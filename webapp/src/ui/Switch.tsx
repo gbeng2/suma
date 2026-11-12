@@ -1,4 +1,5 @@
 import useId from "../state/useId.ts";
+import { InputFeedbackError } from "./InputFeedback.tsx";
 import "./Switch.css";
 import clsx from "clsx";
 import React from "react";
@@ -31,7 +32,7 @@ const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(function Switch(
   const errorId = error ? `${inputId}-error` : undefined;
   return (
     <div className={className}>
-      <label className="form-switch">
+      <label className={clsx("form-switch", error && "is-invalid")}>
         <input
           ref={ref}
           id={inputId}
@@ -40,7 +41,7 @@ const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(function Switch(
           name={name}
           checked={checked}
           disabled={disabled}
-          className={clsx(inputClass)}
+          className={clsx(inputClass, error && "is-invalid")}
           {...rest}
         />
         <span className="form-switch-track">
@@ -48,11 +49,7 @@ const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(function Switch(
         </span>
         <span>{label}</span>
       </label>
-      {error && (
-        <div id={errorId} className="form-text invalid-feedback">
-          {error}
-        </div>
-      )}
+      {error && <InputFeedbackError id={errorId}>{error}</InputFeedbackError>}
     </div>
   );
 });

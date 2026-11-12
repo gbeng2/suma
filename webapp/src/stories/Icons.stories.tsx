@@ -37,7 +37,7 @@ export const Icons: Story = {
         </DemoStack>
         <DemoStack row>
           {icons.map((ic, i) => (
-            <Icon key={i} icon={ic} color="danger" />
+            <Icon key={i} icon={ic} color="danger" size={30} />
           ))}
         </DemoStack>
         <h2>Buttons</h2>

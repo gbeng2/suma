@@ -3,9 +3,12 @@
   border-radius: var(--border-radius-3);
 }
 
-.alert-icon {
-  padding: var(--space-3);
+.alert-icon-container {
   border-radius: var(--border-radius-2);
+  padding: var(--space-3);
+}
+
+.alert-icon {
 }
 
 .alert-title {

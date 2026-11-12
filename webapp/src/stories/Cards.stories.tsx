@@ -41,14 +41,14 @@ export const Basic: Story = {
 export const CheckableStates: Story = {
   render: () => (
     <DemoStack>
-      <CheckableCard checked>
-        <CardBody>
-          <CardText>This card is checked.</CardText>
-        </CardBody>
-      </CheckableCard>
       <CheckableCard checked={false}>
         <CardBody>
           <CardText>This card is unchecked.</CardText>
+        </CardBody>
+      </CheckableCard>
+      <CheckableCard checked>
+        <CardBody>
+          <CardText>This card is checked.</CardText>
         </CardBody>
       </CheckableCard>
       <CheckableCard checked={false} className="is-focus-visible">

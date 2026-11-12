@@ -1,6 +1,6 @@
 import IndeterminateLoader from "../ui/IndeterminateLoader.tsx";
 import Page from "../ui/Page.tsx";
-import PageHeader, { PageHeaderProps } from "../ui/PageHeader.tsx";
+import TextHeader, { TextHeaderProps } from "../ui/TextHeader.tsx";
 import React from "react";
 
 interface LoadingPageProps {
@@ -10,7 +10,7 @@ interface LoadingPageProps {
    */
   page: boolean;
   /** If given, render the page header element. Should set page to true. */
-  header?: React.ReactElement<PageHeaderProps, typeof PageHeader>;
+  header?: React.ReactElement<TextHeaderProps, typeof TextHeader>;
 }
 
 /**

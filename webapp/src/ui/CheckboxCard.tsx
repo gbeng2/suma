@@ -1,6 +1,7 @@
 import useId from "../state/useId.ts";
 import CardBody from "./CardBody";
 import CardText from "./CardText";
+import Checkbox from "./Checkbox.tsx";
 import "./CheckboxCard.css";
 import InputFeedback, { HasInputFeedback } from "./InputFeedback.tsx";
 import clsx from "clsx";
@@ -37,14 +38,7 @@ const CheckboxCard = React.forwardRef<HTMLInputElement, CheckboxCardProps>(
         className={clsx("card checkable-card checkbox-card", error ? "is-invalid" : "")}
       >
         <CardBody className={clsx("checkbox-card-body", `align-items-${alignCheckbox}`)}>
-          <input
-            ref={ref}
-            id={inputId}
-            type="checkbox"
-            aria-describedby={InputFeedback.idFor(inputId)}
-            aria-invalid={error ? true : undefined}
-            {...rest}
-          />
+          <Checkbox ref={ref} id={inputId} error={error} noFeedback {...rest} />
           <div id={labeledBy}>
             {title && <CardText variant="subtitle">{title}</CardText>}
             {text && <CardText variant="subtext">{text}</CardText>}

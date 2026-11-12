@@ -24,7 +24,7 @@ export default function Page({
   style,
   children,
   appNav,
-  gap = 3,
+  gap = 4,
   className,
 }: PageProps) {
   const navRef = React.useRef<HTMLDivElement>(null);

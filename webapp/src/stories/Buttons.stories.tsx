@@ -48,10 +48,10 @@ type Story = StoryObj<typeof meta>;
 
 export const Variants: Story = {
   render: () => (
-    <DemoStack>
+    <DemoStack gap={6}>
       {BUTTON_PROPS.map(({ ...props }, i) => (
         <React.Fragment key={i}>
-          <Stack gap={2}>
+          <Stack gap={3}>
             {BUTTON_STATES.map((st) => (
               <Button
                 key={st}
@@ -106,7 +106,7 @@ export const Groups: Story = {
         <p>Text line to check line height</p>
         <p>
           Button text after this
-          <Button variant="text" inline>
+          <Button variant="inherit" inline>
             Button Text
           </Button>
           should be inline
@@ -115,7 +115,7 @@ export const Groups: Story = {
         <p>Text line to check line height</p>
         <p>
           Icon button after this
-          <Button variant="text" inline>
+          <Button variant="inherit" inline>
             <Icon icon={ChevronRightIcon} />
           </Button>
           should be inline

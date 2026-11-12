@@ -23,11 +23,23 @@ export default function Alert({
   icon = "info",
 }: AlertProps) {
   const cls = clsx("alert", `bgcolor-${color}-soft`);
-  const iconCls = clsx("alert-icon", `bgcolor-${color}`, `color-${color}-contrast`);
   const content = (
-    <Stack row gap={3} center>
+    <Stack row gap={5} center>
       {icon && (
-        <Icon icon={icon} forceSize size="var(--alert-icon-size)" className={iconCls} />
+        <div
+          className={clsx(
+            "alert-icon-container",
+            `bgcolor-${color}`,
+            `color-${color}-contrast`
+          )}
+        >
+          <Icon
+            icon={icon}
+            forceSize
+            size="var(--alert-icon-size)"
+            className="alert-icon"
+          />
+        </div>
       )}
       <Stack col>
         {title && <div className="alert-title">{title}</div>}

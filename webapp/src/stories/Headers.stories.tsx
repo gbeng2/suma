@@ -2,6 +2,7 @@ import { RoutePath } from "../routing/RoutePath.ts";
 import Breadcrumb from "../ui/Breadcrumb.tsx";
 import ImageHeader from "../ui/ImageHeader.tsx";
 import ProgressStepHeader from "../ui/ProgressStepHeader.tsx";
+import TextHeader from "../ui/TextHeader.tsx";
 import { DemoStack } from "./helpers.tsx";
 import type { Meta, StoryObj } from "@storybook/preact-vite";
 
@@ -48,6 +49,27 @@ export const ImageHeaders: Story = {
       <ImageHeader>
         <div style={{ backgroundColor: "var(--fill-primary-strong)", height: "120px" }} />
       </ImageHeader>
+    </DemoStack>
+  ),
+};
+
+export const TextHeaders: Story = {
+  render: () => (
+    <DemoStack>
+      <TextHeader
+        backTo={"#" as RoutePath}
+        backLabel="Home"
+        title="Offers"
+        subtitle="4 offers currently available"
+      />
+      <hr />
+      <TextHeader title="Offers" subtitle="4 offers currently available" />
+      <hr />
+      <TextHeader
+        variant="section"
+        title="Offers"
+        subtitle="4 offers currently available"
+      />
     </DemoStack>
   ),
 };

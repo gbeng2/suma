@@ -4,20 +4,21 @@
 label,
 .form-label {
     display: inline-block;
-    margin-bottom: var(--space-1);
-    font-weight: var(--font-weight-medium);
+    margin-bottom: var(--space-3);
+    font-weight: var(--font-weight-semi);
+    font-size: var(--font-size-body-sm);
 }
 
 .form-text {
     display: block;
-    margin-top: var(--space-1);
-    font-size: var(--font-size-sm);
-    color: var(--color-text-muted);
+    margin-top: var(--space-3);
+    color: var(--text-secondary-mute);
+    font-size: var(--font-size-body-sm);
 }
 
 input::placeholder,
 textarea::placeholder {
-    color: var(--input-placeholder-color);
+    color: var(--text-secondary-placeholder);
     opacity: 1; /* Firefox applies a lower default opacity; this normalizes it */
 }
 
@@ -39,10 +40,10 @@ select,
     font-family: inherit;
     font-size: var(--font-size-base);
     line-height: var(--line-height-base);
-    color: var(--color-text);
+    color: var(--text-color);
     background-color: var(--input-background-color);
-    border: var(--border-width) solid var(--color-border);
-    border-radius: var(--border-radius);
+    border: var(--border-width) solid var(--border-secondary);
+    border-radius: var(--border-radius-3);
     transition: border-color var(--transition-base), box-shadow var(--transition-base);
     margin: 0;
 }
@@ -57,7 +58,7 @@ input:focus,
 textarea:focus,
 select:focus {
     outline: none;
-    border-color: var(--color-primary);
+    border-color: var(--focus-ring-color);
     box-shadow: 0 0 0 var(--focus-ring-width) var(--focus-ring-color);
 }
 
@@ -65,15 +66,22 @@ input:disabled,
 textarea:disabled,
 select:disabled {
     cursor: not-allowed;
-    opacity: 50%;
+    color: var(--text-secondary-mute);
+    background-color: var(--fill-disabled);
+    border-color: var(--fill-disabled);
 }
 
 input.is-invalid,
 textarea.is-invalid,
 select.is-invalid {
-    border-color: var(--color-danger);
+    border-color: var(--fill-danger-strong);
 }
 
 .invalid-feedback {
-    color: var(--color-danger);
+    color: var(--fill-danger-strong);
+    font-weight: var(--font-weight-semi);
+    display: flex;
+    flex-direction: row;
+    gap: var(--space-2);
+    align-items: center;
 }

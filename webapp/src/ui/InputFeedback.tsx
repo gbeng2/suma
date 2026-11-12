@@ -1,3 +1,5 @@
+import Icon from "./Icon.tsx";
+import ErrorIcon from "@heroicons/react/24/outline/ExclamationCircleIcon";
 import React from "react";
 
 export interface HasInputFeedback {
@@ -15,11 +17,7 @@ interface InputFeedbackProps extends HasInputFeedback {
 export default function InputFeedback({ inputId, help, error }: InputFeedbackProps) {
   const describedBy = InputFeedback.idFor(inputId);
   if (error) {
-    return (
-      <div id={describedBy} className="form-text invalid-feedback" role="alert">
-        {error}
-      </div>
-    );
+    return <InputFeedbackError id={describedBy}>{error}</InputFeedbackError>;
   }
   if (help) {
     return (
@@ -32,3 +30,17 @@ export default function InputFeedback({ inputId, help, error }: InputFeedbackPro
 }
 
 InputFeedback.idFor = (inputId: string) => `${inputId}-feedback`;
+
+interface InputFeedbackErrorProps {
+  id?: string;
+  children: React.ReactNode;
+}
+
+export function InputFeedbackError({ id, children }: InputFeedbackErrorProps) {
+  return (
+    <div id={id} className="form-text invalid-feedback" role="alert">
+      <Icon icon={ErrorIcon} size={20} color="danger" />
+      {children}
+    </div>
+  );
+}

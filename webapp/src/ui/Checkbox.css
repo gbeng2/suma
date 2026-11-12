@@ -9,7 +9,8 @@
 .form-check input[type="checkbox"] {
   width: 1.1rem;
   height: 1.1rem;
-  accent-color: var(--color-primary);
+  accent-color: var(--fill-primary-strong);
+  border-radius: var(--border-radius-2);
   cursor: pointer;
 }
 
@@ -17,7 +18,12 @@
   cursor: not-allowed;
 }
 
+.form-check input[type="checkbox"].is-invalid {
+  box-shadow: 0 0 0 var(--border-width-strong) var(--fill-danger-strong);
+  border: none;
+}
+
 .form-check:has(input:disabled) {
-  color: var(--color-text-muted);
+  color: var(--text-secondary-mute);
   cursor: not-allowed;
 }

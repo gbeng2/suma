@@ -26,19 +26,19 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-    font-size: var(--font-size-heading-xl);
-    font-family: var(--font-family-title);
-    margin-bottom: 0;
-}
-
-h2 {
     font-size: var(--font-size-heading-lg);
     font-family: var(--font-family-title);
     margin-bottom: 0;
 }
 
-h3 {
+h2 {
     font-size: var(--font-size-heading-md);
+    font-family: var(--font-family-title);
+    margin-bottom: 0;
+}
+
+h3 {
+    font-size: var(--font-size-heading-sm);
     font-family: var(--font-family-title);
     margin-bottom: 0;
 }
@@ -80,7 +80,7 @@ dl, dd, dt {
 :focus-visible,
 .is-focus-visible {
     outline: var(--focus-ring-width) solid var(--focus-ring-color);
-    outline-offset: -1px;
+    outline-offset: var(--focus-ring-offset);
 }
 
 fieldset {

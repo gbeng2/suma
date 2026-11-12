@@ -10,10 +10,22 @@ export interface CheckboxProps
   label?: React.ReactNode;
   checked: boolean;
   inputClass?: string;
+  noFeedback?: boolean;
 }
 
 const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(function Checkbox(
-  { label, checked, error, help, required = false, id, className, inputClass, ...rest },
+  {
+    label,
+    checked,
+    error,
+    help,
+    required = false,
+    id,
+    className,
+    inputClass,
+    noFeedback,
+    ...rest
+  },
   ref
 ) {
   const inputId = useId(id);
@@ -36,7 +48,7 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(function Chec
           {required && <span className="ml-1 color-danger">*</span>}
         </span>
       </label>
-      <InputFeedback inputId={inputId} error={error} help={help} />
+      {!noFeedback && <InputFeedback inputId={inputId} error={error} help={help} />}
     </div>
   );
 });

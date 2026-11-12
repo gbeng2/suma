@@ -13,6 +13,7 @@ dialog.dialog {
 
 dialog.dialog::backdrop {
   background-color: var(--bg-scrim);
+  backdrop-filter: blur(var(--bg-scrim-blur));
 }
 
 @media (prefers-reduced-motion: no-preference) {

@@ -6,7 +6,13 @@ import "./Button.css";
 import clsx from "clsx";
 import React, { CSSProperties, MouseEventHandler } from "react";
 
-export type ButtonVariant = "primary" | "secondary" | "outline" | "text" | "unstyled";
+export type ButtonVariant =
+  | "primary"
+  | "secondary"
+  | "outline"
+  | "text"
+  | "unstyled"
+  | "inherit";
 interface ButtonStyle extends CSSProperties {
   "--btn-color"?: string;
   "--btn-color-hover"?: string;
@@ -144,7 +150,7 @@ function toButtonStyle(v: ButtonVariant, c: ThemeColor, s: ThemeSize): ButtonSty
       "--btn-bg-hover": `var(--fill-${c}-soft)`,
       "--btn-border": `transparent`,
     };
-  } else if (v === "unstyled") {
+  } else if (v === "unstyled" || v === "inherit") {
     return {
       ...size,
       "--btn-color": "unset",

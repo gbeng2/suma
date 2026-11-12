@@ -7,8 +7,8 @@ import CardBody from "../ui/CardBody.tsx";
 import { Dialog } from "../ui/Dialog.tsx";
 import DialogHeader from "../ui/DialogHeader.tsx";
 import Page from "../ui/Page.tsx";
-import PageHeader from "../ui/PageHeader.tsx";
 import Stack from "../ui/Stack.tsx";
+import TextHeader from "../ui/TextHeader.tsx";
 import ScrollTopOnMount from "../uir/ScrollToTopOnMount.ts";
 import AsyncContent from "./AsyncContent.tsx";
 import SumaImage from "./SumaImage.tsx";
@@ -47,9 +47,10 @@ export default function PrivateAccountsList({
 
   return (
     <Page appNav>
-      <PageHeader title={t("titles.private_accounts")} />
-
-      <p className="text-secondary">{t("private_accounts.intro")}</p>
+      <TextHeader
+        title={t("titles.private_accounts")}
+        subtitle={t("private_accounts.intro")}
+      />
 
       <hr className="my-4" />
       <Dialog
@@ -60,20 +61,17 @@ export default function PrivateAccountsList({
         <Card>
           <CardBody>
             <DialogHeader id="private-account-help">
-              {" "}
               {t("private_accounts.help_title", {
                 vendorName: modalAccount?.vendorName,
               })}
             </DialogHeader>
-            <div className="d-flex justify-content-center align-items-center flex-column m-2">
+            <Stack col gap={2}>
               <ScrollTopOnMount />
               {dt(modalAccount?.uiStateV1.helpText || "")}
-              <div className="d-flex justify-content-end mt-2">
-                <Button variant="outline" onClick={() => setModalAccount(null)}>
-                  {t("common.close")}
-                </Button>
-              </div>
-            </div>
+              <Button variant="outline" onClick={() => setModalAccount(null)}>
+                {t("common.close")}
+              </Button>
+            </Stack>
           </CardBody>
         </Card>
       </Dialog>
@@ -108,19 +106,19 @@ function PrivateAccount({
   let actionLocKey, ctaVariant: ButtonVariant, showHelp: boolean;
   if (account.uiStateV1.indexCardMode === "link") {
     actionLocKey = "private_accounts.action_link_app";
-    ctaVariant = "filled";
+    ctaVariant = "primary";
     showHelp = false;
   } else if (account.uiStateV1.indexCardMode === "relink") {
     actionLocKey = "private_accounts.action_relink_app";
-    ctaVariant = "outline";
+    ctaVariant = "secondary";
     showHelp = true;
   } else {
     actionLocKey = "private_accounts.action_setup_payment";
-    ctaVariant = "filled";
+    ctaVariant = "primary";
     showHelp = false;
   }
   return (
-    <Stack col center gap={3}>
+    <Stack col center gap={5}>
       <SumaImage
         image={account.vendorImage}
         h={80}
@@ -131,7 +129,7 @@ function PrivateAccount({
       <p>{dt(account.uiStateV1.descriptionText)}</p>
       <ButtonGroup row className="w-100">
         {showHelp && (
-          <Button variant="text" onClick={onHelp}>
+          <Button variant="outline" inline onClick={onHelp}>
             {t("common.help")}
           </Button>
         )}

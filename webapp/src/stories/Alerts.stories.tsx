@@ -30,6 +30,7 @@ export const Variants: Story = {
         to={untypedRoutePath("#hello")}
         color="danger"
       />
+      <Alert color="info" icon="loader" text="Something is happening" />
     </DemoStack>
   ),
 };

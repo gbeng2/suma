@@ -3,11 +3,12 @@
     opacity: 0;
     transform: scaleY(0);
     transition: opacity 60ms ease-in, transform 60ms ease-in;
+    font-size: var(--font-size-body-sm);
 }
 
 .form-feedback-surface {
-    padding: var(--space-1) var(--space-2);
-    border-radius: var(--border-radius);
+    padding: var(--space-4);
+    border-radius: var(--border-radius-3);
 }
 
 .form-feedback-visible {

@@ -249,7 +249,7 @@ export function anonProxyVendorAccount(
       linkStepIndex: 0,
       descriptionText: "Link your suma and Great Shop accounts for more savings.",
       termsText: "Here are the terms and conditions.",
-      helpText: "1. Do the first step.\n2. Do the second step.\n3. **Profit!**",
+      helpText: "\u200D1. Do the first step.\n2. Do the second step.\n3. **Profit!**",
       ...uis,
     },
     ...va,

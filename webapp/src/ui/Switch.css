@@ -24,7 +24,7 @@
   flex-shrink: 0;
   width: var(--switch-width);
   height: var(--switch-height);
-  background-color: var(--color-border);
+  background-color: var(--fill-track);
   border-radius: var(--border-radius-pill);
   transition: background-color var(--transition-base);
 }
@@ -35,14 +35,14 @@
   left: var(--switch-thumb-gap);
   width: var(--switch-thumb-size);
   height: var(--switch-thumb-size);
-  background-color: var(--color-surface);
+  background-color: var(--bg-card);
   border-radius: 50%;
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-1);
   transition: transform var(--transition-base);
 }
 
 .form-switch input:checked + .form-switch-track {
-  background-color: var(--color-primary);
+  background-color: var(--fill-primary-strong);
 }
 
 .form-switch input:checked + .form-switch-track .form-switch-thumb {
@@ -63,4 +63,10 @@
 
 .form-switch:has(input:disabled) {
   cursor: not-allowed;
+}
+
+.form-switch.is-invalid {
+  .form-switch-track {
+    box-shadow: 0 0 0 var(--border-width-strong) var(--fill-danger-strong);
+  }
 }

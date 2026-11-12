@@ -27,9 +27,9 @@ const FormFeedback = React.forwardRef<HTMLElement, FormFeedbackProps>(function (
     setVariant(isSuccess ? "success" : "danger");
   }, [feedback, isSuccess]);
 
-  const sty = { ...style, color: `var(--color-${variant})` };
+  const sty = { ...style, color: `var(--text-${variant}-on-soft)` };
   if (!noSurface) {
-    sty.backgroundColor = `var(--tint-${variant})`;
+    sty.backgroundColor = `var(--fill-${variant}-soft)`;
   }
   const msg = isSuccess ? feedback.value : feedback?.render();
   const cls = clsx(

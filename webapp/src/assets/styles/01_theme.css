@@ -111,6 +111,7 @@
     --bg-page: #FFFAF2;
     --bg-card: var(--sand-1);
     --bg-scrim: #2B262033;
+    --bg-scrim-blur: 3px;
 
     /* one off variables/tokens for specific use*/
     --fill-disabled: var(--gray-4);
@@ -292,6 +293,7 @@
 
     --focus-ring-color: var(--border-focus-ring);
     --focus-ring-width: 3px;
+    --focus-ring-offset: 2px;
 
     /* ---- Shadows ---- */
     --shadow-0: 0 0px 0px  0 color-mix(in srgb, var(--text-secondary-mute) 0%, transparent);
@@ -309,15 +311,13 @@
 
     /* ---- Layout ---- */
 
-    /* ---- Component sizing ---- */
-    /*--input-height: 2.5rem;*/
-    /*--input-padding-x: var(--space-3);*/
-    /*--input-padding-y: var(--space-2);*/
-    /*--btn-padding-x: var(--space-4);*/
-    /*--btn-padding-y: var(--space-2);*/
+    /* ---- Components ---- */
+    --input-height: 54px;
+    --input-padding-x: var(--space-5);
+    --input-padding-y: var(--space-3);
 
-    /*--input-background-color: var(--color-surface);*/
-    /*--input-placeholder-color: #a58b6f;*/
+    --input-background-color: var(--bg-card);
+    --input-placeholder-color: var(--text-secondary-placeholder);
 
     --switch-width: 2.5rem;
     --switch-height: 1.5rem;
@@ -326,7 +326,7 @@
 
     --select-arrow-size: 0.75rem;
 
-    --alert-icon-size: 40px;
+    --alert-icon-size: 25px;
     --alert-arrow-size: 16px;
 
     /* ---- Other input behavior ---- */

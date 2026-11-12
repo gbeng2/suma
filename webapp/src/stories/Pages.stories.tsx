@@ -1,7 +1,7 @@
 import ErrorPage from "../components/ErrorPage.tsx";
 import LoadingPage from "../components/LoadingPage.tsx";
 import Page from "../ui/Page.tsx";
-import PageHeader from "../ui/PageHeader.tsx";
+import TextHeader from "../ui/TextHeader.tsx";
 import { DemoStack } from "./helpers.tsx";
 import type { Meta, StoryObj } from "@storybook/preact-vite";
 
@@ -34,7 +34,7 @@ export const ErrorPageHeader: Story = {
       <ErrorPage
         variant="home"
         page={true}
-        header={<PageHeader title="Some title" subtitle="Some subtitle" />}
+        header={<TextHeader title="Some title" subtitle="Some subtitle" />}
       />
     </DemoStack>
   ),
@@ -44,7 +44,7 @@ export const ErrorPageEmbedded: Story = {
   render: () => (
     <DemoStack>
       <Page>
-        <PageHeader title="This is outside ErrorPage" />
+        <TextHeader title="This is outside ErrorPage" />
         <ErrorPage variant="home" page={false} />
       </Page>
     </DemoStack>
@@ -64,7 +64,7 @@ export const LoadingPageHeader: Story = {
     <DemoStack>
       <LoadingPage
         page={true}
-        header={<PageHeader title="Some title" subtitle="Some subtitle" />}
+        header={<TextHeader title="Some title" subtitle="Some subtitle" />}
       />
     </DemoStack>
   ),
@@ -74,7 +74,7 @@ export const LoadingPageEmbedded: Story = {
   render: () => (
     <DemoStack>
       <Page>
-        <PageHeader title="This is outside LoadingPage" />
+        <TextHeader title="This is outside LoadingPage" />
         <LoadingPage page={false} />
       </Page>
     </DemoStack>

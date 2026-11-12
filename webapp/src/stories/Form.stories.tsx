@@ -92,7 +92,7 @@ export const Demo: Story = {
             error={errors.agree?.message}
             required
           />
-          <FormSubmit label="Continue" feedback={feedback} back />
+          <FormSubmit label="Continue" feedback={feedback} />
         </Form>
       </Page>
     );
@@ -113,7 +113,7 @@ export const WithError: Story = {
         <Form noValidate onSubmit={submit}>
           <TextInput label="Name" />
           <TextInput label="Address" />
-          <FormSubmit label="Continue" feedback={err} back />
+          <FormSubmit label="Continue" feedback={err} />
         </Form>
       </Page>
     );
@@ -156,7 +156,6 @@ export const Loading: Story = {
           <TextInput label="Address" />
           <ButtonGroup col bottom>
             <Button type="submit">Continue</Button>
-            <Button variant="outline">Back</Button>
           </ButtonGroup>
         </Form>
       </Page>

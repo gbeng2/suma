@@ -1,20 +1,23 @@
 import { IdParams } from "../api.ts";
 import { dt, t } from "../localization";
 import { appError, AppError, extractAppErrorAny } from "../modules/feedback.ts";
+import ignore from "../modules/ignore.ts";
 import { scaleMoney } from "../modules/money.ts";
 import { withQuery } from "../routing/withQuery.ts";
 import { SetCurrentMember } from "../state/UserProvider.tsx";
 import useAsyncFetch from "../state/useAsyncFetch.ts";
 import useScreenLoader from "../state/useScreenLoader.ts";
 import useUnmountEffect from "../state/useUnmountEffect.ts";
-import Alert, { AlertVariant } from "../ui/Alert.tsx";
+import { ThemeColor } from "../types/theme";
+import Alert from "../ui/Alert.tsx";
+import Breadcrumb from "../ui/Breadcrumb.tsx";
 import { ButtonProps } from "../ui/Button.tsx";
 import Checklist from "../ui/Checklist.tsx";
 import ChecklistItem from "../ui/ChecklistItem.tsx";
 import FormSubmit from "../ui/FormSubmit.tsx";
 import Page from "../ui/Page.tsx";
-import PageHeader from "../ui/PageHeader.tsx";
 import ProgressStepHeader from "../ui/ProgressStepHeader.tsx";
+import TextHeader from "../ui/TextHeader.tsx";
 import AsyncContent from "./AsyncContent.tsx";
 import { DevicePhoneMobileIcon } from "@heroicons/react/24/outline";
 import { AxiosRequestConfig, AxiosResponse, CanceledError } from "axios";
@@ -109,7 +112,6 @@ function StepsView({ account, setView }: ViewProps) {
 
   const primaryProps: ButtonProps = {
     children: t("common.next"),
-    preset: "primary",
   };
   if (requiresPaymentMethod && !hasPaymentMethod) {
     primaryProps.to = withQuery(`/add-card`, {
@@ -141,7 +143,8 @@ function StepsView({ account, setView }: ViewProps) {
 
   return (
     <Page>
-      <PageHeader title={t("private_accounts.view_header_steps")} back />
+      <Breadcrumb to="/mobility">Map</Breadcrumb>
+      <TextHeader title={t("private_accounts.view_header_steps")} />
       <Checklist>
         {potentialFirstStep}
         <ChecklistItem key={20} variant="future">
@@ -151,7 +154,7 @@ function StepsView({ account, setView }: ViewProps) {
           {t("private_accounts.checklist_link_app")}
         </ChecklistItem>
       </Checklist>
-      <FormSubmit back primary={primaryProps} />
+      <FormSubmit primary={primaryProps} />
     </Page>
   );
 }
@@ -191,7 +194,6 @@ function BalanceView({ account, setView, apiCalls, user, setUser }: ViewProps) {
         }}
         primary={{
           children: t("payments.negative_balance_action", { amount: balance }),
-          variant: "filled",
           color: "danger",
           onClick: handleClick,
         }}
@@ -249,7 +251,7 @@ function LinkView({ account, setView, apiCalls }: ViewProps) {
               setPollingSuccessResponse(r.data);
               setButtonStatus(LINKBTN_SENT);
             } else {
-              pollAndReplace();
+              pollAndReplace().then(ignore);
             }
           })
           .catch((r) => {
@@ -259,11 +261,11 @@ function LinkView({ account, setView, apiCalls }: ViewProps) {
               setButtonStatus(LINKBTN_INITIAL);
               return;
             }
-            pollAndReplace();
+            pollAndReplace().then(ignore);
           })
       );
     }
-    pollAndReplace();
+    pollAndReplace().then(ignore);
   }, [account.id, apiCalls]);
 
   function handleInitialClick(e: React.MouseEvent) {
@@ -282,18 +284,18 @@ function LinkView({ account, setView, apiCalls }: ViewProps) {
 
   let primaryBtnProps: ButtonProps;
   let secondaryBtnProps: ButtonProps | null = null;
-  let alertVariant: AlertVariant | null = null;
+  let alertVariant: ThemeColor | null = null;
   if (buttonStatus === LINKBTN_SENT) {
     primaryBtnProps = {
       children: t("private_accounts.linkview_back_to_list"),
       to: `/private-accounts`,
-      variant: "outline",
+      variant: "secondary",
     };
     alertVariant = "success";
   } else if (buttonStatus === LINKBTN_POLLING) {
     primaryBtnProps = {
       children: t("private_accounts.linkview_polling"),
-      variant: "filled",
+      variant: "primary",
       disabled: true,
     };
     secondaryBtnProps = {
@@ -304,7 +306,7 @@ function LinkView({ account, setView, apiCalls }: ViewProps) {
   } else {
     primaryBtnProps = {
       children: t("private_accounts.linkview_link_app"),
-      variant: "filled",
+      variant: "primary",
       onClick: handleInitialClick,
     };
     secondaryBtnProps = {
@@ -322,7 +324,7 @@ function LinkView({ account, setView, apiCalls }: ViewProps) {
       {t("private_accounts.linkview_instructions")}
       {alertVariant && (
         <Alert
-          variant={alertVariant!}
+          color={alertVariant!}
           icon={buttonStatus === LINKBTN_SENT ? DevicePhoneMobileIcon : "loader"}
           text={
             buttonStatus === LINKBTN_SENT
@@ -376,8 +378,9 @@ function ProgressContainer({
   }
   return (
     <Page>
+      <Breadcrumb to="/mobility">Map</Breadcrumb>
       <ProgressStepHeader step={mapping[step]} steps={stepCount} />
-      <h2>{header}</h2>
+      <TextHeader title={header} />
       {children}
     </Page>
   );

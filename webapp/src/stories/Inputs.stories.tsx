@@ -25,20 +25,20 @@ export const TextInputs: Story = {
   render: () => (
     <DemoStack>
       <TextInput
-        label="Zip"
+        label="Regular text input"
         value=""
         help="Five digits."
         placeholder="12345 (placeholder)"
       />
       <TextInput
-        label="Zip"
+        label="Focused input"
         value="97211"
         help="Five digits."
         inputClass="is-focus-visible"
       />
-      <TextInput label="Zip" value="9721" help="Five digits." disabled />
+      <TextInput label="Disabled" value="9721" disabled />
       <TextInput
-        label="Zip"
+        label="Error state"
         value="9721"
         help="Five digits."
         error="Zip code is 5 digits."
@@ -50,8 +50,9 @@ export const TextInputs: Story = {
 export const Checkboxes: Story = {
   render: () => (
     <DemoStack>
-      <Checkbox label="Checkbox 1" checked={false} />
-      <Checkbox label="Checkbox 2" checked />
+      <Checkbox label="Unchecked" checked={false} />
+      <Checkbox label="Checked" checked />
+      <Checkbox checked />
       <Checkbox checked={false} />
       <Checkbox label="Invalid" checked={false} error="Must agree to continue" />
     </DemoStack>
@@ -63,6 +64,7 @@ export const Switches: Story = {
     <DemoStack>
       <Switch label="Switch 1" checked={false} />
       <Switch label="Switch 2" checked />
+      <Switch checked />
       <Switch checked={false} />
       <Switch label="Invalid switch" checked={false} error="Must turn on to continue" />
     </DemoStack>
@@ -86,13 +88,19 @@ export const RadioCards: Story = {
     ];
     return (
       <DemoStack>
-        <RadioCard name="radio" options={options} value="" onValueChange={noop} />
+        <RadioCard name="vradiocard" options={options} value="" onValueChange={noop} />
         <RadioCard
-          name="radio"
+          name="hradiocard"
           options={options}
           value=""
           onValueChange={noop}
           direction="horizontal"
+        />
+        <RadioCard
+          name="nocheckradiocard"
+          options={options}
+          value={options[0].value}
+          onValueChange={noop}
         />
       </DemoStack>
     );

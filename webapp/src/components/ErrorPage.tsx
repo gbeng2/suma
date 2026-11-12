@@ -1,8 +1,8 @@
 import { t } from "../localization";
 import Button from "../ui/Button.tsx";
 import Page from "../ui/Page.tsx";
-import PageHeader, { PageHeaderProps } from "../ui/PageHeader.tsx";
 import Stack from "../ui/Stack.tsx";
+import TextHeader, { TextHeaderProps } from "../ui/TextHeader.tsx";
 import GoHome from "./GoHome";
 import React from "react";
 
@@ -17,7 +17,7 @@ interface ErrorPageProps {
    */
   page: boolean;
   /** If given, render the page header element. Should set page to true. */
-  header?: React.ReactElement<PageHeaderProps, typeof PageHeader>;
+  header?: React.ReactElement<TextHeaderProps, typeof TextHeader>;
 }
 
 /**
@@ -45,7 +45,9 @@ export default function ErrorPage({
     <>
       {header}
       <Stack col gap={5} className="text-center">
-        <h2>{title || t("errors.something_went_wrong_title")}</h2>
+        <h2 className="font-weight-bold">
+          {title || t("errors.something_went_wrong_title")}
+        </h2>
         <p>{body || t("errors.something_went_wrong_body")}</p>
         {action}
       </Stack>

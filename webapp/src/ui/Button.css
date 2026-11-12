@@ -69,6 +69,9 @@
   padding: 0 var(--space-1);
   margin: 0 calc(-1 * var(--space-1));
   display: inline;
+}
+
+.btn-inherit {
   font-size: inherit;
   font-weight: inherit;
 }
