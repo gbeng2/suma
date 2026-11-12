@@ -1,18 +1,9 @@
-export type TintColor = "primary" | "secondary" | "success" | "danger";
 export type ThemeColor =
   | "primary"
-  | "primary-contrast"
   | "secondary"
-  | "secondary-contrast"
+  | "info"
   | "success"
-  | "danger"
-  | "accent"
-  | "text"
-  | "text-muted"
-  | "text-inverse"
-  | "link"
-  | "bg"
-  | "bg-subtle"
-  | "surface"
-  | "border"
-  | "border-strong";
+  | "warning"
+  | "danger";
+export type ThemeSize = "sm" | "md" | "lg";
+export type ThemeSpacing = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11;

@@ -1,0 +1,20 @@
+.image-header {
+  position: relative;
+}
+
+.image-header-breadcrumb {
+  position: absolute;
+  top: var(--space-4);
+  left: var(--space-4);
+
+}
+
+.image-header-bottom-flow {
+  position: absolute;
+  bottom: 0;
+  height: var(--border-radius-card);
+  width: 100%;
+  background-color: var(--bg-page);
+  border-top-left-radius: var(--border-radius-card);
+  border-top-right-radius: var(--border-radius-card);
+}

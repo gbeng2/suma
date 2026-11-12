@@ -3,16 +3,16 @@
 dialog.dialog {
   padding: 0;
   border: none;
-  border-radius: var(--border-radius-lg);
+  border-radius: var(--border-radius-card);
   background: transparent;
-  color: var(--color-text);
+  color: var(--text-color);
   max-width: min(90vw, 32rem);
   width: 100%;
   position: relative;
 }
 
 dialog.dialog::backdrop {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: var(--bg-scrim);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -46,31 +46,31 @@ dialog.dialog::backdrop {
 }
 
 :root {
-  --dialog-close-size: 2rem;
+  --dialog-close-size: 35px;
 }
 
 /* Always rendered by Dialog itself, positioned over whatever content
    the caller passes — the one piece of chrome Dialog owns. */
 .dialog-close {
   position: absolute;
-  top: var(--space-3);
-  right: var(--space-3);
+  top: var(--space-4);
+  right: var(--space-4);
   z-index: var(--z-index-dialog);
   display: flex;
   align-items: center;
   justify-content: center;
   width: var(--dialog-close-size);
   height: var(--dialog-close-size);
+  padding-bottom: calc(var(--dialog-close-size) * 0.2);
   border: none;
   border-radius: 50%;
-  font-size: calc(var(--dialog-close-size) * 0.8);
+  font-size: var(--dialog-close-size);
   line-height: 1;
-  color: var(--color-text-muted);
+  color: var(--text-mute);
   cursor: pointer;
   background-color: transparent;
 }
 
 .dialog-close:hover {
-  color: var(--color-text);
-  background-color: var(--color-secondary-hover);
+  background-color: var(--fill-secondary-soft-hover);
 }

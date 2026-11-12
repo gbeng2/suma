@@ -1,7 +1,9 @@
 .nav {
-  background-color: var(--color-surface);
-  padding: var(--space-2) var(--space-6);
-  border-top: var(--border-width) var(--color-border) solid;
+  background-color: var(--bg-card);
+  padding: var(--space-4) var(--space-7) var(--space-3);
+  border-top: var(--border-width) var(--border-secondary-subtle) solid;
+  border-top-left-radius: var(--border-radius-2);
+  border-top-right-radius: var(--border-radius-2);
   display: flex;
   flex-direction: row;
   align-items: center;

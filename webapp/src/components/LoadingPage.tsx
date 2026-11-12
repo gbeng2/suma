@@ -20,7 +20,7 @@ export default function LoadingPage({ page, header }: LoadingPageProps) {
   const loader = (
     <>
       {header}
-      <IndeterminateLoader variant="plain" />
+      <IndeterminateLoader variant="plain" color="primary" />
     </>
   );
   let content = loader;

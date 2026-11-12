@@ -2,6 +2,7 @@ import { ThemeColor } from "../types/theme";
 import IndeterminateLoader from "./IndeterminateLoader.tsx";
 import ChevronLeftIcon from "@heroicons/react/24/outline/ChevronLeftIcon";
 import ChevronRightIcon from "@heroicons/react/24/outline/ChevronRightIcon";
+import InformationCircleIcon from "@heroicons/react/24/outline/InformationCircleIcon";
 import clsx from "clsx";
 import React, { CSSProperties } from "react";
 
@@ -9,7 +10,8 @@ export type IconPropsIcon =
   | React.ComponentType<React.SVGProps<SVGSVGElement>>
   | "right"
   | "left"
-  | "loader";
+  | "loader"
+  | "info";
 
 export interface IconProps {
   icon: IconPropsIcon;
@@ -46,7 +48,16 @@ export default function Icon({
   } else if (IconComponent === "right") {
     el = <ChevronRightIcon {...elProps} />;
   } else if (IconComponent === "loader") {
-    el = <IndeterminateLoader variant="plain" size={size || "inherit"} {...elProps} />;
+    el = (
+      <IndeterminateLoader
+        variant="plain"
+        size={size || "inherit"}
+        color={color}
+        {...elProps}
+      />
+    );
+  } else if (IconComponent === "info") {
+    el = <InformationCircleIcon {...elProps} />;
   } else {
     el = <IconComponent {...elProps} />;
   }

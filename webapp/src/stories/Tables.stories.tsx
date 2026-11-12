@@ -1,7 +1,6 @@
 import Card from "../ui/Card";
-import CardBody from "../ui/CardBody";
 import DefinitionTable from "../ui/DefinitionTable.tsx";
-import CPagination from "../ui/Pagination.tsx";
+import Pagination from "../ui/Pagination.tsx";
 import Table from "../ui/Table.tsx";
 import TableBody from "../ui/TableBody.tsx";
 import TableFooter from "../ui/TableFooter.tsx";
@@ -72,10 +71,10 @@ export const Standard: Story = {
           striped
           hover
           theme={{
-            headerColor: "var(--tint-secondary)",
-            backgroundColor1: "var(--tint-alert)",
-            backgroundColor2: "var(--tint-success)",
-            hoverColor: "var(--tint-primary)",
+            headerColor: "var(--fill-secondary-soft)",
+            backgroundColor1: "var(--fill-danger-soft)",
+            backgroundColor2: "var(--fill-success-soft)",
+            hoverColor: "var(--fill-warning-soft)",
           }}
         >
           {children}
@@ -85,7 +84,7 @@ export const Standard: Story = {
   },
 };
 
-export const Pagination: Story = {
+export const Paginations: Story = {
   render: () => {
     const [page, setPage] = React.useState(0);
     const items = ["a" + page, "b" + page, "c" + page, "d" + page];
@@ -99,7 +98,7 @@ export const Pagination: Story = {
             ))}
           </TableBody>
         </Table>
-        <CPagination page={page} pageCount={4} onPageChange={setPage} />
+        <Pagination page={page} pageCount={4} onPageChange={setPage} />
         <h2>One Page</h2>
         <Table>
           <TableBody>
@@ -108,7 +107,7 @@ export const Pagination: Story = {
             ))}
           </TableBody>
         </Table>
-        <CPagination size="sm" page={0} pageCount={1} onPageChange={setPage} />
+        <Pagination size="sm" page={0} pageCount={1} onPageChange={setPage} />
       </DemoStack>
     );
   },
@@ -117,23 +116,37 @@ export const Pagination: Story = {
 export const Definition: Story = {
   render: () => (
     <DemoStack>
+      <DefinitionTable
+        items={[
+          { label: "Much Longer Field Name", value: "Ana Flores" },
+          {
+            label: "Eligibility",
+            value: <span>Hacienda CDC &bull; In Review</span>,
+          },
+          {
+            label: "Address",
+            value:
+              "2001 NE Alberta St, Portland, OR 97211 2001 NE Alberta St, Portland, OR 97211",
+          },
+        ]}
+      />
+
       <Card>
-        <CardBody>
-          <DefinitionTable
-            items={[
-              { label: "Much Longer Field Name", value: "Ana Flores" },
-              {
-                label: "Eligibility",
-                value: <span>Hacienda CDC &bull; In Review</span>,
-              },
-              {
-                label: "Address",
-                value:
-                  "2001 NE Alberta St, Portland, OR 97211 2001 NE Alberta St, Portland, OR 97211",
-              },
-            ]}
-          />
-        </CardBody>
+        <DefinitionTable
+          inCard
+          items={[
+            { label: "Much Longer Field Name", value: "Ana Flores" },
+            {
+              label: "Eligibility",
+              value: <span>Hacienda CDC &bull; In Review</span>,
+            },
+            {
+              label: "Address",
+              value:
+                "2001 NE Alberta St, Portland, OR 97211 2001 NE Alberta St, Portland, OR 97211",
+            },
+          ]}
+        />
       </Card>
     </DemoStack>
   ),

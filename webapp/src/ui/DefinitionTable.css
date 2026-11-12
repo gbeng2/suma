@@ -12,7 +12,7 @@
 }
 
 .definition-table > div:not(:last-child) {
-    border-bottom: var(--border-width) var(--color-border) solid;
+    border-bottom: var(--border-width) var(--border-secondary-subtle) solid;
 }
 
 .definition-table > div:first-child {
@@ -23,8 +23,21 @@
     padding-bottom: 0;
 }
 
+.definition-table-in-card {
+    div, div:first-child, div:last-child {
+        padding-left: var(--space-6);
+        padding-right: var(--space-6);
+    }
+    div:first-child {
+        padding-top: var(--space-6);
+    }
+    div:last-child {
+        padding-bottom: var(--space-6);
+    }
+}
+
 .definition-table-key {
-    color: var(--color-text-muted);
+    color: var(--text-secondary-mute);
 }
 
 .definition-table-value {

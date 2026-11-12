@@ -1,6 +1,8 @@
 import useId from "../state/useId.ts";
 import "./CheckableCard.css";
+import Icon from "./Icon.tsx";
 import InputFeedback, { HasInputFeedback } from "./InputFeedback.tsx";
+import CheckIcon from "@heroicons/react/24/outline/CheckIcon";
 import clsx from "clsx";
 import React from "react";
 
@@ -36,6 +38,11 @@ const CheckableCard = React.forwardRef<HTMLInputElement, CheckableCardProps>(
     return (
       <div>
         <label className={cls} style={style}>
+          <Icon
+            className={clsx("checkable-card-check", checked && "checked")}
+            icon={CheckIcon}
+            size={20}
+          />
           <input
             ref={ref}
             type="checkbox"

@@ -1,6 +1,7 @@
-import Button from "../ui/Button.tsx";
 import Icon, { IconPropsIcon } from "../ui/Icon.tsx";
+import IconButton from "../ui/IconButton.tsx";
 import IconChip from "../ui/IconChip.tsx";
+import { themeColors } from "./constants.tsx";
 import { DemoStack } from "./helpers.tsx";
 import LanguageIcon from "@heroicons/react/24/outline/LanguageIcon";
 import MapIcon from "@heroicons/react/24/outline/MapIcon";
@@ -21,8 +22,8 @@ const icons: IconPropsIcon[] = [
   "right",
   "left",
   "loader",
+  "info",
 ];
-const colors = ["primary", "secondary", "success", "danger"];
 
 export const Icons: Story = {
   render: () => {
@@ -34,19 +35,25 @@ export const Icons: Story = {
             <Icon key={i} icon={ic} />
           ))}
         </DemoStack>
+        <DemoStack row>
+          {icons.map((ic, i) => (
+            <Icon key={i} icon={ic} color="danger" />
+          ))}
+        </DemoStack>
         <h2>Buttons</h2>
         <DemoStack row>
           {icons.map((ic, i) => (
-            <Button key={i}>
-              <Icon icon={ic} />
-            </Button>
+            <IconButton key={i} icon={ic} />
           ))}
         </DemoStack>
         <DemoStack row>
           {icons.map((ic, i) => (
-            <Button key={i} variant="text">
-              <Icon icon={ic} />
-            </Button>
+            <IconButton key={i} variant="text" icon={ic} />
+          ))}
+        </DemoStack>
+        <DemoStack row>
+          {themeColors.map((c, i) => (
+            <IconButton key={i} icon="info" color={c} />
           ))}
         </DemoStack>
       </DemoStack>
@@ -57,16 +64,16 @@ export const Icons: Story = {
 export const Chips: Story = {
   render: () => (
     <DemoStack row>
+      <IconChip size={48} icon={icons[0]} color="success" />
       {icons.map((ic, i) => (
         <div key={i}>
           <IconChip
-            size={10 * (1 + i / 2)}
+            size={20 * (1 + i / 2)}
             icon={ic}
-            color={colors[i % colors.length] as any}
+            color={themeColors[i % themeColors.length] as any}
           />
         </div>
       ))}
-      <IconChip size={48} icon={icons[0]} color="success" />
     </DemoStack>
   ),
 };

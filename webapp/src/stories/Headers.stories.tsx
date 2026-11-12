@@ -1,7 +1,6 @@
 import { RoutePath } from "../routing/RoutePath.ts";
-import BreadcrumbBack from "../ui/BreadcrumbBack.tsx";
-import BreadcrumbButton from "../ui/BreadcrumbButton.tsx";
-import PageHeader from "../ui/PageHeader.tsx";
+import Breadcrumb from "../ui/Breadcrumb.tsx";
+import ImageHeader from "../ui/ImageHeader.tsx";
 import ProgressStepHeader from "../ui/ProgressStepHeader.tsx";
 import { DemoStack } from "./helpers.tsx";
 import type { Meta, StoryObj } from "@storybook/preact-vite";
@@ -25,29 +24,30 @@ export const ProgressSteps: Story = {
 
 export const Breadcrumbs: Story = {
   render: () => (
-    <DemoStack>
-      <h2>Breadcrumb Back</h2>
-      <BreadcrumbBack back />
-      <BreadcrumbBack back>Hello</BreadcrumbBack>
+    <DemoStack className="align-items-start">
+      <h2>Back</h2>
+      <Breadcrumb />
+      <Breadcrumb>Hello</Breadcrumb>
+      <h2>Left</h2>
+      <Breadcrumb variant="left" />
+      <Breadcrumb variant="left">Hello</Breadcrumb>
       <h2>Right</h2>
-      <BreadcrumbButton right />
-      <BreadcrumbButton right>Hello</BreadcrumbButton>
+      <Breadcrumb variant="right" />
+      <Breadcrumb variant="right">Hello</Breadcrumb>
     </DemoStack>
   ),
 };
 
-export const PageHeaders: Story = {
+export const ImageHeaders: Story = {
   render: () => (
     <DemoStack>
+      <ImageHeader backTo={"#" as RoutePath} backLabel="Home" bottomFlow>
+        <div style={{ backgroundColor: "var(--fill-primary-strong)", height: "120px" }} />
+      </ImageHeader>
       <hr />
-      <PageHeader title="Default with subtitle" subtitle="No back button" />
-      <hr />
-      <PageHeader
-        title="Default with back"
-        subtitle="Gets a back button"
-        back={"#" as RoutePath}
-      />
-      <hr />
+      <ImageHeader>
+        <div style={{ backgroundColor: "var(--fill-primary-strong)", height: "120px" }} />
+      </ImageHeader>
     </DemoStack>
   ),
 };

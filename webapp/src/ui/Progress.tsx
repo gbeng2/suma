@@ -1,3 +1,4 @@
+import "./Progress.css";
 import React from "react";
 
 interface ProgressProps {
@@ -9,7 +10,7 @@ interface ProgressProps {
 
 export default function Progress({
   value,
-  size = 40,
+  size = 56,
   stroke = 6,
   variant = "bar",
 }: ProgressProps) {
@@ -36,14 +37,14 @@ function ProgressBar({ value, stroke }: { value: number; stroke: number }) {
       <div
         style={{
           width: "100%",
-          backgroundColor: "var(--color-secondary)",
+          backgroundColor: "var(--fill-secondary-soft)",
           ...commonParams,
         }}
       ></div>
       <div
         style={{
           width: `${value}%`,
-          backgroundColor: "var(--color-primary)",
+          backgroundColor: "var(--fill-primary-strong)",
           ...commonParams,
         }}
       />
@@ -69,8 +70,10 @@ function ProgressCircle({
       aria-valuenow={value}
       aria-valuemin={0}
       aria-valuemax={100}
-      style={{ width: size, height: size, display: "inline-block" }}
+      className="progress-circle"
+      style={{ width: size, height: size }}
     >
+      <div className="progress-circle-text">{value}%</div>
       <svg
         width={size}
         height={size}
@@ -82,7 +85,7 @@ function ProgressCircle({
           cy={size / 2}
           r={radius}
           fill="none"
-          stroke="var(--color-secondary)"
+          stroke="var(--fill-secondary-soft)"
           strokeWidth={stroke}
         />
         <circle
@@ -90,7 +93,7 @@ function ProgressCircle({
           cy={size / 2}
           r={radius}
           fill="none"
-          stroke="var(--color-primary)"
+          stroke="var(--fill-primary-strong)"
           strokeWidth={stroke}
           strokeLinecap="round"
           strokeDasharray={circumference}

@@ -1,7 +1,9 @@
 import useId from "../state/useId";
 import { Direction } from "../types/direction.ts";
+import Icon from "./Icon.tsx";
 import InputFeedback, { HasInputFeedback } from "./InputFeedback.tsx";
 import "./RadioCard.css";
+import CheckIcon from "@heroicons/react/24/outline/CheckIcon";
 import clsx from "clsx";
 import React from "react";
 
@@ -15,6 +17,7 @@ export interface RadioCardProps<T extends string = string> extends HasInputFeedb
   name: string;
   /** Accessible group label, rendered as the fieldset's <legend> */
   legend?: string;
+  noCheck?: boolean;
   options: RadioOption<T>[];
   value: T;
   onValueChange: (value: T) => void;
@@ -36,6 +39,7 @@ const RadioCard = React.forwardRef(function RadioCard<T extends string = string>
   {
     name,
     legend,
+    noCheck,
     options,
     value,
     onValueChange,
@@ -77,6 +81,13 @@ const RadioCard = React.forwardRef(function RadioCard<T extends string = string>
               onChange={() => onValueChange(option.value)}
             />
             {option.label}
+            {!noCheck && (
+              <Icon
+                className={clsx("radio-card-check", value === option.value && "checked")}
+                icon={CheckIcon}
+                size={26}
+              />
+            )}
           </label>
         ))}
       </fieldset>

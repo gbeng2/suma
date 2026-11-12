@@ -8,28 +8,30 @@
   align-items: center;
   cursor: pointer;
   text-decoration: none !important;
+  gap: var(--space-1);
 }
 
 .nav-option-icon {
-  color: var(--color-primary);
-  border: var(--color-primary) solid 2px;
+  color: var(--fill-primary-strong);
+  border: var(--fill-primary-strong) solid var(--border-width-strong);
   border-radius: var(--border-radius-pill);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--space-2);
+  padding: var(--space-4);
 }
 
 .nav-option-icon.active, .nav-option-icon:hover {
-  color: var(--color-primary-contrast);
-  background-color: var(--color-primary);
+  color: var(--text-primary-on-strong);
+  background-color: var(--fill-primary-strong);
 }
 
 .nav-option-label {
-  font-size: var(--font-size-sm);
-  color: var(--color-text);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-semi);
+  color: var(--text-secondary-mute);
 }
 
 .nav-option-label.active {
-  color: var(--color-primary);
+  color: var(--fill-primary-strong);
 }

@@ -1,25 +1,26 @@
 import Link from "../routing/Link.tsx";
 import { RoutePathOrUrl } from "../routing/RoutePath.ts";
+import { assertNever } from "../types/global.ts";
+import { ThemeColor, ThemeSize } from "../types/theme";
 import "./Button.css";
 import clsx from "clsx";
 import React, { CSSProperties, MouseEventHandler } from "react";
 
-export type ButtonVariant = "filled" | "text" | "outline";
-export type ButtonColor = "primary" | "secondary" | "danger" | "success";
-export type ButtonPreset = "primary" | "secondary";
-export type ButtonSize = "sm" | "md" | "lg";
+export type ButtonVariant = "primary" | "secondary" | "outline" | "text" | "unstyled";
 interface ButtonStyle extends CSSProperties {
   "--btn-color"?: string;
   "--btn-color-hover"?: string;
   "--btn-bg"?: string;
   "--btn-bg-hover"?: string;
+  "--btn-border"?: string;
+  "--btn-x"?: string;
+  "--btn-y"?: string;
 }
 
 export interface ButtonProps {
   variant?: ButtonVariant;
-  color?: ButtonColor;
-  size?: ButtonSize;
-  preset?: ButtonPreset;
+  color?: ThemeColor;
+  size?: ThemeSize;
   className?: string;
   style?: ButtonStyle;
   to?: RoutePathOrUrl;
@@ -38,10 +39,9 @@ const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonPro
       className,
       style,
       to,
-      variant = "filled",
+      variant = "primary",
       color = "primary",
       size = "md",
-      preset,
       disabled,
       inline,
       children,
@@ -50,22 +50,15 @@ const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonPro
     },
     ref
   ) {
-    if (preset === "primary") {
-      color = "primary";
-      variant = "filled";
-    } else if (preset === "secondary") {
-      color = "secondary";
-      variant = "filled";
-    }
     const cls = clsx(
-      className,
       `btn`,
       `btn-${variant}`,
       `btn-${size}`,
-      inline && `btn-inline btn-inline-${size}`,
-      to && "btn-link"
+      inline && `btn-inline`,
+      to && "btn-link",
+      className
     );
-    const sty: ButtonStyle = { ...toColorStyle(variant, color), ...style };
+    const sty: ButtonStyle = { ...toButtonStyle(variant, color, size), ...style };
     if (to) {
       return (
         <Link
@@ -97,29 +90,69 @@ const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonPro
 
 export default Button;
 
-function toColorStyle(v: ButtonVariant, c: ButtonColor): ButtonStyle {
-  const transparentBg = v === "outline" || v === "text";
-  if (transparentBg) {
+function toButtonStyle(v: ButtonVariant, c: ThemeColor, s: ThemeSize): ButtonStyle {
+  let size;
+  if (s === "sm") {
+    size = {
+      "--btn-y": "var(--space-4)",
+      "--btn-x": "var(--space-5)",
+    };
+  } else if (s === "md") {
+    size = {
+      "--btn-y": "var(--space-6)",
+      "--btn-x": "var(--space-7)",
+    };
+  } else {
+    size = {
+      "--btn-y": "var(--space-7)",
+      "--btn-x": "var(--space-8)",
+    };
+  }
+  if (v === "primary") {
     return {
-      "--btn-color": `var(--color-${c})`,
+      ...size,
+      "--btn-color": `var(--text-${c}-on-strong)`,
+      "--btn-color-hover": `var(--text-${c}-on-strong)`,
+      "--btn-bg": `var(--fill-${c}-strong)`,
+      "--btn-bg-hover": `var(--fill-${c}-strong-hover)`,
+      "--btn-border": `transparent`,
+    };
+  } else if (v === "secondary") {
+    return {
+      ...size,
+      "--btn-color": `var(--text-${c})`,
+      "--btn-color-hover": `var(--text-${c})`,
+      "--btn-bg": `var(--fill-${c}-soft)`,
+      "--btn-bg-hover": `var(--fill-${c}-soft-hover)`,
+      "--btn-border": `transparent`,
+    };
+  } else if (v === "outline") {
+    return {
+      ...size,
+      "--btn-color": `var(--text-${c}-mute)`,
       "--btn-color-hover": `var(--color-${c}-hover)`,
       "--btn-bg": `transparent`,
-      "--btn-bg-hover": `transparent`,
+      "--btn-bg-hover": `var(--fill-${c}-soft)`,
+      "--btn-border": `var(--border-${c}-strong) var(--border-width) solid`,
     };
-  }
-  const contrastBased = c === "primary" || c === "secondary";
-  if (contrastBased) {
+  } else if (v === "text") {
     return {
-      "--btn-color": `var(--color-${c}-contrast)`,
-      "--btn-color-hover": `var(--color-${c}-contrast)`,
-      "--btn-bg": `var(--color-${c})`,
-      "--btn-bg-hover": `var(--color-${c}-hover)`,
+      ...size,
+      "--btn-color": `var(--text-${c})`,
+      "--btn-color-hover": `var(--text-${c}-hover)`,
+      "--btn-bg": `transparent`,
+      "--btn-bg-hover": `var(--fill-${c}-soft)`,
+      "--btn-border": `transparent`,
+    };
+  } else if (v === "unstyled") {
+    return {
+      ...size,
+      "--btn-color": "unset",
+      "--btn-color-hover": "unset",
+      "--btn-bg": "unset",
+      "--btn-bg-hover": "unset",
+      "--btn-border": "unset",
     };
   }
-  return {
-    "--btn-color": `var(--color-primary-contrast)`,
-    "--btn-color-hover": `var(--color-primary-contrast)`,
-    "--btn-bg": `var(--color-${c})`,
-    "--btn-bg-hover": `var(--color-${c}-hover)`,
-  };
+  assertNever(v);
 }

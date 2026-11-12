@@ -1,4 +1,5 @@
 import Progress from "./Progress.tsx";
+import "./ProgressStepHeader.css";
 import Stack from "./Stack.tsx";
 
 interface ProgressStepHeaderProps {
@@ -8,11 +9,11 @@ interface ProgressStepHeaderProps {
 
 export default function ProgressStepHeader({ step, steps }: ProgressStepHeaderProps) {
   return (
-    <Stack row center gap={3}>
+    <Stack row center gap={4}>
       <div className="flex-1">
         <Progress value={Math.ceil((step / steps) * 100)} />
       </div>
-      <p>
+      <p className="progress-step-header-label">
         Step {step} of {steps}
       </p>
     </Stack>

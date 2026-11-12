@@ -1,19 +1,19 @@
-import { TintColor } from "../types/theme";
+import { ThemeColor } from "../types/theme";
 import Icon, { IconProps } from "./Icon.tsx";
 import "./IconChip.css";
 
 export interface IconChipProps extends IconProps {
-  color: TintColor;
+  color: ThemeColor;
   size: number;
 }
 
 export default function IconChip({ color, size, ...rest }: IconChipProps) {
   return (
     <div
-      className={`icon-chip bgcolor-tint-${color}`}
+      className={`icon-chip bgcolor-${color} color-${color}-contrast`}
       style={{ width: size, height: size }}
     >
-      <Icon size={size * 0.5} {...rest} />
+      <Icon size={size * 0.6} {...rest} />
     </div>
   );
 }

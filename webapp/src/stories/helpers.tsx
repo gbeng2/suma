@@ -1,3 +1,4 @@
+import { ThemeSpacing } from "../types/theme";
 import Stack from "../ui/Stack.tsx";
 import React from "react";
 
@@ -5,11 +6,13 @@ export function DemoStack({
   row,
   gap = 3,
   wrap = false,
+  className,
   children,
 }: {
   row?: boolean;
-  gap?: number;
+  gap?: ThemeSpacing;
   wrap?: boolean;
+  className?: string;
   children: React.ReactNode;
 }) {
   const direction = row ? "horizontal" : "vertical";
@@ -19,6 +22,7 @@ export function DemoStack({
       gap={gap}
       style={{ maxWidth: wrap ? undefined : 700 }}
       wrap={wrap}
+      className={className}
     >
       {children}
     </Stack>

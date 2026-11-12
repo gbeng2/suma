@@ -1,5 +1,6 @@
+import { ThemeSize } from "../types/theme";
 import "./Button.css";
-import Button, { ButtonProps, ButtonSize } from "./Button.tsx";
+import Button, { ButtonProps } from "./Button.tsx";
 import Icon, { IconPropsIcon } from "./Icon.tsx";
 import "./IconButton.css";
 import clsx from "clsx";
@@ -12,20 +13,26 @@ export interface IconButtonProps extends ButtonProps {
 const IconButton = React.forwardRef<
   HTMLButtonElement | HTMLAnchorElement,
   IconButtonProps
->(function IconButton({ icon, size = "md", className, ...rest }, ref) {
+>(function IconButton({ icon, size = "md", color, className, ...rest }, ref) {
   return (
     <div>
-      <Button className={clsx("icon-button", className)} size={size} {...rest} ref={ref}>
+      <Button
+        className={clsx("icon-button", `icon-button-${size}`, className)}
+        size={size}
+        color={color}
+        {...rest}
+        ref={ref}
+      >
         <Icon icon={icon} size={iconSizes[size]} />
       </Button>
     </div>
   );
 });
 
-const iconSizes: Record<ButtonSize, number> = {
-  sm: 16,
-  md: 24,
-  lg: 32,
+const iconSizes: Record<ThemeSize, number> = {
+  sm: 18,
+  md: 27,
+  lg: 36,
 };
 
 export default IconButton;

@@ -1,25 +1,26 @@
 .tile {
-  border-radius: var(--border-radius);
+  border-radius: var(--border-radius-3);
   width: 43px;
   height: 43px;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--color-primary);
+  color: var(--text-primary-mute);
+  background-color: var(--fill-secondary-soft);
 }
 
 .tile-primary {
-  background-color: var(--tint-primary);
+
 }
 
 .tile-secondary {
-  background-color: var(--tint-secondary);
+
 }
 
 .tile-success {
-  background-color: var(--tint-success);
+
 }
 
 .tile-danger {
-  background-color: var(--tint-danger);
+
 }

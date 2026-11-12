@@ -1,19 +1,20 @@
 .card-text-title {
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-heading-xs);
   font-weight: var(--font-weight-bold);
 }
 
 .card-text-subtitle {
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-semi);
 }
 
 .card-text-text {
-  font-size: var(--font-size-base);
+  font-size: var(--font-size-body-md);
   font-weight: var(--font-weight-normal);
 }
 
 .card-text-subtext {
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-body-sm);
   font-weight: var(--font-weight-normal);
+  color: var(--text-mute);
 }

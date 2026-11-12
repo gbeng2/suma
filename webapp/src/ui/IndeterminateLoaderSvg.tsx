@@ -1,15 +1,9 @@
-import useId from "../state/useId";
+interface IndeterminateLoaderSvgProps {
+  size?: number | string;
+}
 
-export default function IndeterminantLoaderSvg({ size }: { size?: number | string }) {
+export default function IndeterminantLoaderSvg({ size }: IndeterminateLoaderSvgProps) {
   size = size || 300;
-  const gradientId = `ldio-4tvqiefh3c8-gradient-${useId()}`;
-  // Fragment-only url() references to in-page <defs> can silently stop
-  // resolving in browsers after a client-side route change (history
-  // pushState). Prefixing with the current path forces it to re-resolve.
-  const gradientUrl =
-    typeof window !== "undefined"
-      ? `${window.location.pathname}${window.location.search}#${gradientId}`
-      : `#${gradientId}`;
   return (
     <svg
       style={{
@@ -23,21 +17,17 @@ export default function IndeterminantLoaderSvg({ size }: { size?: number | strin
       viewBox="31 31 38 38"
       preserveAspectRatio="xMidYMid"
     >
-      <defs>
-        <radialGradient id={gradientId} cx="0.5" cy="0.5" fx="0" fy="0" r="2">
-          <stop offset="0%" style={{ stopColor: "var(--tint-primary)" }}></stop>
-          <stop offset="100%" style={{ stopColor: "var(--color-accent)" }}></stop>
-        </radialGradient>
-      </defs>
       <g>
         <circle
           cx="50"
           cy="50"
           r="16"
-          stroke={`url(${gradientUrl})`}
+          pathLength="100"
+          stroke="currentColor"
+          strokeDasharray="75 25"
           strokeWidth="3"
           fill="none"
-        ></circle>
+        />
         <animateTransform
           attributeName="transform"
           type="rotate"

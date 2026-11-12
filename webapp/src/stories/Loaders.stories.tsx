@@ -17,9 +17,16 @@ type Story = StoryObj<typeof meta>;
 export const Plain: Story = {
   render: () => (
     <DemoStack>
-      <IndeterminateLoader variant="plain" size={20} />
-      <IndeterminateLoader variant="plain" size={40} />
-      <IndeterminateLoader variant="plain" />
+      <DemoStack row>
+        <IndeterminateLoader variant="plain" size={20} />
+        <IndeterminateLoader variant="plain" size={40} />
+        <IndeterminateLoader variant="plain" />
+      </DemoStack>
+      <DemoStack row>
+        <IndeterminateLoader variant="plain" size={20} color="primary" />
+        <IndeterminateLoader variant="plain" size={40} color="danger" />
+        <IndeterminateLoader variant="plain" color="success" />
+      </DemoStack>
     </DemoStack>
   ),
 };
@@ -27,14 +34,25 @@ export const Plain: Story = {
 export const Content: Story = {
   render: () => (
     <DemoStack>
+      <p>{LOREM_IPSUM}</p>
       <div className="position-relative">
+        <p>{LOREM_IPSUM}</p>
+        <p>{LOREM_IPSUM}</p>
         <p>{LOREM_IPSUM}</p>
         <IndeterminateLoader variant="content" />
       </div>
+      <p>{LOREM_IPSUM}</p>
     </DemoStack>
   ),
 };
 
 export const Screen: Story = {
-  render: () => <IndeterminateLoader variant="screen" />,
+  render: () => (
+    <DemoStack>
+      <div className="position-relative">
+        <p>{LOREM_IPSUM}</p>
+        <IndeterminateLoader variant="screen" />
+      </div>
+    </DemoStack>
+  ),
 };

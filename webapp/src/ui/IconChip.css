@@ -1,7 +1,6 @@
 .icon-chip {
-  border-radius: var(--border-radius);
+  border-radius: var(--border-radius-pill);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--color-primary);
 }

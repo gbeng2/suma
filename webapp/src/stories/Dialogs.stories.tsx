@@ -1,16 +1,12 @@
 import useToggle from "../state/useToggle";
 import Button from "../ui/Button";
-import ButtonGroup from "../ui/ButtonGroup";
-import Card from "../ui/Card";
-import CardBody from "../ui/CardBody";
 import { Dialog } from "../ui/Dialog";
-import DialogHeader from "../ui/DialogHeader";
-import Stack from "../ui/Stack";
+import DialogYesNo from "../ui/DialogYesNo.tsx";
 import type { Meta, StoryObj } from "@storybook/preact-vite";
 import React from "react";
 
 function DialogDemo() {
-  const dialogToggle = useToggle();
+  const dialogToggle = useToggle(true);
   const dialogFocusRef = React.useRef(null);
   return (
     <>
@@ -20,29 +16,15 @@ function DialogDemo() {
         labelledBy="delete-confirm"
         initialFocusRef={dialogFocusRef}
       >
-        <Card>
-          <CardBody>
-            <Stack direction="vertical" gap={3}>
-              <DialogHeader id="delete-confirm">
-                Are you sure you want to delete this item?
-              </DialogHeader>
-              <p>This cannot be undone.</p>
-              <ButtonGroup>
-                <Button
-                  variant="text"
-                  ref={dialogFocusRef}
-                  className="btn btn-secondary"
-                  onClick={dialogToggle.turnOff}
-                >
-                  Cancel
-                </Button>
-                <Button preset="primary" onClick={dialogToggle.turnOff}>
-                  Delete
-                </Button>
-              </ButtonGroup>
-            </Stack>
-          </CardBody>
-        </Card>
+        <DialogYesNo
+          dialogId="delete-confirm"
+          header="Are you sure you want to delete this item?"
+          body="Only do this at the counter, once staff hand you your items. You can&rsquo;t undo it."
+          toggle={dialogToggle}
+          focusRef={dialogFocusRef}
+          yesText="Delete"
+          onYes={dialogToggle.turnOff}
+        />
       </Dialog>
       <Button onClick={dialogToggle.turnOn}>Open Dialog</Button>
     </>

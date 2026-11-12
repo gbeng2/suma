@@ -1,4 +1,5 @@
 import { DirectionProps, getDirection } from "../types/direction.ts";
+import { ThemeSpacing } from "../types/theme";
 import clsx from "clsx";
 import React, { CSSProperties } from "react";
 
@@ -7,7 +8,7 @@ export type FlexJustify = "around" | "between" | "evenly" | "start" | "end" | "c
 
 export interface StackProps extends DirectionProps {
   id?: string;
-  gap?: number;
+  gap?: ThemeSpacing;
   wrap?: boolean;
   /** Shorthand for align=center or className=align-items-center. */
   center?: boolean;

@@ -2,10 +2,10 @@
     width: 100%;
     border-collapse: collapse;
 
-    --tcolor-header: var(--tint-primary);
-    --tcolor-bg1: var(--color-surface);
-    --tcolor-bg2: var(--color-surface-alt);
-    --tcolor-hover: color-mix(in srgb, var(--tcolor-bg1) 50%, var(--tcolor-bg2));
+    --tcolor-header: var(--fill-primary-soft);
+    --tcolor-bg1: var(--bg-card);
+    --tcolor-bg2: var(--bg-page);
+    --tcolor-hover: var(--fill-primary-soft-hover);
 
     thead,
     tfoot {
@@ -19,8 +19,8 @@
 
     th {
         text-align: left;
-        font-weight: var(--font-weight-medium);
-        color: var(--color-text-muted);
+        font-weight: var(--font-weight-semi);
+        color: var(--text-mute);
     }
 
     caption {
@@ -36,7 +36,7 @@
 .table-borders {
     th,
     td {
-        border: 1px solid var(--color-border);
+        border: 1px solid var(--border-secondary-subtle);
     }
 }
 
@@ -56,7 +56,7 @@
     th,
     td {
         padding: var(--space-1) var(--space-1);
-        font-size: var(--font-size-sm);
+        font-size: var(--font-size-body-sm);
     }
     caption {
         margin-top: var(--space-1);
@@ -64,7 +64,7 @@
 }
 
 .table-sm {
-    font-size: var(--font-size-sm);
+    font-size: var(--font-size-body-sm);
 }
 
 .table-md {
@@ -72,7 +72,7 @@
 }
 
 .table-lg {
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-body-md);
 }
 
 .table-row-highlight {

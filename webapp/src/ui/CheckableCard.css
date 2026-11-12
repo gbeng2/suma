@@ -5,6 +5,7 @@
   display: block;
   cursor: pointer;
   user-select: none;
+  position: relative;
 }
 
 /* Real checkbox stays functional/accessible but is visually hidden;
@@ -22,9 +23,21 @@
 }
 
 .checkable-card:has(input:checked) {
-  border-color: var(--color-primary);
-  outline: solid var(--color-primary) var(--border-width-checked);
-  background-color: color-mix(in srgb, var(--color-primary) 8%, var(--color-surface));
+  border-color: var(--border-primary);
+  outline: solid var(--border-primary) var(--border-width-checked);
+  background-color: var(--fill-primary-soft);
+}
+
+.checkable-card-check {
+  position: absolute;
+  right: var(--space-3);
+  top: var(--space-3);
+  color: var(--fill-primary-strong);
+  display: none;
+}
+
+.checkable-card-check.checked {
+  display: block;
 }
 
 .checkable-card:has(input:focus-visible) {

@@ -11,18 +11,30 @@ import type { Meta, StoryObj } from "@storybook/preact-vite";
 import React from "react";
 
 const BUTTON_PROPS: ButtonProps[] = [
-  { children: "Continue", variant: "filled" },
+  { children: "Continue", variant: "primary" },
+  { children: "Back", variant: "secondary" },
+  { children: "Outline", variant: "outline" },
   { children: "Skip for now", variant: "text" },
-  { children: "Add", variant: "outline" },
-  { children: "Danger", variant: "filled", color: "danger" },
+
+  { children: "Continue", variant: "primary", size: "sm" },
+  { children: "Back", variant: "secondary", size: "sm" },
+  { children: "Outline", variant: "outline", size: "sm" },
+  { children: "Skip for now", variant: "text", size: "sm" },
+
+  { children: "Continue", variant: "primary", size: "lg" },
+  { children: "Back", variant: "secondary", size: "lg" },
+  { children: "Outline", variant: "outline", size: "lg" },
+  { children: "Skip for now", variant: "text", size: "lg" },
+
+  { children: "Danger", variant: "primary", color: "danger" },
+  { children: "Danger", variant: "secondary", color: "danger" },
   { children: "Danger", variant: "text", color: "danger" },
   { children: "Danger", variant: "outline", color: "danger" },
-  { children: "Success", variant: "filled", color: "success" },
-  { children: "Success", variant: "text", color: "success" },
-  { children: "Success", variant: "outline", color: "success" },
-  { children: "Large Btn", size: "lg" },
-  { children: "Small Btn", variant: "outline", size: "sm" },
+
   { children: "Inline", variant: "text", inline: true },
+  { children: "Inline", variant: "primary", inline: true },
+
+  { children: "Unstyled", variant: "unstyled" },
 ] as const;
 
 const BUTTON_STATES = ["", "is-hover", "is-focus-visible", "is-disabled"];
@@ -81,25 +93,34 @@ export const Groups: Story = {
       <h2>Horizontal</h2>
       <ButtonGroup>
         <Button>Primary Action</Button>
-        <Button preset="secondary">Secondary Action</Button>
+        <Button variant="secondary">Secondary Action</Button>
       </ButtonGroup>
       <h2>Vertical</h2>
       <ButtonGroup vertical>
         <Button>Primary Action</Button>
-        <Button preset="secondary">Secondary Action</Button>
+        <Button variant="secondary">Secondary Action</Button>
       </ButtonGroup>
       <h2>Inline</h2>
       <Stack col>
-        <p>Some text</p>
-        <p>Some text</p>
-        <Stack row center className="justify-content-between" style={{ maxWidth: 250 }}>
-          <p>Some text</p>
+        <p>Text line to check line height</p>
+        <p>Text line to check line height</p>
+        <p>
+          Button text after this
+          <Button variant="text" inline>
+            Button Text
+          </Button>
+          should be inline
+        </p>
+        <p>Text line to check line height</p>
+        <p>Text line to check line height</p>
+        <p>
+          Icon button after this
           <Button variant="text" inline>
             <Icon icon={ChevronRightIcon} />
           </Button>
-        </Stack>
-        <p>Some text</p>
-        <p>Some text</p>
+          should be inline
+        </p>
+        <p>Text line to check line height</p>
       </Stack>
     </DemoStack>
   ),
@@ -109,10 +130,13 @@ export const Icons: Story = {
   render: () => (
     <DemoStack>
       <IconButton icon={TrashIcon} />
-      <IconButton icon={TrashIcon} color="success" />
-      <IconButton icon={TrashIcon} color="danger" />
+      <IconButton icon={TrashIcon} variant="secondary" />
       <IconButton icon={TrashIcon} variant="outline" />
       <IconButton icon={TrashIcon} variant="text" />
+
+      <IconButton icon={TrashIcon} color="success" />
+      <IconButton icon={TrashIcon} color="danger" />
+
       <IconButton icon={TrashIcon} size="sm" />
       <IconButton icon={TrashIcon} size="lg" />
     </DemoStack>

@@ -1,0 +1,13 @@
+.progress-circle {
+  display: inline-block;
+  position: relative;
+}
+
+.progress-circle-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-semi);
+}

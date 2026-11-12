@@ -5,7 +5,6 @@ import CardBody from "../ui/CardBody";
 import CardImage from "../ui/CardImage";
 import CardText from "../ui/CardText";
 import CheckableCard from "../ui/CheckableCard";
-import Chip from "../ui/Chip";
 import Stack from "../ui/Stack";
 import Tile from "../ui/Tile";
 import { DemoStack } from "./helpers.tsx";
@@ -25,6 +24,14 @@ export const Basic: Story = {
         <CardBody>
           <CardText variant="title">Your savings so far</CardText>
           <CardText>Across every offer you have used</CardText>
+        </CardBody>
+      </Card>
+      <Card>
+        <CardBody>
+          <CardText variant="title">Roasted Turkey Dinner</CardText>
+          <CardText variant="subtitle">Local Market</CardText>
+          <CardText variant="text">Turkey, stuffing, gravy and rolls.</CardText>
+          <CardText variant="subtext">Feeds 4–6. Limit 1 per person</CardText>
         </CardBody>
       </Card>
     </DemoStack>
@@ -83,15 +90,25 @@ export const WithImage: Story = {
   render: () => (
     <DemoStack>
       <Card>
+        <CardImage>
+          <div style={{ backgroundColor: "var(--fill-success-strong)", height: 100 }} />
+        </CardImage>
         <CardBody>
           <Stack col gap={3}>
-            <CardImage>
-              <div style={{ backgroundColor: "var(--tint-success", height: 60 }} />
+            <h3>Card with flush image</h3>
+            <p>Here is detail text.</p>
+          </Stack>
+        </CardBody>
+      </Card>
+      <Card>
+        <CardBody>
+          <Stack col gap={3}>
+            <CardImage variant="inset">
+              <div
+                style={{ backgroundColor: "var(--fill-success-strong)", height: 100 }}
+              />
             </CardImage>
-            <Chip variant="secondary" className="align-self-start">
-              hello
-            </Chip>
-            <h3>Card with image</h3>
+            <h3>Card with inset image</h3>
             <p>Here is detail text.</p>
           </Stack>
         </CardBody>
@@ -112,7 +129,7 @@ export const Brand: Story = {
           <span>Call or text (555) 123-1234 &bull; 9am - 5pm, Monday to Friday</span>
         }
       >
-        <Button className="mt-4">Contact Support</Button>
+        <Button>Contact Support</Button>
       </BrandCard>
       <BrandCard text="Are you ready to claim your order at Local Farmers Market?">
         <Button className="mt-4 w-100">Yes</Button>

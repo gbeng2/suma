@@ -13,100 +13,311 @@
 }
 
 :root {
-    /* ---- Color palette ---- */
-    --color-primary: #36569C;
-    --color-primary-hover: #1d4ed8;
-    --color-primary-contrast: #ffffff;
 
-    --color-secondary: #F4EFE7;
-    --color-secondary-hover: #EEE8DC;
-    --color-secondary-contrast: #2B2620;
+    /* ***********************************************************
+    PRIMITIVES
 
-    --color-success: #4D6B44;
-    --color-success-hover: #69935d;
+    Do NOT use these tokens within components.
+    These are not semantic, so they break theming.
+    They are here for use by semantic tokens ONLY.
+    *********************************************************** */
+    --sand-1: #FDFCFA;
+    --sand-2: #F9F6F1;
+    --sand-3: #F4EFE7;
+    --sand-4: #EEE8DC;
+    --sand-5: #E7E0D0;
+    --sand-6: #DFD5C3;
+    --sand-7: #D2C5AE;
+    --sand-8: #BFAE92;
+    --sand-9: #8C7A63;
+    --sand-10: #7D6C56;
+    --sand-11: #6B5B49;
+    --sand-12: #2B2620;
 
-    --color-danger: #A3521F;
-    --color-danger-hover: #ba581a;
+    --accent-1: #FDFCFB;
+    --accent-2: #F7F8FD;
+    --accent-3: #EBF0FA;
+    --accent-4: #DFE7F6;
+    --accent-5: #D2DCF1;
+    --accent-6: #C1CEE9;
+    --accent-7: #AABBDF;
+    --accent-8: #8BA2D2;
+    --accent-9: #36569C;
+    --accent-10: #2D4A8B;
+    --accent-11: #395DA3;
+    --accent-12: #1B2A4E;
 
-    --color-accent: #F5A98D;
+    --terracotta-1: #FFFBF9;
+    --terracotta-2: #FFF5EF;
+    --terracotta-3: #FBE1CB;
+    --terracotta-4: #F9D9C0;
+    --terracotta-5: #F8D0B5;
+    --terracotta-6: #F6C8AA;
+    --terracotta-7: #EDB48D;
+    --terracotta-8: #E39760;
+    --terracotta-9: #A45400;
+    --terracotta-10: #904A00;
+    --terracotta-11: #763E1E;
+    --terracotta-12: #411D00;
 
-    --tint-primary: #CFDAF0;
-    --tint-secondary: #FAD6AC;
-    --tint-success: #DCE2C9;
-    --tint-danger: #F3D0B8;
+    --amber-1: #FFFCF6;
+    --amber-2: #FEF7E9;
+    --amber-3: #FBEED8;
+    --amber-4: #F9E4BE;
+    --amber-5: #F6D9A4;
+    --amber-6: #ECCA8C;
+    --amber-7: #E2BB74;
+    --amber-8: #D5A030;
+    --amber-9: #8B6400;
+    --amber-10: #805C00;
+    --amber-11: #7B5800;
+    --amber-12: #372600;
 
-    --color-bg: #FFEDD8;
-    --color-bg-subtle: #FFEDD8;
-    --color-surface: #FDFCFA;
-    --color-surface-alt: #f1f0ee;
-    --color-border: #D2C5AE;
-    --color-border-strong: #D2C5AE;
+    --green-1: #FAFDF9;
+    --green-2: #F4F9F2;
+    --green-3: #EAF3E8;
+    --green-4: #DEEDDB;
+    --green-5: #D3E4CF;
+    --green-6: #C1D8BD;
+    --green-7: #ACC9A6;
+    --green-8: #8EB385;
+    --green-9: #447738;
+    --green-10: #3A692F;
+    --green-11: #3D6833;
+    --green-12: #122F0B;
 
-    --color-text: #111827;
-    --color-text-muted: #6B5B49;
-    --color-text-inverse: #FFFAF2;
-    --color-link: var(--color-primary);
-    --color-link-hover: var(--color-primary-hover);
+    --gray-1: #FAFCFF;
+    --gray-2: #F4F7FB;
+    --gray-3: #EDF0F4;
+    --gray-4: #E6E9ED;
+    --gray-5: #DEE1E5;
+    --gray-6: #D4D6DA;
+    --gray-7: #C4C7CA;
+    --gray-8: #AEB1B4;
+    --gray-9: #7B7D81;
+    --gray-10: #6D6F73;
+    --gray-11: #5C5E61;
+    --gray-12: #25272A;
+
+
+    --transparent: transparent;
+
+
+    /* ***********************************************************
+    ~~ bg ~~
+    separated background colors for containers of content
+    this includes a scrim for dialogs / modals
+    *********************************************************** */
+    --bg-page: #FFFAF2;
+    --bg-card: var(--sand-1);
+    --bg-scrim: #2B262033;
+
+    /* one off variables/tokens for specific use*/
+    --fill-disabled: var(--gray-4);
+    --fill-track: var(--sand-5);
+    --fill-track-strong: var(--sand-6);
+
+    --fill-primary-strong: var(--accent-9);
+    --fill-primary-strong-hover: var(--accent-10);
+    --fill-primary-strong-pressed: var(--accent-10);
+    --fill-primary-soft: var(--accent-3);
+    --fill-primary-soft-hover: var(--accent-4);
+    --fill-primary-soft-pressed: var(--accent-5);
+
+    --fill-secondary-strong: var(--sand-12);
+    --fill-secondary-strong-hover: var(--sand-11);
+    --fill-secondary-strong-pressed: var(--sand-11);
+    --fill-secondary-soft: var(--sand-3);
+    --fill-secondary-soft-hover: var(--sand-4);
+    --fill-secondary-soft-pressed: var(--sand-5);
+
+    --fill-info-strong: var(--accent-9);
+    --fill-info-strong-hover: var(--accent-10);
+    --fill-info-strong-pressed: var(--accent-10);
+    --fill-info-soft: var(--accent-3);
+    --fill-info-soft-hover: var(--accent-4);
+    --fill-info-soft-pressed: var(--accent-5);
+
+    --fill-success-strong: var(--green-9);
+    --fill-success-strong-hover: var(--green-10);
+    --fill-success-strong-pressed: var(--green-10);
+    --fill-success-soft: var(--green-3);
+    --fill-success-soft-hover: var(--green-4);
+    --fill-success-soft-pressed: var(--green-5);
+
+    --fill-warning-strong: var(--amber-9);
+    --fill-warning-strong-hover: var(--amber-10);
+    --fill-warning-strong-pressed: var(--amber-10);
+    --fill-warning-soft: var(--amber-3);
+    --fill-warning-soft-hover: var(--amber-4);
+    --fill-warning-soft-pressed: var(--amber-5);
+
+    --fill-danger-strong: var(--terracotta-9);
+    --fill-danger-strong-hover: var(--terracotta-10);
+    --fill-danger-strong-pressed: var(--terracotta-10);
+    --fill-danger-soft: var(--terracotta-3);
+    --fill-danger-soft-hover: var(--terracotta-4);
+    --fill-danger-soft-pressed: var(--terracotta-5);
+
+
+    --border-focus-ring: var(--accent-8);
+    --border-disabled: var(--gray-7);
+
+    --border-primary-subtle: var(--accent-6);
+    --border-primary: var(--accent-7);
+    --border-primary-strong: var(--accent-9);
+
+    --border-info-subtle: var(--accent-6);
+    --border-info: var(--accent-7);
+    --border-info-strong: var(--accent-9);
+
+    --border-success-subtle: var(--green-6);
+    --border-success: var(--green-7);
+    --border-success-strong: var(--green-9);
+
+    --border-danger-subtle: var(--terracotta-6);
+    --border-danger: var(--terracotta-7);
+    --border-danger-strong: var(--terracotta-9);
+
+    --border-secondary-subtle: var(--sand-6);
+    --border-secondary: var(--sand-7);
+    --border-secondary-strong: var(--sand-9);
+
+
+    --text-disabled: var(--sand-8);
+    --text-color: var(--sand-12);
+    --text-mute: var(--sand-11);
+    --link-color: var(--text-primary-mute);
+    --link-color-visited: var(--text-primary-placeholder);
+
+    --text-primary: var(--accent-12);
+    --text-primary-mute: var(--accent-11);
+    --text-primary-placeholder: var(--accent-9);
+    --text-primary-on-strong: var(--sand-1);
+    --text-primary-on-soft: var(--accent-12);
+
+    --text-info: var(--accent-12);
+    --text-info-mute: var(--accent-11);
+    --text-info-placeholder: var(--accent-9);
+    --text-info-on-strong: var(--sand-1);
+    --text-info-on-soft: var(--accent-12);
+
+    --text-success: var(--green-12);
+    --text-success-mute: var(--green-11);
+    --text-success-placeholder: var(--green-9);
+    --text-success-on-strong: var(--sand-1);
+    --text-success-on-soft: var(--green-11);
+
+    --text-warning: var(--amber-12);
+    --text-warning-mute: var(--amber-11);
+    --text-warning-placeholder: var(--amber-9);
+    --text-warning-on-strong: var(--sand-1);
+    --text-warning-on-soft: var(--amber-11);
+
+    --text-danger: var(--terracotta-12);
+    --text-danger-mute: var(--terracotta-11);
+    --text-danger-placeholder: var(--terracotta-9);
+    --text-danger-on-strong: var(--sand-1);
+    --text-danger-on-soft: var(--terracotta-11);
+
+    --text-secondary: var(--sand-12);
+    --text-secondary-mute: var(--sand-11);
+    --text-secondary-placeholder: var(--sand-9);
+    --text-secondary-on-strong: var(--sand-1);
+    --text-secondary-on-soft: var(--sand-12);
 
     /* ---- Typography ---- */
     --font-family-base: 'Source Sans Pro', system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     --font-family-title: 'Raleway', "Source Serif Pro", Georgia, Cambria, "Times New Roman", Times, serif;
     --font-family-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
-    --font-size-base: 16px;
-    --font-size-xs: 0.7rem;
-    --font-size-sm: 0.875rem;
-    --font-size-lg: 1.125rem;
-    --font-size-xl: 1.5rem;
-    --font-size-xxl: 2rem;
+    --font-size-base: 18px;
+    --font-size-heading-xl: 40px;
+    --font-size-heading-lg: 30px;
+    --font-size-heading-md: 24px;
+    --font-size-heading-sm: 21px;
+    --font-size-heading-xs: 19px;
+
+    --font-size-body-md: 17px;
+    --font-size-body-sm: 15px;
+    --font-size-label: 15px;
+    --font-size-nav: 15px;
+    --font-size-mark: 19px;
 
     --font-weight-normal: 400;
-    --font-weight-medium: 500;
-    --font-weight-bold: 600;
+    --font-weight-semi: 600;
+    --font-weight-bold: 700;
 
     --line-height-base: 1.5;
     --line-height-heading: 1.25;
 
     /* ---- Spacing scale ---- */
-    --space-1: 0.25rem;
-    --space-2: 0.5rem;
-    --space-3: 0.75rem;
-    --space-4: 1rem;
-    --space-5: 1.5rem;
-    --space-6: 2rem;
+    --space-0: 0;
+    --space-1: 2px;
+    --space-2: 4px;
+    --space-3: 6px;
+    --space-4: 10px;
+    --space-5: 14px;
+    --space-6: 18px;
+    --space-7: 24px;
+    --space-8: 32px;
+    --space-9: 40px;
+    --space-10: 48px;
+    --space-11: 64px;
+
+    --space-gutter: var(--space-6);
+    /*--gap-xs: 6px;*/
+    /*--gap-sm: 11px;*/
+    /*--gap-lg: 18px;*/
+    /*--space-row-x: 12px;*/
+    /*--space-row-y: 11px;*/
+    /*--pad-card: 18px;*/
+    /*--pad-page-x: 20px;*/
 
     /* ---- Borders / radius ---- */
     --border-width: 1px;
     --border-width-checked: 1px;
+    --border-width-strong: 2px;
     --border-width-highlighted: 4px;
-    --border-radius-sm: 0.25rem;
-    --border-radius: 0.375rem;
-    --border-radius-lg: 0.5rem;
-    --border-radius-xl: 1rem;
+
+    --border-radius-0: 0;
+    --border-radius-1: 6px;
+    --border-radius-2: 10px;
+    --border-radius-3: 14px;
+    --border-radius-4: 18px;
+    --border-radius-5: 24px;
     --border-radius-pill: 999px;
+    --border-radius-card: var(--border-radius-4);
+    --border-radius-sm: var(--border-radius-3);
+
+    --focus-ring-color: var(--border-focus-ring);
+    --focus-ring-width: 3px;
 
     /* ---- Shadows ---- */
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
-    --shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
-    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+    --shadow-0: 0 0px 0px  0 color-mix(in srgb, var(--text-secondary-mute) 0%, transparent);
+    --shadow-1: 0 1px 2px 0 color-mix(in srgb, var(--text-secondary-mute) 18%, transparent);
+    --shadow-2:
+        0 1px 3px 0 color-mix(in srgb, var(--text-secondary-mute) 10%, transparent)
+        0 1px 2px 0 color-mix(in srgb, var(--text-secondary-mute) 6%, transparent);
+    --shadow-3:
+        0 10px 15px 0 color-mix(in srgb, var(--text-secondary-mute) 10%, transparent)
+        0 4px 6px 0 color-mix(in srgb, var(--text-secondary-mute) 5%, transparent);
 
     /* ---- Transitions ---- */
     --transition-fast: 100ms ease-in-out;
     --transition-base: 150ms ease-in-out;
 
     /* ---- Layout ---- */
-    --focus-ring-color: var(--color-primary-hover);
-    --focus-ring-width: 3px;
 
     /* ---- Component sizing ---- */
-    --input-height: 2.5rem;
-    --input-padding-x: var(--space-3);
-    --input-padding-y: var(--space-2);
-    --btn-padding-x: var(--space-4);
-    --btn-padding-y: var(--space-2);
+    /*--input-height: 2.5rem;*/
+    /*--input-padding-x: var(--space-3);*/
+    /*--input-padding-y: var(--space-2);*/
+    /*--btn-padding-x: var(--space-4);*/
+    /*--btn-padding-y: var(--space-2);*/
 
-    --input-background-color: var(--color-surface);
-    --input-placeholder-color: #a58b6f;
+    /*--input-background-color: var(--color-surface);*/
+    /*--input-placeholder-color: #a58b6f;*/
 
     --switch-width: 2.5rem;
     --switch-height: 1.5rem;
@@ -115,11 +326,11 @@
 
     --select-arrow-size: 0.75rem;
 
-    --alert-icon-size: 24px;
+    --alert-icon-size: 40px;
     --alert-arrow-size: 16px;
 
     /* ---- Other input behavior ---- */
-    --disabled-opacity: 45%;
+    --opacity-dim: 0.55;
 
     /* ---- Z-index management ---- */
     --z-index-dialog: 100;

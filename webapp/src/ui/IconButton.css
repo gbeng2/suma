@@ -2,6 +2,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--space-2);
   border-radius: var(--border-radius-pill);
+}
+
+.icon-button-sm {
+  padding: var(--space-4);
+}
+
+.icon-button-md {
+  padding: var(--space-5);
+}
+
+.icon-button-lg {
+  padding: var(--space-6);
 }

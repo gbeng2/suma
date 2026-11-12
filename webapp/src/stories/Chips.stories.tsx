@@ -1,5 +1,6 @@
 import Chip from "../ui/Chip";
-import Stack from "../ui/Stack";
+import { themeColors } from "./constants.tsx";
+import { DemoStack } from "./helpers.tsx";
 import type { Meta, StoryObj } from "@storybook/preact-vite";
 
 const meta = {
@@ -11,11 +12,19 @@ type Story = StoryObj<typeof meta>;
 
 export const Variants: Story = {
   render: () => (
-    <Stack gap={2}>
-      <Chip variant="secondary">Available now</Chip>
-      <Chip variant="info">Ready for pickup</Chip>
-      <Chip variant="danger">2 left</Chip>
-      <Chip variant="success">Picked up</Chip>
-    </Stack>
+    <DemoStack className="align-items-start">
+      <h2>Chips</h2>
+      {themeColors.map((c) => (
+        <Chip key={c} variant={c}>
+          {c}
+        </Chip>
+      ))}
+      <h2>Invert</h2>
+      {themeColors.map((c) => (
+        <Chip key={c} variant={c} invert>
+          {c}
+        </Chip>
+      ))}
+    </DemoStack>
   ),
 };

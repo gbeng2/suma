@@ -12,8 +12,9 @@
 }
 
 .radio-card-option {
+    position: relative;
     display: block;
-    padding: var(--space-3);
+    padding: var(--space-5) var(--space-6);
     margin: 0;
     cursor: pointer;
     user-select: none;
@@ -26,17 +27,17 @@
     /** We use an outline to show an item checked.
     The outline must follow the card on the first/last item. */
     .radio-card-option:first-child {
-        border-top-left-radius: var(--border-radius);
-        border-top-right-radius: var(--border-radius);
+        border-top-left-radius: var(--border-radius-card);
+        border-top-right-radius: var(--border-radius-card);
     }
 
     .radio-card-option:last-child {
-        border-bottom-left-radius: var(--border-radius);
-        border-bottom-right-radius: var(--border-radius);
+        border-bottom-left-radius: var(--border-radius-card);
+        border-bottom-right-radius: var(--border-radius-card);
     }
 
     .radio-card-option:not(:last-child) {
-        border-bottom: var(--border-width) var(--color-border) solid;
+        border-bottom: var(--border-width) var(--border-secondary-subtle) solid;
     }
 
     /** Hide the border for the item before the item that is selected.
@@ -61,17 +62,17 @@
     }
 
     .radio-card-option:first-child {
-        border-top-left-radius: var(--border-radius);
-        border-bottom-left-radius: var(--border-radius);
+        border-top-left-radius: var(--border-radius-card);
+        border-bottom-left-radius: var(--border-radius-card);
     }
 
     .radio-card-option:last-child {
-        border-top-right-radius: var(--border-radius);
-        border-bottom-right-radius: var(--border-radius);
+        border-top-right-radius: var(--border-radius-card);
+        border-bottom-right-radius: var(--border-radius-card);
     }
 
     .radio-card-option:not(:last-child) {
-        border-right: var(--border-width) var(--color-border) solid;
+        border-right: var(--border-width) var(--border-secondary-subtle) solid;
     }
 
     .radio-card-option:has(+ .radio-card-option input:checked) {
@@ -93,8 +94,8 @@
 
 .radio-card-option:has(input:checked) {
     outline-offset: calc(-1 * var(--focus-ring-width));
-    outline: var(--focus-ring-width) var(--color-primary) solid;
-    background-color: color-mix(in srgb, var(--color-primary) 8%, var(--color-surface));
+    outline: var(--focus-ring-width) var(--fill-primary-strong) solid;
+    background-color: color-mix(in srgb, var(--fill-primary-strong) 8%, var(--bg-card));
 }
 
 .radio-card-option:has(input:focus-visible) {
@@ -104,4 +105,17 @@
 .radio-card-option:has(input:disabled) {
     cursor: not-allowed;
     opacity: 0.6;
+}
+
+.radio-card-check {
+    position: absolute;
+    right: var(--space-4);
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--fill-primary-strong);
+    display: none;
+}
+
+.radio-card-check.checked {
+    display: block;
 }

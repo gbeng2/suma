@@ -35,6 +35,7 @@ export default function LanguageSwitcher({
   return (
     <RadioCard
       name="language"
+      noCheck
       direction={direction}
       options={supportedLocales.map(({ code, native }) => ({
         label: (
@@ -49,7 +50,7 @@ export default function LanguageSwitcher({
         value: code,
       }))}
       value={currentLanguage}
-      optionClass={variant === "short" ? "py-1 px-0" : ""}
+      optionClass={variant === "short" ? "py-3 px-0" : ""}
       className={className}
       style={style}
       onValueChange={(v) => changeLanguage(v)}

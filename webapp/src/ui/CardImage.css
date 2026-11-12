@@ -1,4 +1,11 @@
 .card-image {
-  border-radius: var(--border-radius-lg);
   overflow: hidden;
+}
+
+.card-image-flush {
+
+}
+
+.card-image-inset {
+  border-radius: var(--border-radius-3);
 }

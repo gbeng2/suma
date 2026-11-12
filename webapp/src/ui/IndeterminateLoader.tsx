@@ -1,3 +1,4 @@
+import { ThemeColor } from "../types/theme";
 import "./IndeterminateLoader.css";
 import IndeterminantLoaderSvg from "./IndeterminateLoaderSvg";
 import clsx from "clsx";
@@ -6,6 +7,7 @@ import React from "react";
 interface IndeterminateLoaderProps {
   variant?: "plain" | "screen" | "content";
   size?: number | string;
+  color?: ThemeColor | "inherit";
   className?: string;
   style?: React.CSSProperties;
 }
@@ -13,15 +15,25 @@ interface IndeterminateLoaderProps {
 export default function IndeterminateLoader({
   variant,
   size,
+  color = "inherit",
   className,
   style,
 }: IndeterminateLoaderProps) {
-  if (variant === "plain") {
-    return <SizedLoader size={size || 60} className={className} style={style} />;
-  } else if (variant === "screen") {
-    return <ScreenLoader size={size || 160} className={className} style={style} />;
+  const sty = { ...style };
+  if (color === "inherit") {
+    if (variant !== "plain") {
+      color = "primary";
+    }
   }
-  return <ContentLoader size={size || 120} className={className} style={style} />;
+  if (color !== "inherit") {
+    sty.color = `var(--fill-${color}-strong)`;
+  }
+  if (variant === "plain") {
+    return <SizedLoader size={size || 60} className={className} style={sty} />;
+  } else if (variant === "screen") {
+    return <ScreenLoader size={size || 160} className={className} style={sty} />;
+  }
+  return <ContentLoader size={size || 120} className={className} style={sty} />;
 }
 
 interface SizedProps {

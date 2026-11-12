@@ -21,7 +21,7 @@ export default function BrandCard({
       {pillText && <div className="brand-card-pill">{pillText}</div>}
       <h2 className="brand-card-title">{title}</h2>
       <div className="brand-card-text">{text}</div>
-      {children}
+      <div className="brand-card-actions">{children}</div>
       <div className="brand-card-help">{helpText}</div>
     </div>
   );
