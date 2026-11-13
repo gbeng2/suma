@@ -160,7 +160,6 @@
     --fill-danger-soft-hover: var(--terracotta-4);
     --fill-danger-soft-pressed: var(--terracotta-5);
 
-
     --border-focus-ring: var(--accent-8);
     --border-disabled: var(--gray-7);
 
@@ -184,12 +183,12 @@
     --border-secondary: var(--sand-7);
     --border-secondary-strong: var(--sand-9);
 
-
     --text-disabled: var(--sand-8);
     --text-color: var(--sand-12);
     --text-mute: var(--sand-11);
     --link-color: var(--text-primary-mute);
     --link-color-visited: var(--text-primary-placeholder);
+    --link-color-hover: var(--text-primary-mute);
 
     --text-primary: var(--accent-12);
     --text-primary-mute: var(--accent-11);
@@ -310,6 +309,8 @@
     --transition-base: 150ms ease-in-out;
 
     /* ---- Layout ---- */
+    --page-max-width: 600px;
+    --page-gutter: var(--space-5);
 
     /* ---- Components ---- */
     --input-height: 54px;

@@ -6,7 +6,7 @@ export default function DrawerContentsLoading() {
   return (
     <DrawerContents>
       <Stack col center className="position-relative">
-        <IndeterminateLoader size={100} variant="plain" />
+        <IndeterminateLoader size={100} variant="plain" color="primary" />
       </Stack>
     </DrawerContents>
   );

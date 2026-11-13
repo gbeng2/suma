@@ -1,2 +1,7 @@
 .card-body {
+  @property --card-body-padding {
+    syntax: '*';
+    inherits: false;
+  }
+  padding: var(--card-body-padding, var(--space-gutter));
 }

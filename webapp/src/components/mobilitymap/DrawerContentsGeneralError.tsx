@@ -5,7 +5,7 @@ import DrawerContents from "./DrawerContents.tsx";
 export default function DrawerContentsGeneralError({ error }: { error: AppError }) {
   return (
     <DrawerContents>
-      <FormFeedback noSurface feedback={error} />
+      <FormFeedback feedback={error} />
     </DrawerContents>
   );
 }

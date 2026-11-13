@@ -19,6 +19,7 @@ import React from "react";
 
 const meta = {
   title: "Styleguide/TransactionHistory",
+  parameters: { layout: "fullscreen" },
 } satisfies Meta;
 
 export default meta;

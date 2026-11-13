@@ -1,6 +1,7 @@
 import { IdParams } from "../api.ts";
 import { r, t } from "../localization";
 import { AppError, extractAppErrorAny } from "../modules/feedback.ts";
+import ignore from "../modules/ignore.ts";
 import useAsyncFetch from "../state/useAsyncFetch.ts";
 import useHashSelector from "../state/useHashSelector.ts";
 import Button from "../ui/Button.tsx";
@@ -12,13 +13,13 @@ import DialogHeader from "../ui/DialogHeader.tsx";
 import FormFeedback from "../ui/FormFeedback.tsx";
 import IndeterminateLoader from "../ui/IndeterminateLoader.tsx";
 import Page from "../ui/Page.tsx";
-import PageHeader from "../ui/PageHeader.tsx";
 import Pagination from "../ui/Pagination.tsx";
 import Select from "../ui/Select.tsx";
 import Stack from "../ui/Stack.tsx";
 import Table from "../ui/Table.tsx";
 import TableBody from "../ui/TableBody.tsx";
 import TableRow from "../ui/TableRow.tsx";
+import TextHeader from "../ui/TextHeader.tsx";
 import Money from "../uir/Money.tsx";
 import AsyncContent from "./AsyncContent.tsx";
 import { AxiosRequestConfig, AxiosResponse } from "axios";
@@ -81,13 +82,13 @@ export default function TransactionHistory({
     }
     if (isEmpty(ledgerLines)) {
       // Initial load should fetch whatever page is in the url
-      ledgerLinesFetch({ id: ledgerId, page: ledgerLinesPage + 1 });
+      ledgerLinesFetch({ id: ledgerId, page: ledgerLinesPage + 1 }).then(ignore);
     } else if (ledgerLines.ledgerId !== activeLedger.id) {
       // When the ID changes, fetch the first page. The call to setListQueryParams has already set page:0.
-      ledgerLinesFetch({ id: ledgerId, page: 1 });
+      ledgerLinesFetch({ id: ledgerId, page: 1 }).then(ignore);
     } else if (ledgerLines.currentPage !== ledgerLinesPage + 1) {
       // Happens when paginating.
-      ledgerLinesFetch({ id: ledgerId, page: ledgerLinesPage + 1 });
+      ledgerLinesFetch({ id: ledgerId, page: ledgerLinesPage + 1 }).then(ignore);
     }
   }, [activeLedger, ledgerLinesPage, ledgerId, ledgerLines, ledgerLinesFetch]);
 
@@ -104,10 +105,16 @@ export default function TransactionHistory({
   );
 
   return (
-    <Page>
-      <PageHeader title={t("payments.ledger_transactions")} back="/menu" />
-      <p>{t("payments.ledgers_intro")}</p>
-      <AsyncContent loading={loading || false} error={error}>
+    <Page buffer={false}>
+      <div className="page-padding">
+        <TextHeader
+          title={t("payments.ledger_transactions")}
+          backTo="/menu"
+          backLabel="Menu"
+        />
+        <p>{t("payments.ledgers_intro")}</p>
+      </div>
+      <AsyncContent loading={loading || false} error={error} page={true}>
         {() =>
           recentLinesSelected ? (
             <>
@@ -169,6 +176,7 @@ function LedgerSelect({ activeLedger, ledgers, onLedgerSelected }: LedgerSelectP
     <Select
       title={selectedLedgerLabel}
       value={"" + activeLedger.id}
+      className="page-padding-x"
       options={[
         { label: r("payments.recent_ledger_lines"), value: "0" },
         ...ledgers.map((led) => ({
@@ -192,17 +200,13 @@ function RecentLinesSubheader({
   lifetimeSavings?: Money;
 }) {
   return (
-    <Stack row justify="between">
+    <Stack row justify="between" className="page-margin-x">
       <Stack col align="start">
-        <h3>
-          <Money>{totalBalance}</Money>
-        </h3>
+        <Money className="h3">{totalBalance}</Money>
         <p>{t("payments.total_balance")}</p>
       </Stack>
       <Stack col align="end">
-        <h3>
-          <Money>{lifetimeSavings}</Money>
-        </h3>
+        <Money className="h3">{lifetimeSavings}</Money>
         <p>{t("payments.lifetime_savings")}</p>
       </Stack>
     </Stack>
@@ -228,33 +232,45 @@ function LedgerLinesTable({
   return (
     <div className="position-relative">
       {loading && <IndeterminateLoader variant="content" />}
-      <FormFeedback feedback={feedback} />
-      <Table striped hover borders={false} className={clsx(loading && "opacity-25")}>
+      {/* There will rarely be an error, so hide it rather than have blank space. */}
+      {feedback && <FormFeedback feedback={feedback} className="page-margin-x" />}
+      <Table striped hover borders={false}>
         <TableBody>
           {lines.map((line) => (
             <TableRow
               key={line.id}
               highlight={line === selectedHashItem}
+              className="page-padding-x"
               cells={[
-                <Stack key={1} col>
-                  <a
-                    className="ps-0"
-                    href={`#${line.opaqueId}`}
-                    onClick={(e) => onHashItemSelected(e, line)}
-                  >
-                    <strong>{dayjs(line.at).format("lll")}</strong>
-                  </a>
-                  <div>{line.memo}</div>
-                </Stack>,
-                <Money
-                  key={2}
-                  className={clsx(
-                    "whitespace-nowrap",
-                    line.amount.cents < 0 ? "color-danger" : "color-success"
-                  )}
-                >
-                  {line.amount}
-                </Money>,
+                {
+                  children: (
+                    <Stack key={1} col>
+                      <a
+                        className="ps-0"
+                        href={`#${line.opaqueId}`}
+                        onClick={(e) => onHashItemSelected(e, line)}
+                      >
+                        <strong>{dayjs(line.at).format("lll")}</strong>
+                      </a>
+                      <div>{line.memo}</div>
+                    </Stack>
+                  ),
+                  className: "page-padding-l",
+                },
+                {
+                  children: (
+                    <Money
+                      key={2}
+                      className={clsx(
+                        "whitespace-nowrap",
+                        line.amount.cents < 0 ? "color-danger" : "color-success"
+                      )}
+                    >
+                      {line.amount}
+                    </Money>
+                  ),
+                  className: "text-right page-padding-r",
+                },
               ]}
             ></TableRow>
           ))}
@@ -292,7 +308,7 @@ function LedgerItemModal({ ledgers, item, open, onClose }: LedgerItemModalProps)
   return (
     <Dialog open={open} onClose={onClose} labelledBy={dlgId}>
       <Card>
-        <CardBody className="d-flex flex-column gap-3">
+        <CardBody className="d-flex flex-column gap-5">
           <DialogHeader id={dlgId}>
             <Money
               className={clsx(item.amount.cents < 0 ? "color-danger" : "color-success")}
@@ -307,13 +323,13 @@ function LedgerItemModal({ ledgers, item, open, onClose }: LedgerItemModalProps)
               <p key={i}>{t("ledgerusage." + code, { ...args })}</p>
             ))}
           </CardText>
-          <Stack col gap={1}>
+          <Stack col gap={2}>
             <CardText variant="subtext">{dayjs(item.at).format("LLL")}</CardText>
             <CardText variant="subtext">
               {t("common.reference_id")}: {item.opaqueId}
             </CardText>
           </Stack>
-          <Button variant="outline" onClick={onClose}>
+          <Button variant="secondary" onClick={onClose}>
             {t("common.close")}
           </Button>
         </CardBody>

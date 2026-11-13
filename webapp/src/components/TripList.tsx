@@ -44,7 +44,7 @@ function Week({ items, beginAt, endAt, beginIndex, endIndex }: WeekProps) {
       {trips.map((a, i) => (
         <React.Fragment key={a.id}>
           <Trip trip={a} />
-          {i < trips.length - 1 && <hr className="mx-3" />}
+          {i < trips.length - 1 && <hr className="mx-3 trips-ride-divider" />}
         </React.Fragment>
       ))}
     </Stack>
@@ -55,7 +55,10 @@ function Trip({ trip }: { trip: MobilityTrip }) {
   const { marshalToUrl } = useUrlMarshal();
   const { id, vehicleType, provider, beganAt, charge } = trip;
   return (
-    <DivLink to={withQuery([`/trip/:id`, { id }], { trip: marshalToUrl(trip) })}>
+    <DivLink
+      to={withQuery([`/trip/:id`, { id }], { trip: marshalToUrl(trip) })}
+      className="color-text"
+    >
       <Stack row className="justify-content-between">
         <Stack row gap={3}>
           <img
@@ -64,15 +67,17 @@ function Trip({ trip }: { trip: MobilityTrip }) {
             height={42}
             className="trips-image-vehicle"
           />
-          <Stack direction="vertical" className="small">
-            <div className="me-3">
+          <Stack direction="vertical" className="font-size-body-sm">
+            <div className="mr-3">
               {t("trips.ride_description", {
                 vendor: provider.vendorName,
                 vehicleType: t(`trips.${vehicleType}`),
               })}{" "}
               &bull; {t(`trips.minutes`, { minutes: trip.minutes })}
             </div>
-            <div className="color-text-muted">{dayjs(beganAt).format("MMM D, LT")}</div>
+            <div className="color-secondary-mute">
+              {dayjs(beganAt).format("MMM D, LT")}
+            </div>
           </Stack>
         </Stack>
         <Stack row center gap={3}>

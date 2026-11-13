@@ -1,8 +1,5 @@
 .border-radius-0 { border-radius: 0; }
 .border-radius-sm { border-radius: var(--border-radius-sm); }
-.border-radius { border-radius: var(--border-radius); }
-.border-radius-lg { border-radius: var(--border-radius-lg); }
-.border-radius-xl { border-radius: var(--border-radius-xl); }
 .border-radius-pill { border-radius: var(--border-radius-pill); }
 
 .hidden { visibility: hidden; }
@@ -14,3 +11,6 @@
 .whitespace-nowrap {
   white-space: nowrap;
 }
+
+.shadow-0 { box-shadow: var(--shadow-0) !important; }
+.shadow-1 { box-shadow: var(--shadow-1) !important; }

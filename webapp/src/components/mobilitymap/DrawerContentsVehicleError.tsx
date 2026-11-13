@@ -15,7 +15,7 @@ export default function DrawerContentsVehicleError({
     <DrawerContents>
       <DrawerTitle>{provider.name}</DrawerTitle>
       <MicromobilityRate rate={provider.rate} />
-      <FormFeedback noSurface feedback={error} />
+      <FormFeedback feedback={error} />
     </DrawerContents>
   );
 }

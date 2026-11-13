@@ -16,6 +16,7 @@ import noop from "lodash/noop";
 
 const meta = {
   title: "Styleguide/PrivateAccounts",
+  parameters: { layout: "fullscreen" },
 } satisfies Meta;
 
 export default meta;

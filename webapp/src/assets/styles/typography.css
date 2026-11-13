@@ -5,9 +5,11 @@
 
 .text-transform-unset { text-transform: unset !important; }
 
-.text-left { text-align: left; }
-.text-center { text-align: center; }
-.text-right { text-align: right; }
+.text-left { text-align: left !important; }
+.text-center { text-align: center !important; }
+.text-right { text-align: right !important; }
+
+.text-strikethrough { text-decoration: line-through; }
 
 .font-weight-normal { font-weight: var(--font-weight-normal); }
 .font-weight-medium { font-weight: var(--font-weight-semi); }

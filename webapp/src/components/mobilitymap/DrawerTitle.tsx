@@ -6,5 +6,5 @@ interface DrawerTitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
 }
 
 export default function DrawerTitle({ className, ...rest }: DrawerTitleProps) {
-  return <h5 className={clsx(className, "mb-0")} {...rest} />;
+  return <h3 className={clsx(className, "mb-0")} {...rest} />;
 }

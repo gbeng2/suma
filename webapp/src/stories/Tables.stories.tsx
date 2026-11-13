@@ -22,7 +22,13 @@ export const Standard: Story = {
   render: () => {
     const children = (
       <>
-        <TableHeaders cells={["Person", "Most interest in", "Age"]} />
+        <TableHeaders
+          cells={[
+            "Person",
+            "Most interest in",
+            { children: "Age", className: "text-right" },
+          ]}
+        />
         <TableBody>
           <TableRow
             cells={[
@@ -30,7 +36,7 @@ export const Standard: Story = {
                 Chris
               </TableHeader>,
               <strong key={2}>HTML tables</strong>,
-              "22",
+              { children: "22", className: "text-right" },
             ]}
           />
           <TableRow highlight cells={["Dennis", "Web accessibility", "45"]} />
@@ -43,6 +49,7 @@ export const Standard: Story = {
             ]}
           />
           <TableRow cells={["Karen", "Web performance", "36"]} />
+          <TableRow cells={["Karen2", "Web performance", "36"]} />
         </TableBody>
         <TableFooter
           cells={[{ colSpan: 2, className: "text-right", children: "Average age" }, "33"]}

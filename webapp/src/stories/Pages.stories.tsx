@@ -7,6 +7,7 @@ import type { Meta, StoryObj } from "@storybook/preact-vite";
 
 const meta = {
   title: "Styleguide/Pages",
+  parameters: { layout: "fullscreen" },
 } satisfies Meta;
 
 export default meta;

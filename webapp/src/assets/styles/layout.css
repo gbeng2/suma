@@ -1,8 +1,30 @@
 .content-page {
-    max-width: 600px;
+    max-width: var(--page-max-width);
     margin-left: auto;
     margin-right: auto;
 }
+
+.page-padding {
+    padding: var(--page-gutter) !important;
+}
+
+.page-padding-x {
+    padding-left: var(--page-gutter) !important;
+    padding-right: var(--page-gutter) !important;
+}
+.page-padding-l { padding-left: var(--page-gutter) !important; }
+.page-padding-r { padding-right: var(--page-gutter) !important; }
+
+.page-margin {
+    margin: var(--page-gutter) !important;
+}
+
+.page-margin-x {
+    margin-left: var(--page-gutter) !important;
+    margin-right: var(--page-gutter) !important;
+}
+.page-margin-l { margin-left: var(--page-gutter) !important; }
+.page-margin-r { margin-right: var(--page-gutter) !important; }
 
 .w-25 { width: 25%; }
 .w-50 { width: 50%; }

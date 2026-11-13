@@ -1,7 +1,8 @@
 .mobility-drawer {
-  background-color: var(--color-surface);
-  padding: var(--space-4);
-  border-radius: var(--border-radius-lg);
+  background-color: var(--bg-card);
+  padding: var(--space-6);
+  border-radius: var(--border-radius-card);
+  box-shadow: var(--shadow-1);
 }
 
 .mobility-drawer-position {
@@ -58,12 +59,12 @@
   padding: var(--space-3);
 
   p {
-    color: var(--color-text);
+    color: var(--text-color);
     margin: 0;
   }
 
   hr {
-    margin: var(--space-3) 0;
+    margin: var(--space-5) 0;
   }
 }
 

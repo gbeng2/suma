@@ -3,8 +3,8 @@
     border-collapse: collapse;
 
     --tcolor-header: var(--fill-primary-soft);
-    --tcolor-bg1: var(--bg-card);
-    --tcolor-bg2: var(--bg-page);
+    --tcolor-bg1: var(--bg-page);
+    --tcolor-bg2: var(--fill-secondary-soft);
     --tcolor-hover: var(--fill-primary-soft-hover);
 
     thead,

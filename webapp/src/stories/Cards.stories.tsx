@@ -34,6 +34,11 @@ export const Basic: Story = {
           <CardText variant="subtext">Feeds 4–6. Limit 1 per person</CardText>
         </CardBody>
       </Card>
+      <Card>
+        <CardBody padding={10}>
+          <CardText variant="title">Different padding</CardText>
+        </CardBody>
+      </Card>
     </DemoStack>
   ),
 };

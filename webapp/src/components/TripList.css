@@ -1,11 +1,15 @@
 .trips-week-divider {
-  background-color: var(--color-primary);
+  background-color: var(--fill-track);
   height: var(--space-1);
   width: 100%;
 }
 
+.trips-ride-divider {
+  border-color: var(--fill-track);
+}
+
 .trips-image-vehicle {
   border-radius: 50%;
-  background-color: var(--tint-secondary);
-  padding: var(--space-1);
+  background-color: var(--fill-primary-soft);
+  padding: var(--space-2);
 }

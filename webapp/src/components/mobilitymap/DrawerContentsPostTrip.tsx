@@ -24,7 +24,7 @@ export default function DrawerContentsPostTrip({
         discountAmount: charge!.savings,
       })}
       <FormFeedback feedback={error} />
-      <Button size="sm" variant="outline" className="w-100" onClick={handleClose}>
+      <Button size="sm" onClick={handleClose}>
         {t("common.close")}
       </Button>
     </DrawerContents>

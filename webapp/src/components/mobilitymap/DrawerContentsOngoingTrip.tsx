@@ -64,13 +64,13 @@ export default function DrawerContentsOngoingTrip({
       {trip && !endTrip && lastLocation && (
         <DrawerContents>
           <DrawerTitle>{trip.provider.name}</DrawerTitle>
-          <p className="color-text-muted">
+          <p className="color-secondary-mute">
             {t("mobility.trip_started_at", {
               at: dayjs(trip.beganAt).format("LT"),
             })}
           </p>
           <FormFeedback feedback={error} />
-          <Button size="sm" variant="outline" className="w-100" onClick={handleEndTrip}>
+          <Button size="sm" className="w-100" onClick={handleEndTrip}>
             {t("mobility.end_trip")}
           </Button>
         </DrawerContents>

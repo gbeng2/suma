@@ -41,7 +41,7 @@ export default function Page({
   return (
     <div className="page-outer">
       <div
-        className={clsx("page", buffer ? "page-buffer" : "", `gap-${gap}`, className)}
+        className={clsx("page", buffer ? "page-padding" : "", `gap-${gap}`, className)}
         style={{ height: pageHeight, ...style }}
       >
         {children}

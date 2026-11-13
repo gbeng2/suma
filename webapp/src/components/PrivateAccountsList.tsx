@@ -78,7 +78,7 @@ export default function PrivateAccountsList({
       <AsyncContent loading={loading || false} error={error}>
         {() =>
           accounts.length ? (
-            <Stack col gap={3}>
+            <Stack col gap={5}>
               {accounts.map((a: AnonProxyVendorAccount) => (
                 <Card key={a.id}>
                   <CardBody>
