@@ -8,13 +8,13 @@ import { AppError, extractAppErrorAny } from "../../modules/feedback.ts";
 import { Logger } from "../../modules/logger";
 import useNavigate from "../../routing/useNavigate";
 import useToggle from "../../state/useToggle";
-import BreadcrumbBack from "../../ui/BreadcrumbBack.tsx";
 import ButtonGroup from "../../ui/ButtonGroup.tsx";
 import ContinueButton from "../../ui/ContinueButton.tsx";
 import Form from "../../ui/Form";
 import FormFeedback from "../../ui/FormFeedback";
 import Page from "../../ui/Page.tsx";
 import PhoneInput from "../../ui/PhoneInput";
+import TextHeader from "../../ui/TextHeader.tsx";
 import React from "react";
 import { useForm } from "react-hook-form";
 
@@ -67,9 +67,10 @@ export default function Start() {
   };
   return (
     <Page>
-      <BreadcrumbBack back />
-      <h2>{t("forms.get_started")}</h2>
-      <p id="phoneRequired">{t("forms.get_started_intro")}</p>
+      <TextHeader
+        title={t("forms.get_started")}
+        subtitle={<p id="phoneRequired">{t("forms.get_started_intro")}</p>}
+      />
       <Form noValidate onSubmit={handleSubmit(handleSubmitForm)}>
         <PhoneInput
           className="mb-3"
@@ -80,7 +81,7 @@ export default function Start() {
           autoFocus
           required
         />
-        <p>
+        <p className="color-text-muted font-size-body-md">
           {t(
             "auth.phone_number_changed",
             {},

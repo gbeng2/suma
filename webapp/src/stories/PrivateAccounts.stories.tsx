@@ -5,13 +5,12 @@ import PrivateAccountsList from "../components/PrivateAccountsList.tsx";
 import useLazyRef from "../state/useLazyRef.ts";
 import {
   anonProxyVendorAccount,
-  axiosResponse,
   currentMember,
   money,
+  sequencedResponseMocker,
 } from "./fixtures.ts";
 import { DemoStack } from "./helpers.tsx";
 import type { Meta, StoryObj } from "@storybook/preact-vite";
-import { AxiosResponse } from "axios";
 import noop from "lodash/noop";
 
 const meta = {
@@ -232,31 +231,18 @@ interface BuildApiCallsParams {
 }
 
 function makeApiCalls(params: BuildApiCallsParams): PrivateAccountDetailApiCalls {
-  const indexes: Record<keyof BuildApiCallsParams, number> = {
-    accounts: 0,
-    charges: 0,
-    polls: 0,
-    auths: 0,
-  };
-  function makeCall<T>(
-    k: keyof BuildApiCallsParams,
-    delay: number
-  ): () => Promise<AxiosResponse<T>> {
-    return () => {
-      const arr = params[k];
-      if (!arr || arr.length === 0) {
-        throw new Error(`made api call to ${k} but no responses configured`);
-      }
-      const idx = indexes[k] % arr.length;
-      const val = arr[idx] as T;
-      indexes[k]++;
-      return Promise.delay(delay, Promise.resolve(axiosResponse(val)));
-    };
-  }
   return {
-    processAccount: makeCall("accounts", 0),
-    chargeLedgerBalance: makeCall("charges", 250),
-    pollForNewPrivateAccountMagicLink: makeCall("polls", 500),
-    makeAuthRequest: makeCall("auths", 500),
+    processAccount: sequencedResponseMocker("processAccount", params.accounts ?? []),
+    chargeLedgerBalance: sequencedResponseMocker(
+      "chargeLedgerBalance",
+      params.charges ?? [],
+      250
+    ),
+    pollForNewPrivateAccountMagicLink: sequencedResponseMocker(
+      "pollForNewPrivateAccountMagicLink",
+      params.polls ?? [],
+      500
+    ),
+    makeAuthRequest: sequencedResponseMocker("makeAuthRequest", params.auths ?? [], 500),
   };
 }

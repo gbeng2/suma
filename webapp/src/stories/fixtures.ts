@@ -155,6 +155,31 @@ export function axiosResponseMocker<T>(data: T): (arg: any) => Promise<AxiosResp
   return () => Promise.resolve(axiosResponse<T>(data));
 }
 
+/**
+ * Mock an API call that cycles through a sequence of fixture responses, one per
+ * invocation (repeating once exhausted), with an optional artificial delay to
+ * simulate network latency. Throws if called with no values configured, so a story
+ * loudly fails instead of silently returning undefined. Useful for interactive
+ * stories that exercise polling or multi-step flows.
+ */
+export function sequencedResponseMocker<T>(
+  name: string,
+  values: T[],
+  delay: number = 0
+): (...args: any[]) => Promise<AxiosResponse<T>> {
+  let index = 0;
+  return () => {
+    if (!values || values.length === 0) {
+      throw new Error(
+        `mocked api call '${name}' was made but no responses were configured`
+      );
+    }
+    const value = values[index % values.length];
+    index++;
+    return Promise.delay(delay, Promise.resolve(axiosResponse(value)));
+  };
+}
+
 export function fakeNavigate(p: RoutePath): void {
   console.log("navigating toL:", resolveRoutePath(p));
 }

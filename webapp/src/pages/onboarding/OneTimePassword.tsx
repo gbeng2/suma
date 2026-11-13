@@ -1,13 +1,16 @@
 import api from "../../api";
-import TODO from "../../components/TODO.tsx";
 import { r, t } from "../../localization";
 import { dayjs } from "../../modules/dayConfig";
-import { AppError, extractAppErrorAny } from "../../modules/feedback.ts";
+import {
+  AppError,
+  extractAppErrorAny,
+  success,
+  Success,
+} from "../../modules/feedback.ts";
 import { maskPhoneNumber } from "../../modules/maskPhoneNumber";
 import useLoginRedirectLink from "../../state/useLoginRedirectLink";
 import useUser from "../../state/useUser";
-import BackButton from "../../ui/BackButton.tsx";
-import BreadcrumbBack from "../../ui/BreadcrumbBack.tsx";
+import Breadcrumb from "../../ui/Breadcrumb.tsx";
 import Button from "../../ui/Button";
 import ButtonGroup from "../../ui/ButtonGroup.tsx";
 import ContinueButton from "../../ui/ContinueButton.tsx";
@@ -15,6 +18,7 @@ import Form from "../../ui/Form";
 import FormFeedback from "../../ui/FormFeedback";
 import Page from "../../ui/Page.tsx";
 import Stack from "../../ui/Stack.tsx";
+import TextHeader from "../../ui/TextHeader.tsx";
 import "./OneTimePassword.css";
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -26,7 +30,7 @@ const OneTimePassword = () => {
     new Array(OTP_LENGTH).fill("")
   );
   const [error, setError] = React.useState<AppError | null>();
-  const [message, setMessage] = React.useState<string>("");
+  const [message, setMessage] = React.useState<Success | null>(null);
   const { state } = useLocation();
   const submitRef = React.useRef<HTMLButtonElement | null>(null);
   const phoneNumber: string = state ? state.phoneNumber : undefined;
@@ -124,7 +128,7 @@ const OneTimePassword = () => {
       })
       .catch((err) => {
         setOtpChars(new Array(6).fill(""));
-        setMessage("");
+        setMessage(null);
         setError(extractAppErrorAny(err));
         const firstOtpField = document.getElementById("otpContainer")!
           .firstChild as HTMLElement;
@@ -132,10 +136,11 @@ const OneTimePassword = () => {
       });
   };
 
-  const handleResend = () => {
+  const handleResend = (e: React.MouseEvent) => {
+    e.preventDefault();
     setOtpChars(new Array(6).fill(""));
     setError(null);
-    setMessage(r("otp.code_resent", { phone: maskPhoneNumber(phoneNumber) }));
+    setMessage(success(r("otp.code_resent", { phone: maskPhoneNumber(phoneNumber) })));
     const firstOtpField = document.getElementById("otpContainer")!
       .firstChild as HTMLElement;
     firstOtpField.focus();
@@ -145,7 +150,7 @@ const OneTimePassword = () => {
         timezone: dayjs.tz.guess(),
       })
       .catch((err) => {
-        setMessage("");
+        setMessage(null);
         setError(extractAppErrorAny(err));
       });
   };
@@ -163,17 +168,21 @@ const OneTimePassword = () => {
 
   return (
     <Page>
-      <BreadcrumbBack back />
-      <h1>{t("otp.verify_code")}</h1>
-      <p>
-        {t("otp.enter_code_sent_to")} {maskPhoneNumber(phoneNumber)}
-      </p>
+      <Breadcrumb to="/start" />
+      <TextHeader
+        title={t("otp.verify_code")}
+        subtitle={
+          <>
+            {t("otp.enter_code_sent_to")} {maskPhoneNumber(phoneNumber)}
+          </>
+        }
+      />
       <Form noValidate onSubmit={handleOtpSubmit} gap={3}>
         <fieldset id="otpContainer" className="otp-container">
           {otpChars.map((data, index) => (
             <input
               className="otp-field"
-              type="number"
+              type="text"
               name="otp"
               // Must use the OTP length here, so any input can capture the full paste.
               maxLength={OTP_LENGTH}
@@ -194,19 +203,15 @@ const OneTimePassword = () => {
             />
           ))}
         </fieldset>
-        <FormFeedback feedback={error} className="mb-1" />
-        <TODO
-          message={message}
-        >{`<FormSuccess message={message} center className="mb-1" />`}</TODO>
-        <Stack gap={1} className="color-text-muted font-size-sm" wrap center>
+        <FormFeedback feedback={error || message} className="my-4" />
+        <Stack gap={4} className="color-text-muted font-size-body-sm" wrap center>
           {t("otp.did_not_receive")}
-          <Button size="sm" variant="text" onClick={handleResend}>
+          <Button size="sm" variant="text" inline onClick={handleResend}>
             {t("otp.send_new_code")}
           </Button>
         </Stack>
         <ButtonGroup col bottom>
           <ContinueButton ref={handleSubmitRef}>{t("otp.verify")}</ContinueButton>
-          <BackButton>Back</BackButton>
         </ButtonGroup>
       </Form>
     </Page>

@@ -36,8 +36,8 @@ i18n.addFormatters();
 
 const preview: Preview = {
   decorators: [
-    (Story) => (
-      <MemoryRouter>
+    (Story, context) => (
+      <MemoryRouter initialEntries={context.parameters.initialEntries ?? ["/"]}>
         <ScreenLoaderProvider>
           <Story />
         </ScreenLoaderProvider>
