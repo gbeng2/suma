@@ -43,6 +43,7 @@ import PreferencesPublic from "./pages/PreferencesPublic";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import PrivateAccountDetail from "./pages/PrivateAccountDetail.jsx";
 import PrivateAccountsList from "./pages/PrivateAccountsList";
+import ProductDetails from "./pages/ProductDetails.jsx";
 import RegainAccountAccess from "./pages/RegainAccountAccess.jsx";
 import Sitemap from "./pages/Sitemap";
 import Start from "./pages/Start";
@@ -338,6 +339,17 @@ function AppRoutes() {
             withScreenLoaderMount(),
             withMetatags({ title: t("food.title") }),
             FoodDetails
+          )}
+        />
+        <Route
+          path="/offering/:offeringId/product/:productId"
+          exact
+          element={renderWithHocs(
+            redirectIfUnauthed,
+            redirectIfUnboarded,
+            withScreenLoaderMount(),
+            withMetatags({ title: t("products.title") }),
+            ProductDetails
           )}
         />
         <Route
