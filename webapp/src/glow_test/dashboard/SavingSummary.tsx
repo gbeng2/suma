@@ -7,8 +7,11 @@ import clsx from "clsx";
 export interface SavingSummaryProps {
   /** Money the member did not have to pay, in cents. */
   savedCents?: number;
-  /** Money the member paid, in cents. */
-  paidCents?: number;
+  /**
+   * Money the member paid, in cents.
+   * With null, the comparison bar and legend are hidden (the API has no such value yet).
+   */
+  paidCents?: number | null;
 }
 
 /**
@@ -32,8 +35,6 @@ export default function SavingSummary({
       </Card>
     );
   }
-  // How much of the regular price the member did not pay, like 80 (%).
-  const savedPercent = (savedCents / (savedCents + paidCents)) * 100;
   return (
     <Card className="saving-summary-card">
       <CardBody className="saving-summary">
@@ -42,20 +43,26 @@ export default function SavingSummary({
         <p className="saving-summary-text">
           Money you didn’t have to pay, compared with regular prices.
         </p>
-        <div className="saving-summary-compare">
-          <div className="saving-summary-bar" aria-hidden="true">
-            <div
-              className="saving-summary-bar-saved"
-              style={{ width: `${savedPercent}%` }}
-            />
-          </div>
-          <div className="saving-summary-legend">
-            <LegendItem kind="saved" label="Saved" value={formatMoney(savedCents)} />
-            <LegendItem kind="paid" label="You paid" value={formatMoney(paidCents)} />
-          </div>
-        </div>
+        {paidCents !== null && <Compare savedCents={savedCents} paidCents={paidCents} />}
       </CardBody>
     </Card>
+  );
+}
+
+/** The bar and legend that compare "Saved" with "You paid". */
+function Compare({ savedCents, paidCents }: { savedCents: number; paidCents: number }) {
+  // How much of the regular price the member did not pay, like 80 (%).
+  const savedPercent = (savedCents / (savedCents + paidCents)) * 100;
+  return (
+    <div className="saving-summary-compare">
+      <div className="saving-summary-bar" aria-hidden="true">
+        <div className="saving-summary-bar-saved" style={{ width: `${savedPercent}%` }} />
+      </div>
+      <div className="saving-summary-legend">
+        <LegendItem kind="saved" label="Saved" value={formatMoney(savedCents)} />
+        <LegendItem kind="paid" label="You paid" value={formatMoney(paidCents)} />
+      </div>
+    </div>
   );
 }
 

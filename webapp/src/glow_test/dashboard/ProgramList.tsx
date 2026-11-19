@@ -1,17 +1,26 @@
+import { RoutePathOrUrl, untypedRoutePath } from "../../routing/RoutePath.ts";
 import SectionHeader from "../components/SectionHeader.tsx";
-import { DashboardProgram } from "../fixtures/dashboard.ts";
 import "./ProgramList.css";
 import ProgramRow from "./ProgramRow.tsx";
+import { DashboardProgramView } from "./toDashboardProps.ts";
 
 export interface ProgramListProps {
-  programs: DashboardProgram[];
+  programs: DashboardProgramView[];
+  /**
+   * Changes where a program button goes. The prototype uses it to stay on the
+   * prototype page, because the real routes do not exist there.
+   */
+  resolveLink?: (to: string) => RoutePathOrUrl;
 }
 
 /**
  * Figma "ProgramList" (2034:17976): the "Ways to save" section.
  * With no programs it shows the Figma data=Empty variant.
  */
-export default function ProgramList({ programs }: ProgramListProps) {
+export default function ProgramList({
+  programs,
+  resolveLink = untypedRoutePath,
+}: ProgramListProps) {
   return (
     <section className="program-list">
       <SectionHeader
@@ -27,8 +36,10 @@ export default function ProgramList({ programs }: ProgramListProps) {
               key={p.id}
               name={p.name}
               description={p.description}
-              image={p.image}
+              imageUrl={p.imageUrl}
+              imageAlt={p.imageAlt}
               buttonLabel={p.buttonLabel}
+              to={p.to ? resolveLink(p.to) : undefined}
             />
           ))}
         </div>

@@ -20,6 +20,11 @@
   object-fit: cover;
 }
 
+/* Shown when the program has no image. Not in Figma. */
+.program-row-thumb-empty {
+  background: var(--fill-secondary-soft);
+}
+
 .program-row-body {
   flex: 1 0 0;
   min-width: 0;

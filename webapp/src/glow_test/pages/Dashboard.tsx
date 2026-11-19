@@ -1,27 +1,29 @@
 import GlowRoot from "../GlowRoot.tsx";
-import Alert from "../components/Alert.tsx";
-import AlertStack from "../components/AlertStack.tsx";
 import Nav from "../components/Nav.tsx";
 import Page from "../components/Page.tsx";
+import DashboardView from "../dashboard/DashboardView.tsx";
 import OnboardingVerificationStatusCard from "../dashboard/OnboardingVerificationStatusCard.tsx";
-import ProgramList from "../dashboard/ProgramList.tsx";
-import SavingSummary from "../dashboard/SavingSummary.tsx";
+import toDashboardProps from "../dashboard/toDashboardProps.ts";
 import {
-  DashboardAlert,
   DashboardStateKey,
   dashboardStates,
   verificationFixture,
 } from "../fixtures/dashboard.ts";
-import { Info, Prohibit } from "../icons";
 import "./Dashboard.css";
 import { useSearchParams } from "react-router-dom";
 
-const alertIcons = { info: Info, prohibit: Prohibit };
-
 /**
- * Figma "Dashboard - New" (2022:81). Mounted at /glow_test/dashboard.
+ * The Dashboard prototype page. Mounted at /glow_test/dashboard.
  *
- * Uses fixture data. Pick a Figma page state with the `state` query param:
+ * This file is the "container": it gets the data and hands it to the view.
+ *
+ *   fixture (API-shaped)  ->  toDashboardProps()  ->  <DashboardView>
+ *
+ * To use real data later, only this file changes: replace the fixture lookup
+ * with `useUser()`, `useAsyncFetch(api.dashboard)` and
+ * `useAsyncFetch(api.getLedgersOverview)`. See docs/02-fixtures-and-real-data.md.
+ *
+ * Pick a Figma page state with the `state` query param:
  *   ?state=default      (2513:4304)
  *   ?state=no_alerts    (2513:4309)
  *   ?state=no_savings   (2513:4314)
@@ -35,7 +37,8 @@ export default function Dashboard() {
   const verifying = stateParam === "verifying";
   const stateKey: DashboardStateKey =
     stateParam in dashboardStates ? (stateParam as DashboardStateKey) : "default";
-  const { alerts, savings, programs } = dashboardStates[stateKey];
+  const fixture = dashboardStates[stateKey];
+  const viewProps = toDashboardProps(fixture.api, fixture.notInApiYet);
 
   return (
     <GlowRoot>
@@ -45,35 +48,14 @@ export default function Dashboard() {
         {verifying ? (
           <OnboardingVerificationStatusCard {...verificationFixture} />
         ) : (
-          <>
-            {alerts.length > 0 && (
-              <AlertStack>
-                {alerts.map((a) => (
-                  <DashboardAlertItem key={a.id} alert={a} />
-                ))}
-              </AlertStack>
-            )}
-            <SavingSummary
-              savedCents={savings?.savedCents}
-              paidCents={savings?.paidCents}
-            />
-            <ProgramList programs={programs} />
-          </>
+          <DashboardView {...viewProps} resolveLink={stayOnPrototype} />
         )}
       </Page>
     </GlowRoot>
   );
 }
 
-function DashboardAlertItem({ alert }: { alert: DashboardAlert }) {
-  return (
-    <Alert
-      color={alert.color}
-      icon={alertIcons[alert.icon]}
-      title={alert.title}
-      text={alert.text}
-      // Fixture links point at real app routes, which the prototype does not have.
-      to="/glow_test/dashboard"
-    />
-  );
+/** The real routes (like /food) do not exist in the prototype, so links stay here. */
+function stayOnPrototype() {
+  return "/glow_test/dashboard" as const;
 }
