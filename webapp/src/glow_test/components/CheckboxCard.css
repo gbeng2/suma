@@ -1,19 +1,19 @@
 .glow {
+/* Not in Figma (Figma has only CheckboxRow). Kept from src/ui/CheckboxCard:
+   a Card with a checkbox and text, where the whole card is clickable. */
 .checkbox-card {
+  display: flex;
+  gap: var(--space-4);
+  padding: var(--space-5);
   cursor: pointer;
   user-select: none;
 }
 
-.checkbox-card-body {
-  display: flex;
-  flex-direction: row;
-  gap: var(--space-3);
-}
-
-.checkbox-card input[type="checkbox"] {
-}
-
 .checkbox-card.is-invalid {
-  border-color: var(--border-danger);
+  border-color: var(--border-danger-strong);
+}
+
+.checkbox-card:has(input:disabled) {
+  cursor: not-allowed;
 }
 }

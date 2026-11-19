@@ -1,0 +1,19 @@
+.glow {
+/* Figma "LanguageSwitcher": a label, and a select at the end of the row. */
+.language-switcher {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  /* Figma min height 56px, the same as OptionRow. No token. */
+  min-height: 56px;
+}
+
+/* Figma text style "Body M Semi" */
+.language-switcher-label {
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-semi);
+  line-height: var(--line-height-body);
+  color: var(--text-secondary);
+}
+}

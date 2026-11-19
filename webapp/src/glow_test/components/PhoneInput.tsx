@@ -10,6 +10,17 @@ import {
   UseFormClearErrors,
 } from "react-hook-form";
 
+/**
+ * Figma "PhoneInput": a TextInput with "+1" before the number.
+ * This is only the visual part (no form library), so it can be used anywhere.
+ * `PhoneInput` below wires it to react-hook-form.
+ */
+export const PhoneInputField = React.forwardRef<HTMLInputElement, TextInputProps>(
+  function PhoneInputField(props, ref) {
+    return <TextInput ref={ref} type="tel" autoComplete="tel" prefix="+1" {...props} />;
+  }
+);
+
 export interface PhoneInputProps<TFieldValues extends FieldValues = FieldValues>
   extends Omit<TextInputProps, "name" | "value" | "onChange" | "onBlur" | "error"> {
   /** react-hook-form field name for this input. */
@@ -57,11 +68,9 @@ export default function PhoneInput<TFieldValues extends FieldValues = FieldValue
   }
 
   return (
-    <TextInput
+    <PhoneInputField
       ref={ref}
-      type="tel"
       name={name}
-      autoComplete="tel"
       value={value || ""}
       required={required}
       onChange={handleChange}

@@ -1,0 +1,16 @@
+.glow {
+/* Figma "CheckboxRow" */
+.checkbox-row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  /* Figma min height 44px: the smallest size for a touch target. No token. */
+  min-height: 44px;
+  padding: var(--space-3) 0;
+  cursor: pointer;
+}
+
+.checkbox-row:has(input:disabled) {
+  cursor: not-allowed;
+}
+}

@@ -1,0 +1,166 @@
+/*
+ * Glow copy of assets/styles/forms.css (the global styles for native inputs, selects
+ * and labels), restyled to the Figma "Inputs" section and scoped to `.glow`.
+ * Import it from every component that renders a text field (TextInput, Select, Form).
+ *
+ * Figma states -> CSS
+ *   Hover    -> :hover          (gallery: .is-hover)
+ *   Focus    -> :focus-visible  (gallery: .is-focus-visible)
+ *   Error    -> [aria-invalid="true"] or .is-invalid
+ *   Disabled -> :disabled       (gallery: .is-disabled, only for the .input-field wrapper)
+ */
+.glow {
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+/* The global forms.css gives every <label> a margin and a bold font. Undo that here,
+   because glow rows (CheckboxRow, OptionRow, ...) are labels too. */
+label {
+  display: inline-block;
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+/* Figma "Label row": the label, and "Optional" next to it. */
+.form-label {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-semi);
+  line-height: var(--line-height-label);
+  color: var(--text-secondary);
+}
+
+.form-label-optional {
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-body);
+  color: var(--text-secondary-mute);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--input-placeholder-color);
+  opacity: 1; /* Firefox applies a lower default opacity; this normalizes it */
+}
+
+/* Figma "Input field".
+   `.input-field` is a wrapper with the same look, for a field with something
+   before the input (like the "+1" of PhoneInput). */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="search"],
+input[type="tel"],
+input[type="url"],
+input[type="date"],
+textarea,
+select,
+.form-control,
+.input-field {
+  display: block;
+  width: 100%;
+  height: var(--input-height);
+  margin: 0;
+  /* In Figma the border is inside the 14px padding, so subtract it here. */
+  padding: 0 calc(var(--input-padding-x) - var(--border-width));
+  border: var(--border-width) solid var(--border-secondary);
+  border-radius: var(--border-radius-3);
+  background-color: var(--input-background-color);
+  color: var(--text-secondary);
+  font-family: inherit;
+  font-size: var(--font-size-body-md);
+  line-height: var(--line-height-body);
+  transition:
+    border-color var(--transition-base),
+    box-shadow var(--transition-base);
+
+  /* Figma state=Hover */
+  &:hover,
+  &.is-hover {
+    border-color: var(--border-secondary-strong);
+  }
+
+  /* The ring is only for :focus-visible, so remove the global :focus ring. */
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+
+  /* Figma state=Focus. The ring is the Figma effect "interactive/focus-ring". */
+  &:focus-visible,
+  &.is-focus-visible,
+  &:has(> input:focus-visible) {
+    border-color: var(--border-primary-strong);
+    box-shadow: var(--focus-ring-shadow);
+  }
+
+  /* Figma state=Error */
+  &[aria-invalid="true"],
+  &.is-invalid,
+  &:has(> input[aria-invalid="true"]) {
+    border-color: var(--border-danger-strong);
+  }
+
+  /* Figma state=Disabled */
+  &:disabled,
+  &.is-disabled,
+  &:has(> input:disabled) {
+    border-color: var(--fill-disabled);
+    background-color: var(--fill-disabled);
+    color: var(--text-secondary-mute);
+    /* Browsers fade a disabled select. Figma does not. */
+    opacity: 1;
+    cursor: not-allowed;
+  }
+
+  &:disabled::placeholder {
+    color: var(--text-secondary-mute);
+  }
+}
+
+textarea {
+  height: auto;
+  min-height: calc(var(--input-height) * 2);
+  padding: var(--input-padding-x);
+  resize: vertical;
+}
+
+.input-field {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+/* Text before the input, like "+1". Figma text style "Body M Semi". */
+.input-field-prefix {
+  flex-shrink: 0;
+  font-weight: var(--font-weight-semi);
+  color: var(--text-secondary-mute);
+}
+
+/* The input inside the wrapper has no look of its own: the wrapper shows the
+   border and the states. This must stay after the field rule above. */
+.input-field > input {
+  &,
+  &:hover,
+  &:focus-visible,
+  &[aria-invalid="true"],
+  &:disabled {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+    color: inherit;
+  }
+}
+}

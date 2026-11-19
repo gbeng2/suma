@@ -1,0 +1,59 @@
+.glow {
+/* Figma "OptionRow" */
+.option-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  /* Figma min height 56px. No token. */
+  min-height: 56px;
+  padding: var(--space-4) var(--space-5);
+  cursor: pointer;
+}
+
+/* Figma "Divider": a 1px line at the top of the row.
+   An inset shadow draws the line and does not change the row height. */
+.option-row-divider {
+  box-shadow: inset 0 var(--border-width) 0 var(--border-secondary-subtle);
+}
+
+/* Figma type=Disabled: the title is muted, and the second line says why
+   (like "Expired 09/26"), so it is bold and in the danger color. */
+.option-row:has(input:disabled) {
+  cursor: not-allowed;
+
+  .option-body-title {
+    color: var(--text-secondary-mute);
+  }
+
+  .option-body-text {
+    font-weight: var(--font-weight-semi);
+    color: var(--text-danger-mute);
+  }
+}
+
+/* Figma type=Add: a button row, like "Add a card". */
+.option-row-add {
+  gap: var(--space-3);
+  width: 100%;
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-semi);
+  line-height: var(--line-height-body);
+  color: var(--text-primary-mute);
+  text-align: left;
+}
+
+/* The 18px plus icon sits in a box as wide as a Radio, so rows line up. */
+.option-row-add-icon {
+  display: flex;
+  padding: var(--space-1);
+}
+
+.option-row-add:focus-visible,
+.option-row-add.is-focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: calc(-1 * var(--focus-ring-width));
+}
+}

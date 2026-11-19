@@ -1,0 +1,14 @@
+.glow {
+/* Figma "OptionRow/SwitchRow" */
+.switch-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  padding: var(--space-3) 0;
+  cursor: pointer;
+}
+
+.switch-row:has(input:disabled) {
+  cursor: not-allowed;
+}
+}

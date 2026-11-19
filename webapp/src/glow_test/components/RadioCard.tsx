@@ -1,15 +1,19 @@
 import useId from "../../state/useId";
 import { Direction } from "../../types/direction.ts";
-import Icon from "./Icon.tsx";
 import InputFeedback, { HasInputFeedback } from "./InputFeedback.tsx";
+import OptionRow from "./OptionRow.tsx";
 import "./RadioCard.css";
-import CheckIcon from "@heroicons/react/24/outline/CheckIcon";
+import "./forms.css";
 import clsx from "clsx";
 import React from "react";
 
 export interface RadioOption<T extends string = string> {
   value: T;
+  /** The title of the row. */
   label: React.ReactNode;
+  /** The muted line under the title. */
+  text?: React.ReactNode;
+  disabled?: boolean;
 }
 
 export interface RadioCardProps<T extends string = string> extends HasInputFeedback {
@@ -17,15 +21,15 @@ export interface RadioCardProps<T extends string = string> extends HasInputFeedb
   name: string;
   /** Accessible group label, rendered as the fieldset's <legend> */
   legend?: string;
-  noCheck?: boolean;
   options: RadioOption<T>[];
-  value: T;
+  value: T | null | undefined;
   onValueChange: (value: T) => void;
   disabled?: boolean;
   required?: boolean;
   className?: string;
   optionClass?: string;
   style?: React.CSSProperties;
+  /** Figma "direction". */
   direction?: Direction;
 }
 
@@ -35,11 +39,15 @@ interface RadioCardComponent {
   ): React.ReactElement | null;
 }
 
+/**
+ * Figma "RadioCard": a card with one OptionRow (a Radio with text) per option.
+ * Figma error=On is the `error` prop: the card and the radios get the error color,
+ * and the message is shown under the card.
+ */
 const RadioCard = React.forwardRef(function RadioCard<T extends string = string>(
   {
     name,
     legend,
-    noCheck,
     options,
     value,
     onValueChange,
@@ -56,43 +64,44 @@ const RadioCard = React.forwardRef(function RadioCard<T extends string = string>
 ) {
   const groupId = useId();
   return (
-    <div>
-      <fieldset
-        ref={ref}
-        className={clsx("card radio-card", `radio-card-${direction}`, className)}
-        style={style}
-        aria-describedby={InputFeedback.idFor(groupId)}
-      >
-        {legend && (
-          <legend>
-            {legend}
-            {required && <span className="ml-1 color-danger">*</span>}
-          </legend>
+    <fieldset
+      ref={ref}
+      className="form-group radio-card-group"
+      aria-describedby={InputFeedback.idFor(groupId)}
+    >
+      {legend && <legend className="form-label">{legend}</legend>}
+      <div
+        className={clsx(
+          "card radio-card",
+          `radio-card-${direction}`,
+          error && "is-invalid",
+          className
         )}
+        style={style}
+      >
         {options.map((option) => (
-          <label key={option.value} className={clsx("radio-card-option", optionClass)}>
-            <input
-              type="radio"
-              name={name}
-              value={option.value}
-              checked={value === option.value}
-              disabled={disabled}
-              required={required}
-              onChange={() => onValueChange(option.value)}
-            />
-            {option.label}
-            {!noCheck && (
-              <Icon
-                className={clsx("radio-card-check", value === option.value && "checked")}
-                icon={CheckIcon}
-                size={26}
-              />
-            )}
-          </label>
+          <OptionRow
+            key={option.value}
+            className={optionClass}
+            name={name}
+            value={option.value}
+            title={option.label}
+            text={option.text}
+            checked={value === option.value}
+            disabled={disabled || option.disabled}
+            required={required}
+            error={Boolean(error)}
+            onChange={() => onValueChange(option.value)}
+          />
         ))}
-      </fieldset>
-      <InputFeedback inputId={groupId} error={error} help={help} />
-    </div>
+      </div>
+      {/* `error={true}` shows only the error look, with no message. */}
+      <InputFeedback
+        inputId={groupId}
+        error={error === true ? null : error}
+        help={help}
+      />
+    </fieldset>
   );
 }) as RadioCardComponent;
 export default RadioCard;

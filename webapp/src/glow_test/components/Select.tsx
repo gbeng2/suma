@@ -1,6 +1,8 @@
 import useId from "../../state/useId";
+import { CaretDown } from "../icons";
 import InputFeedback, { HasInputFeedback } from "./InputFeedback.tsx";
 import "./Select.css";
+import "./forms.css";
 import clsx from "clsx";
 import React from "react";
 
@@ -20,6 +22,10 @@ export interface SelectProps<T extends string = string>
   required?: boolean;
   disabled?: boolean;
   id?: string;
+  /** Make the select as wide as its value, and not the full width. */
+  fit?: boolean;
+  /** Class for the select. The gallery uses "is-hover" and "is-focus-visible". */
+  inputClass?: string;
 }
 
 interface SelectComponent {
@@ -28,6 +34,10 @@ interface SelectComponent {
   ): React.ReactElement | null;
 }
 
+/**
+ * Figma "Select": label row, a native select styled like TextInput, and InputFeedback.
+ * Figma value=Empty is `value=""` with a `placeholder`.
+ */
 const Select = React.forwardRef(function Select<T extends string = string>(
   {
     label,
@@ -40,6 +50,8 @@ const Select = React.forwardRef(function Select<T extends string = string>(
     required = false,
     disabled = false,
     id,
+    fit,
+    inputClass,
     className,
     ...rest
   }: SelectProps<T>,
@@ -48,16 +60,17 @@ const Select = React.forwardRef(function Select<T extends string = string>(
   const selectId = useId(id);
   return (
     <div className={clsx("form-group", className)}>
-      <label className="form-label" htmlFor={selectId}>
-        {label}
-        {required && " *"}
-      </label>
-      <div className="select-wrapper">
+      {label && (
+        <label className="form-label" htmlFor={selectId}>
+          {label}
+        </label>
+      )}
+      <div className={clsx("select-wrapper", fit && "select-fit")}>
         <select
           ref={ref}
           id={selectId}
           name={name}
-          className={error ? "is-invalid" : undefined}
+          className={inputClass}
           value={value}
           required={required}
           disabled={disabled}
@@ -76,16 +89,7 @@ const Select = React.forwardRef(function Select<T extends string = string>(
             </option>
           ))}
         </select>
-        <svg className="select-arrow" viewBox="0 0 12 8" aria-hidden="true">
-          <path
-            d="M1 1l5 5 5-5"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
+        <CaretDown className="select-arrow" />
       </div>
       <InputFeedback inputId={selectId} help={help} error={error} />
     </div>

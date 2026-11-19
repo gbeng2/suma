@@ -1,31 +1,54 @@
 .glow {
+/* The native select and the chevron sit in the same grid cell,
+   so the chevron is over the select with no absolute positioning. */
 .select-wrapper {
-  position: relative;
-  display: inline-block;
+  /* Figma "Chevron" is 17px. */
+  --select-chevron-size: 17px;
+
+  display: grid;
+  align-items: center;
   width: 100%;
 }
 
+.select-wrapper > * {
+  grid-area: 1 / 1;
+}
+
+/* The look of the field and its states is in forms.css. */
 .select-wrapper select {
   appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  width: 100%;
-  padding-right: calc(var(--input-padding-x) + var(--select-arrow-size) + var(--space-2));
+  padding-right: calc(
+    var(--input-padding-x) + var(--select-chevron-size) + var(--space-3)
+  );
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.select-wrapper select:disabled {
+  cursor: not-allowed;
+}
+
+/* Figma value=Empty: the placeholder option (value "") is selected. */
+.select-wrapper select:has(option[value=""]:checked):not(:disabled) {
+  color: var(--input-placeholder-color);
 }
 
 .select-arrow {
-  position: absolute;
-  top: 50%;
-  right: var(--input-padding-x);
-  transform: translateY(-50%);
-  width: var(--select-arrow-size);
-  height: var(--select-arrow-size);
+  justify-self: end;
+  width: var(--select-chevron-size);
+  height: var(--select-chevron-size);
+  margin-right: var(--input-padding-x);
+  color: var(--text-secondary-mute);
   pointer-events: none;
-  color: var(--color-text-muted);
 }
 
 .select-wrapper:has(select:disabled) .select-arrow {
-  opacity: 0.5;
+  color: var(--text-secondary-placeholder);
 }
 
+/* `fit` prop: as wide as the selected option (used by LanguageSwitcher). */
+.select-fit,
+.select-fit select {
+  width: auto;
+}
 }

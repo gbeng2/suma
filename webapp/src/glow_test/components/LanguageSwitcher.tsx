@@ -1,59 +1,58 @@
-import { Direction } from "../../types/direction.ts";
-import CardText from "./CardText.tsx";
-import Icon from "./Icon.tsx";
-import RadioCard from "./RadioCard.tsx";
-import LanguageIcon from "@heroicons/react/24/outline/LanguageIcon";
+import useId from "../../state/useId.ts";
+import "./LanguageSwitcher.css";
+import Select from "./Select.tsx";
 import clsx from "clsx";
 import React from "react";
 
+/** @deprecated The Figma LanguageSwitcher has only one layout. */
 export type LanguageSwitcherVariant = "horizontal" | "vertical" | "short";
 
 interface LanguageSwitcherProps {
+  /** Text at the start of the row. Pass a translated string in the real app. */
+  label?: React.ReactNode;
   supportedLocales: Locale[];
   currentLanguage: string;
   changeLanguage: (language: string) => void;
+  /** @deprecated Not used. Kept so callers from src/ui still compile. */
   variant?: LanguageSwitcherVariant;
   className?: string;
   style?: React.CSSProperties;
 }
 
+/**
+ * Figma "LanguageSwitcher": a "Language" label with a Select of the languages.
+ *
+ * This component is only visual. It gets the languages and the current language as
+ * props, and has no i18n hooks. The connected wrapper is components/TranslationToggle.
+ */
 export default function LanguageSwitcher({
+  label = "Language",
   supportedLocales,
   currentLanguage,
   changeLanguage,
-  variant = "horizontal",
   className,
   style,
 }: LanguageSwitcherProps) {
+  const selectId = useId();
   if (!supportedLocales) {
     return null;
   }
-  let direction: Direction = "horizontal";
-  if (variant === "vertical") {
-    direction = "vertical";
-  }
   return (
-    <RadioCard
-      name="language"
-      noCheck
-      direction={direction}
-      options={supportedLocales.map(({ code, native }) => ({
-        label: (
-          <CardText variant="subtitle">
-            <Icon
-              icon={LanguageIcon}
-              className={clsx("mr-2", code !== currentLanguage && "hidden")}
-            />
-            {native}
-          </CardText>
-        ),
-        value: code,
-      }))}
-      value={currentLanguage}
-      optionClass={variant === "short" ? "py-3 px-0" : ""}
-      className={className}
-      style={style}
-      onValueChange={(v) => changeLanguage(v)}
-    />
+    <div className={clsx("language-switcher", className)} style={style}>
+      <label className="language-switcher-label" htmlFor={selectId}>
+        {label}
+      </label>
+      <Select
+        id={selectId}
+        fit
+        name="language"
+        options={supportedLocales.map(({ code, native }) => ({
+          value: code,
+          label: native,
+        }))}
+        value={currentLanguage}
+        onChange={(e) => changeLanguage(e.currentTarget.value)}
+      />
+    </div>
   );
 }

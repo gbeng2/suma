@@ -1,0 +1,71 @@
+.glow {
+/* Figma "Radio". Built like Checkbox: a real <input type="radio"> drawn with CSS,
+   and the dot on top of it in the same grid cell. */
+.radio {
+  /* Figma dot: half of the control. */
+  --radio-dot-size: calc(var(--control-size) / 2);
+
+  display: inline-grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: var(--control-size);
+  height: var(--control-size);
+}
+
+.radio > * {
+  grid-area: 1 / 1;
+}
+
+.radio-input {
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  border: var(--border-width-strong) solid var(--border-secondary);
+  border-radius: 50%;
+  background-color: var(--bg-card);
+  cursor: pointer;
+  transition: box-shadow var(--transition-base);
+}
+
+.radio-dot {
+  display: none;
+  width: var(--radio-dot-size);
+  height: var(--radio-dot-size);
+  border-radius: 50%;
+  background-color: var(--fill-primary-strong);
+  pointer-events: none;
+}
+
+/* Figma checked=On */
+.radio-input:checked {
+  border-color: var(--border-primary-strong);
+}
+
+.radio-input:checked + .radio-dot {
+  display: block;
+}
+
+/* Figma state=Focus */
+.radio-input:focus {
+  outline: none;
+}
+
+.radio-input:focus-visible,
+.radio-input.is-focus-visible {
+  box-shadow: var(--focus-ring-shadow);
+}
+
+/* Figma state=Error. A checked radio looks the same as Default. */
+.radio-input[aria-invalid="true"]:not(:checked),
+.radio-input.is-invalid:not(:checked) {
+  border-color: var(--border-danger-strong);
+}
+
+/* Figma state=Disabled */
+.radio-input:disabled {
+  border-color: var(--border-disabled);
+  background-color: var(--fill-disabled);
+  cursor: not-allowed;
+}
+}

@@ -1,17 +1,43 @@
 .glow {
-/* =============================================================
-   Checkable card
-   ============================================================= */
+/* The card, and the InputFeedback under it. */
+.checkable-card-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+/* Figma "CheckableCard" */
 .checkable-card {
-  display: block;
+  /* Figma values with no token. */
+  --checkable-card-border-width: 1.5px;
+  --checkable-card-min-height: 131px;
+  --checkable-card-logo-size: 43px;
+  --checkable-card-check-size: 22px;
+  --checkable-card-check-inset: 8px;
+
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+  min-height: var(--checkable-card-min-height);
+  /* In Figma the border is inside the 14px padding, so subtract it here. */
+  padding: calc(var(--space-5) - var(--checkable-card-border-width));
+  border: var(--checkable-card-border-width) solid var(--border-secondary);
+  border-radius: var(--border-radius-3);
+  background-color: var(--bg-card);
   cursor: pointer;
   user-select: none;
-  position: relative;
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-base);
 }
 
 /* Real checkbox stays functional/accessible but is visually hidden;
    the card's own border/background communicate checked state. */
-.checkable-card-hidecheck input[type="checkbox"] {
+.checkable-card input[type="checkbox"] {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -23,31 +49,83 @@
   border: 0;
 }
 
-.checkable-card:has(input:checked) {
-  border-color: var(--border-primary);
-  outline: solid var(--border-primary) var(--border-width-checked);
-  background-color: var(--fill-primary-soft);
+/* Figma "Logo": a small tile with initials. */
+.checkable-card-logo {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: var(--checkable-card-logo-size);
+  height: var(--checkable-card-logo-size);
+  border-radius: var(--border-radius-2);
+  background-color: var(--fill-secondary-soft);
+  color: var(--text-primary-mute);
+  font-family: var(--font-family-title);
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-bold);
 }
 
+/* Figma "Body" */
+.checkable-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.checkable-card-title {
+  font-weight: var(--font-weight-semi);
+  color: var(--text-secondary);
+}
+
+.checkable-card-text {
+  font-size: var(--font-size-body-sm);
+  color: var(--text-secondary-mute);
+}
+
+/* Figma "Check": in the top right corner, only when checked. */
 .checkable-card-check {
   position: absolute;
-  right: var(--space-3);
-  top: var(--space-3);
-  color: var(--fill-primary-strong);
+  top: var(--checkable-card-check-inset);
+  right: var(--checkable-card-check-inset);
   display: none;
+  width: var(--checkable-card-check-size);
+  height: var(--checkable-card-check-size);
+  color: var(--text-primary-mute);
 }
 
-.checkable-card-check.checked {
+.checkable-card:has(input:checked) .checkable-card-check {
   display: block;
 }
 
-.checkable-card:has(input:focus-visible) {
-  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+/* Figma state=Hover and state=Selected */
+.checkable-card:hover,
+.checkable-card.is-hover,
+.checkable-card:has(input:checked) {
+  border-color: var(--border-primary-strong);
+  background-color: var(--fill-primary-soft);
 }
 
+/* Figma state=Focus */
+.checkable-card:has(input:focus-visible),
+.checkable-card.is-focus-visible {
+  box-shadow: var(--focus-ring-shadow);
+}
+
+/* Figma state=Error */
+.checkable-card.is-invalid {
+  border-color: var(--border-danger-strong);
+}
+
+/* Figma state=Disabled: everything is gray, and all text is muted. */
 .checkable-card:has(input:disabled) {
+  border-color: var(--fill-disabled);
+  background-color: var(--fill-disabled);
   cursor: not-allowed;
-  opacity: 0.6;
-}
 
+  .checkable-card-logo,
+  .checkable-card-title,
+  .checkable-card-check {
+    color: var(--text-secondary-mute);
+  }
+}
 }

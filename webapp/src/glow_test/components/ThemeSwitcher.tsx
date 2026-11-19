@@ -1,12 +1,12 @@
 import useLocalStorageState from "../../state/useLocalStorageState.ts";
 import useMountEffect from "../../state/useMountEffect.ts";
-import CardText from "./CardText.tsx";
-import RadioCard from "./RadioCard.tsx";
+import OptionListRow, { OptionList } from "./OptionListRow.tsx";
 import Stack from "./Stack.tsx";
 
 export type Theme = "system" | "light" | "dark";
 export type Contrast = "default" | "high";
 
+/** The theme and contrast settings, as two Figma "Option list"s of OptionListRows. */
 export default function ThemeSwitcher() {
   const [theme, setThemeState] = useLocalStorageState<Theme>("theme", "system");
   const [contrast, setContrastState] = useLocalStorageState<Contrast>(
@@ -29,73 +29,54 @@ export default function ThemeSwitcher() {
   }
 
   return (
-    <Stack col gap={4}>
-      <h4>Appearance</h4>
-      <RadioCard<Theme>
-        name="theme"
-        options={[
-          {
-            label: (
-              <div>
-                <CardText variant="subtitle">Light</CardText>
-                <CardText variant="subtext">Always use the light theme</CardText>
-              </div>
-            ),
-            value: "light",
-          },
-          {
-            label: (
-              <div>
-                <CardText variant="subtitle">Dark</CardText>
-                <CardText variant="subtext">Always use the dark theme</CardText>
-              </div>
-            ),
-            value: "dark",
-          },
-          {
-            label: (
-              <div>
-                <CardText variant="subtitle">System</CardText>
-                <CardText variant="subtext">Use whatever your system is set to.</CardText>
-              </div>
-            ),
-            value: "system",
-          },
-        ]}
-        value={theme}
-        onValueChange={handleTheme}
-      />
-      <h4>Contrast</h4>
-      <RadioCard<Contrast>
-        name="contrast"
-        options={[
-          {
-            label: (
-              <div>
-                <CardText variant="subtitle">Default</CardText>
-                <CardText variant="subtext">Standard text and border strength</CardText>
-              </div>
-            ),
-            value: "default",
-          },
-          {
-            label: (
-              <div>
-                <CardText variant="subtitle">High Contrast</CardText>
-                <CardText variant="subtext">
-                  Stronger borders, dividers, larger text
-                </CardText>
-              </div>
-            ),
-            value: "high",
-          },
-        ]}
-        value={contrast}
-        onValueChange={handleContrast}
-      />
+    <Stack col gap={7}>
+      <OptionList legend="Appearance">
+        {themes.map(({ value, title, hint }) => (
+          <OptionListRow
+            key={value}
+            name="theme"
+            value={value}
+            title={title}
+            hint={hint}
+            selected={theme === value}
+            // Like the Figma example: the list has no lines between the rows.
+            divider={false}
+            onSelect={() => handleTheme(value)}
+          />
+        ))}
+      </OptionList>
+      <OptionList legend="Contrast">
+        {contrasts.map(({ value, title, hint }) => (
+          <OptionListRow
+            key={value}
+            name="contrast"
+            value={value}
+            title={title}
+            hint={hint}
+            selected={contrast === value}
+            divider={false}
+            onSelect={() => handleContrast(value)}
+          />
+        ))}
+      </OptionList>
     </Stack>
   );
 }
+
+const themes: { value: Theme; title: string; hint: string }[] = [
+  { value: "light", title: "Light", hint: "Always use the light theme" },
+  { value: "dark", title: "Dark", hint: "Always use the dark theme" },
+  { value: "system", title: "System", hint: "Use whatever your system is set to." },
+];
+
+const contrasts: { value: Contrast; title: string; hint: string }[] = [
+  { value: "default", title: "Default", hint: "Standard text and border strength" },
+  {
+    value: "high",
+    title: "High Contrast",
+    hint: "Stronger borders, dividers, larger text",
+  },
+];
 
 function setThemeOnDOM(t: Theme, c: Contrast) {
   if (t === "system") {

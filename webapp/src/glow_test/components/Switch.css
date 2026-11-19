@@ -1,74 +1,101 @@
 .glow {
-.form-switch {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  cursor: pointer;
-}
+/* Figma "Switch". Built like Checkbox: a real <input type="checkbox"> drawn as the
+   track, and the knob on top of it in the same grid cell. */
+.switch {
+  /* Figma "Switch" is 50x28 with a 22px knob. The --switch-* tokens are smaller,
+     so the sizes are set here. */
+  --switch-w: 50px;
+  --switch-h: 28px;
+  --switch-knob-size: var(--control-size);
+  --switch-knob-gap: calc((var(--switch-h) - var(--switch-knob-size)) / 2);
+  /* Figma uses the border color for the "off" track. */
+  --switch-track-off: var(--border-secondary);
 
-/* The real checkbox stays in the DOM (for accessibility/keyboard/forms)
-   but is visually hidden; the track + thumb below are what's shown. */
-.form-switch input[type="checkbox"] {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-.form-switch-track {
-  position: relative;
+  display: inline-grid;
   flex-shrink: 0;
-  width: var(--switch-width);
-  height: var(--switch-height);
-  background-color: var(--fill-track);
-  border-radius: var(--border-radius-pill);
-  transition: background-color var(--transition-base);
+  align-items: center;
+  width: var(--switch-w);
+  height: var(--switch-h);
 }
 
-.form-switch-thumb {
-  position: absolute;
-  top: var(--switch-thumb-gap);
-  left: var(--switch-thumb-gap);
-  width: var(--switch-thumb-size);
-  height: var(--switch-thumb-size);
-  background-color: var(--bg-card);
+.switch > * {
+  grid-area: 1 / 1;
+}
+
+/* The track */
+.switch-input {
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  border: none;
+  border-radius: var(--border-radius-pill);
+  background-color: var(--switch-track-off);
+  cursor: pointer;
+  transition:
+    background-color var(--transition-base),
+    box-shadow var(--transition-base);
+}
+
+/* Figma "Knob" */
+.switch-knob {
+  width: var(--switch-knob-size);
+  height: var(--switch-knob-size);
+  margin: 0 var(--switch-knob-gap);
   border-radius: 50%;
+  background-color: var(--bg-card);
   box-shadow: var(--shadow-1);
+  pointer-events: none;
   transition: transform var(--transition-base);
 }
 
-.form-switch input:checked + .form-switch-track {
+/* Figma checked=On */
+.switch-input:checked {
   background-color: var(--fill-primary-strong);
 }
 
-.form-switch input:checked + .form-switch-track .form-switch-thumb {
-  transform: translateX(
-    calc(var(--switch-width) - var(--switch-thumb-size) - var(--switch-thumb-gap) * 2)
-  );
+.switch-input:checked + .switch-knob {
+  transform: translateX(calc(var(--switch-w) - var(--switch-h)));
 }
 
-.form-switch input:focus-visible + .form-switch-track {
-  outline: var(--focus-ring-width) solid var(--focus-ring-color);
-  outline-offset: 2px;
+/* Figma state=Focus */
+.switch-input:focus {
+  outline: none;
 }
 
-.form-switch input:disabled + .form-switch-track {
-  opacity: 0.5;
+.switch-input:focus-visible,
+.switch-input.is-focus-visible {
+  box-shadow: var(--focus-ring-shadow);
+}
+
+/* Figma state=Error. A switch that is "on" looks the same as Default. */
+.switch-input[aria-invalid="true"]:not(:checked) {
+  background-color: var(--fill-danger-strong);
+}
+
+/* Figma state=Disabled */
+.switch-input:disabled {
+  background-color: var(--fill-disabled);
   cursor: not-allowed;
+}
+
+.switch-input:disabled:checked {
+  background-color: var(--border-disabled);
+}
+
+.switch-input:disabled + .switch-knob {
+  box-shadow: none;
+}
+
+/* Switch with the `label` prop. For a title with a note, use SwitchRow. */
+.form-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-4);
+  cursor: pointer;
 }
 
 .form-switch:has(input:disabled) {
   cursor: not-allowed;
-}
-
-.form-switch.is-invalid {
-  .form-switch-track {
-    box-shadow: 0 0 0 var(--border-width-strong) var(--fill-danger-strong);
-  }
 }
 }

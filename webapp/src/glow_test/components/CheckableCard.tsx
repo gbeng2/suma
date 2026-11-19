@@ -1,27 +1,41 @@
 import useId from "../../state/useId.ts";
+import { Check } from "../icons";
 import "./CheckableCard.css";
-import Icon from "./Icon.tsx";
 import InputFeedback, { HasInputFeedback } from "./InputFeedback.tsx";
-import CheckIcon from "@heroicons/react/24/outline/CheckIcon";
 import clsx from "clsx";
 import React from "react";
 
 export interface CheckableCardProps
   extends HasInputFeedback,
-    React.InputHTMLAttributes<HTMLInputElement> {
+    Omit<React.InputHTMLAttributes<HTMLInputElement>, "title"> {
   checked: boolean;
+  /** Figma "initials": shown in the logo tile, like "AH". */
+  initials?: React.ReactNode;
+  /** Figma "name". */
+  title?: React.ReactNode;
+  /** Figma "meta": the muted line under the title. */
+  text?: React.ReactNode;
   name?: string;
   disabled?: boolean;
+  /** Class for the card. The gallery uses "is-hover" and "is-focus-visible". */
   className?: string;
   style?: React.CSSProperties;
+  /** Custom content, shown after initials/title/text. */
   children?: React.ReactNode;
 }
 
+/**
+ * Figma "CheckableCard": a card that works as a checkbox.
+ * Figma state=Selected is `checked`, Error is the `error` prop, Disabled is `disabled`.
+ */
 const CheckableCard = React.forwardRef<HTMLInputElement, CheckableCardProps>(
   function CheckableCard(
     {
       id,
       checked,
+      initials,
+      title,
+      text,
       name,
       disabled = false,
       className,
@@ -34,26 +48,37 @@ const CheckableCard = React.forwardRef<HTMLInputElement, CheckableCardProps>(
     ref
   ) {
     const inputId = useId(id);
-    const cls = clsx("card checkable-card checkable-card-hidecheck", className);
+    const cls = clsx("checkable-card", error && "is-invalid", className);
     return (
-      <div>
+      <div className="checkable-card-group">
         <label className={cls} style={style}>
-          <Icon
-            className={clsx("checkable-card-check", checked && "checked")}
-            icon={CheckIcon}
-            size={20}
-          />
           <input
             ref={ref}
+            id={inputId}
             type="checkbox"
             name={name}
             checked={checked}
             disabled={disabled}
+            aria-describedby={InputFeedback.idFor(inputId)}
+            aria-invalid={error ? true : undefined}
             {...rest}
           />
+          {initials && <span className="checkable-card-logo">{initials}</span>}
+          {(title || text) && (
+            <span className="checkable-card-body">
+              {title && <span className="checkable-card-title">{title}</span>}
+              {text && <span className="checkable-card-text">{text}</span>}
+            </span>
+          )}
           {children}
+          <Check className="checkable-card-check" />
         </label>
-        <InputFeedback inputId={inputId} error={error} help={help} />
+        {/* `error={true}` shows only the error look, with no message. */}
+        <InputFeedback
+          inputId={inputId}
+          error={error === true ? null : error}
+          help={help}
+        />
       </div>
     );
   }

@@ -1,0 +1,76 @@
+.glow {
+/* The fieldset only groups the rows. The list inside it is the visible part. */
+.option-list-group {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.option-list-group > legend {
+  margin-bottom: var(--space-3);
+  padding: 0;
+}
+
+/* Figma "Option list": like a Card, with no shadow. */
+.option-list {
+  display: flex;
+  flex-direction: column;
+  border: var(--border-width) solid var(--border-secondary-subtle);
+  border-radius: var(--border-radius-card);
+  background-color: var(--bg-card);
+  overflow: hidden;
+}
+
+/* Figma "OptionListRow" */
+.option-list-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-5) var(--space-6);
+  cursor: pointer;
+}
+
+/* The real radio stays functional/accessible but is visually hidden;
+   the row's own border/background communicate the selected state. */
+.option-list-row input[type="radio"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Figma "Divider": a 1px line at the top of the row.
+   An inset shadow draws the line and does not change the row height. */
+.option-list-row-divider {
+  box-shadow: inset 0 var(--border-width) 0 var(--border-secondary-subtle);
+}
+
+/* Figma selected=true. The 2px border is an outline inside the row,
+   so the row has the same size selected or not. */
+.option-list-row:has(input:checked) {
+  border-radius: var(--border-radius-2);
+  outline: var(--border-width-strong) solid var(--fill-primary-strong);
+  outline-offset: calc(-1 * var(--border-width-strong));
+  background-color: var(--fill-primary-soft);
+  box-shadow: none;
+}
+
+/* Figma "Check" */
+.option-list-row-check {
+  flex-shrink: 0;
+  color: var(--text-primary-mute);
+}
+
+/* Not in Figma. The ring is inside the row, because the list clips what is outside. */
+.option-list-row:has(input:focus-visible),
+.option-list-row.is-focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: calc(-1 * var(--focus-ring-width));
+}
+}
