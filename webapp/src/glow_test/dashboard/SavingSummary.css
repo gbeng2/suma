@@ -1,0 +1,105 @@
+.glow {
+.saving-summary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  text-align: center;
+}
+
+.saving-summary-empty {
+  gap: 0;
+}
+
+.saving-summary-label {
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-semi);
+  line-height: var(--line-height-body);
+  color: var(--text-secondary-mute);
+}
+
+.saving-summary-amount {
+  font-family: var(--font-family-title);
+  font-size: var(--font-size-heading-xl);
+  font-weight: var(--font-weight-semi);
+  line-height: var(--line-height-heading);
+  color: var(--text-success-placeholder);
+}
+
+.saving-summary-text {
+  font-size: var(--font-size-body-md);
+  line-height: var(--line-height-body);
+  color: var(--text-secondary-mute);
+}
+
+.saving-summary-empty-title {
+  margin: 0;
+  font-family: var(--font-family-title);
+  font-size: var(--font-size-heading-lg);
+  font-weight: var(--font-weight-semi);
+  line-height: var(--line-height-heading);
+  color: var(--text-secondary);
+}
+
+.saving-summary-compare {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  width: 100%;
+}
+
+/* The whole bar is "You paid"; the left part on top of it is "Saved". */
+.saving-summary-bar {
+  --saving-summary-bar-height: 12px;
+  display: flex;
+  height: var(--saving-summary-bar-height);
+  border-radius: var(--border-radius-pill);
+  background: var(--terracotta-8);
+  overflow: hidden;
+}
+
+.saving-summary-bar-saved {
+  background: var(--text-success-placeholder);
+}
+
+.saving-summary-legend {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-8);
+  font-size: var(--font-size-body-sm);
+  line-height: var(--line-height-body);
+}
+
+.saving-summary-legend-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.saving-summary-legend-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--text-secondary-mute);
+}
+
+.saving-summary-dot {
+  --saving-summary-dot-size: 10px;
+  width: var(--saving-summary-dot-size);
+  height: var(--saving-summary-dot-size);
+  border-radius: var(--border-radius-pill);
+}
+
+.saving-summary-dot-saved {
+  background: var(--text-success-placeholder);
+}
+
+.saving-summary-dot-paid {
+  background: var(--terracotta-8);
+}
+
+.saving-summary-legend-value {
+  font-weight: var(--font-weight-semi);
+  color: var(--text-secondary);
+}
+}

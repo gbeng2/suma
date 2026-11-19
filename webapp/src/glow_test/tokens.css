@@ -213,7 +213,8 @@
 
     --text-success: var(--green-12);
     --text-success-mute: var(--green-11);
-    --text-success-placeholder: var(--green-9);
+    /* Figma value. It is an olive green that is not on the --green scale above. */
+    --text-success-placeholder: #647300;
     --text-success-on-strong: var(--sand-1);
     --text-success-on-soft: var(--green-11);
 

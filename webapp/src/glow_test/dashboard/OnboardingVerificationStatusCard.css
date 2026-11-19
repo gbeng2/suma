@@ -1,0 +1,82 @@
+.glow {
+.verification-card {
+  /* Gradient colors and the translucent badge are only used here in Figma, so no tokens. */
+  --verification-card-gradient: radial-gradient(
+    ellipse 75% 65% at 85% 25%,
+    #ffdcb4 0%,
+    #ffcca2 55%,
+    #ffc59b 62%,
+    #f5a98d 100%
+  );
+  --verification-card-badge-bg: rgba(255, 255, 255, 0.5);
+  --verification-card-badge-border: rgba(255, 255, 255, 0.8);
+  --verification-card-min-height: 444px;
+  --verification-card-padding-x: 21px;
+  --verification-card-button-width: 240px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-9);
+  min-height: var(--verification-card-min-height);
+  padding: 55px var(--verification-card-padding-x) var(--space-5);
+  border-radius: var(--border-radius-card);
+  background: var(--verification-card-gradient);
+  text-align: center;
+  overflow: hidden;
+}
+
+.verification-card-top,
+.verification-card-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.verification-card-top {
+  gap: var(--space-5);
+}
+
+.verification-card-actions {
+  gap: var(--space-4);
+}
+
+.verification-card-badge {
+  padding: var(--space-3) var(--space-5);
+  border: var(--border-width) solid var(--verification-card-badge-border);
+  border-radius: var(--border-radius-pill);
+  background: var(--verification-card-badge-bg);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-semi);
+  line-height: var(--line-height-body);
+  color: var(--text-secondary);
+}
+
+.verification-card-title {
+  margin: 0;
+  font-family: var(--font-family-title);
+  font-size: var(--font-size-heading-xl);
+  font-weight: var(--font-weight-semi);
+  line-height: var(--line-height-heading);
+  color: var(--text-secondary);
+}
+
+.verification-card-text {
+  max-width: 280px;
+  font-size: var(--font-size-body-sm);
+  line-height: var(--line-height-body);
+  color: var(--text-secondary-mute);
+}
+
+.verification-card-button {
+  width: var(--verification-card-button-width);
+  max-width: 100%;
+}
+
+.verification-card-support {
+  max-width: 250px;
+  font-size: var(--font-size-body-md);
+  line-height: var(--line-height-body);
+  color: var(--text-secondary-mute);
+}
+}
