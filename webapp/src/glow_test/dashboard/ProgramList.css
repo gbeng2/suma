@@ -1,0 +1,23 @@
+.glow {
+.program-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.program-list-rows {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-7);
+}
+
+/* Figma "Heading S" */
+.program-list-empty {
+  font-family: var(--font-family-title);
+  font-size: var(--font-size-heading-sm);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-heading);
+  color: var(--text-secondary);
+  text-align: center;
+}
+}

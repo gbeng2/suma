@@ -1,85 +1,72 @@
 import { RoutePath } from "../../routing/RoutePath.ts";
+import { CaretLeft, CaretRight } from "../icons";
+import BackButton from "./BackButton.tsx";
 import "./Breadcrumb.css";
-import Button, { ButtonProps } from "./Button.tsx";
-import Icon from "./Icon.tsx";
-import Stack from "./Stack.tsx";
-import ChevronLeftIcon from "@heroicons/react/24/outline/ChevronLeftIcon";
-import ChevronRightIcon from "@heroicons/react/24/outline/ChevronRightIcon";
+import Button from "./Button.tsx";
 import clsx from "clsx";
+import React from "react";
 
 interface BreadcrumbProps {
-  /** Use it as the 'to' prop on the link. If not provided, use history.back. */
+  /** Use it as the 'to' prop on the link. If not given (and no onClick), use history.back. */
   to?: RoutePath;
-  /** back shows a back button style; left and right are more subtle breadcrumbs. */
+  onClick?: React.MouseEventHandler;
+  /**
+   * Figma "direction".
+   * left: caret then label, in ink. Goes back or up, like "< Orders".
+   * right: label then caret, smaller, in brand color. Goes forward, like "See all >".
+   */
+  direction?: "left" | "right";
+  /**
+   * Old name of `direction`, kept from src/ui/Breadcrumb.
+   * "back" was the white pill: that is now the BackButton component.
+   */
   variant?: "back" | "left" | "right";
   /**
-   * Offset applies a negative margin to move the 'back' button so it is visually aligned
-   * with text along vertical margins. For example, '< BACK'
-   * stacked on a heading 'My Page' would not align visually (the chevron would be
-   * about 6 pixels to the right of an alignment with the 'M' in 'My Page').
-   * This negative margin moves the chevron to the left to achieve vertical alignment.
+   * A left breadcrumb has padding before the caret (the tap area).
+   * By default a negative margin removes it, so the caret lines up with
+   * the text above or below it. Use noOffset to keep the padding, like in Figma.
    */
   noOffset?: boolean;
   className?: string;
-  /** If given, render this label. If not given, only a chevron is shown. */
+  /** The label. If not given, only a caret is shown. */
   children?: React.ReactNode;
 }
 
+/** Figma "BreadcrumbButton": a text link with a caret. */
 export default function Breadcrumb({
   to,
-  variant = "back",
+  onClick,
+  direction,
+  variant,
   noOffset,
   className,
   children,
 }: BreadcrumbProps) {
-  const backProps: ButtonProps = {};
-  if (to) {
-    backProps.to = to;
-  } else {
-    backProps.onClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  if (!to && !onClick) {
+    onClick = (e) => {
       e.preventDefault();
       window.history.back();
     };
   }
+  if (variant === "back") {
+    return (
+      <BackButton to={to} onClick={onClick} className={className} hideLabel={!children}>
+        {children || undefined}
+      </BackButton>
+    );
+  }
+  const dir = direction || variant || "left";
   const cls = clsx(
     "breadcrumb",
-    `breadcrumb-${variant}`,
-    children ? "breadcrumb-text" : "breadcrumb-empty",
+    `breadcrumb-${dir}`,
+    dir === "left" && !noOffset && "breadcrumb-offset",
     className
   );
-  const left = variant !== "right";
   return (
-    <div className="d-flex">
-      <Button
-        size="sm"
-        variant="unstyled"
-        className={cls}
-        style={{
-          marginLeft: noOffset ? "" : ICON_OFFSET,
-          "--btn-color": "var(--text-secondary)",
-          "--btn-bg": "var(--bg-card)",
-          "--btn-border": `var(--border-secondary-subtle) var(--border-width) solid`,
-        }}
-        {...backProps}
-      >
-        <Stack row center>
-          {left && (
-            <Icon
-              icon={ChevronLeftIcon}
-              className={clsx("breadcrumb-icon-left", `breadcrumb-icon-${variant}`)}
-            />
-          )}
-          {children && <span>{children}</span>}
-          {!left && (
-            <Icon
-              icon={ChevronRightIcon}
-              className={clsx("breadcrumb-icon-left", `breadcrumb-icon-${variant}`)}
-            />
-          )}
-        </Stack>
-      </Button>
-    </div>
+    <Button variant="unstyled" className={cls} to={to} onClick={onClick}>
+      {dir === "left" && <CaretLeft size={20} />}
+      {children && <span>{children}</span>}
+      {dir === "right" && <CaretRight size={16} />}
+    </Button>
   );
 }
-
-const ICON_OFFSET = -6;

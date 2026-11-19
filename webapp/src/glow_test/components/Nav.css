@@ -1,19 +1,22 @@
 .glow {
+/* Figma "BottomNav" (1922:12349). */
 .nav {
-  background-color: var(--bg-card);
-  padding: var(--space-4) var(--space-7) var(--space-3);
-  border-top: var(--border-width) var(--border-secondary-subtle) solid;
-  border-top-left-radius: var(--border-radius-2);
-  border-top-right-radius: var(--border-radius-2);
+  /* Figma uses 12px here. There is no radius token for it. */
+  --nav-radius: 12px;
+
   display: flex;
-  flex-direction: row;
   align-items: center;
-  justify-content: space-between;
-  position: absolute;
-  bottom: 0;
-  left: 0;
   width: 100%;
+  padding-top: var(--space-3);
+  border-top: var(--border-width) solid var(--border-secondary-subtle);
+  border-radius: var(--nav-radius) var(--nav-radius) 0 0;
+  background-color: var(--bg-card);
   z-index: var(--z-index-nav);
 }
 
+/* Tabs share the row equally. */
+.nav > .nav-option {
+  flex: 1 0 0;
+  min-width: 0;
+}
 }

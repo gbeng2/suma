@@ -1,4 +1,9 @@
 .glow {
+/* Figma draws this card with no shadow. */
+.saving-summary-card {
+  box-shadow: none;
+}
+
 .saving-summary {
   display: flex;
   flex-direction: column;

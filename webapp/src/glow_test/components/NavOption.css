@@ -1,40 +1,64 @@
 .glow {
-.nav-option-anchor {
-  text-decoration: none !important;
-}
-
 .nav-option {
+  /* No tokens for these Figma values. */
+  --nav-option-puck-size: 38px;
+  --nav-option-puck-border-width: 1.5px;
+
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  border: none;
+  background: none;
+  color: var(--text-secondary-mute);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-nav);
+  font-weight: var(--font-weight-semi);
+  line-height: var(--line-height-label);
+  white-space: nowrap;
+  text-decoration: none;
   cursor: pointer;
-  text-decoration: none !important;
-  gap: var(--space-1);
 }
 
-.nav-option-icon {
-  color: var(--fill-primary-strong);
-  border: var(--fill-primary-strong) solid var(--border-width-strong);
-  border-radius: var(--border-radius-pill);
+/* Figma "Puck": the circle around the glyph. */
+.nav-option-puck {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--space-4);
+  width: var(--nav-option-puck-size);
+  height: var(--nav-option-puck-size);
+  border: var(--nav-option-puck-border-width) solid var(--border-primary-strong);
+  border-radius: var(--border-radius-pill);
+  color: var(--text-primary-mute);
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast);
 }
 
-.nav-option-icon.active, .nav-option-icon:hover {
-  color: var(--text-primary-on-strong);
+/* Hover is not in Figma. */
+.nav-option:hover .nav-option-puck {
+  background-color: var(--fill-primary-soft);
+}
+
+/* Figma "active=true" */
+.nav-option-active {
+  color: var(--text-primary-mute);
+}
+
+.nav-option-active .nav-option-puck,
+.nav-option-active:hover .nav-option-puck {
+  border-color: var(--fill-primary-strong);
   background-color: var(--fill-primary-strong);
+  color: var(--text-primary-on-strong);
 }
 
-.nav-option-label {
-  font-size: var(--font-size-body-sm);
-  font-weight: var(--font-weight-semi);
-  color: var(--text-secondary-mute);
+.nav-option:focus-visible {
+  outline: none;
 }
 
-.nav-option-label.active {
-  color: var(--fill-primary-strong);
+.nav-option:focus-visible .nav-option-puck {
+  box-shadow: var(--focus-ring-shadow);
 }
-
 }

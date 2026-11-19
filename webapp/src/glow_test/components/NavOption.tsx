@@ -5,28 +5,53 @@ import clsx from "clsx";
 import React from "react";
 
 export interface NavOptionProps {
-  size?: number;
-  label?: string;
-  Icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
+  label: string;
+  /** Icon component from `glow_test/icons`. Figma calls it the "Glyph". */
+  Icon: React.ComponentType<{ size?: number | string }>;
+  /** True for the tab of the current page. */
   active?: boolean;
-  to: RoutePath;
+  /** Renders a link. Without `to`, a button is rendered (use `onClick`). */
+  to?: RoutePath;
+  onClick?: React.MouseEventHandler;
 }
 
-export default function NavOption({
-  size = 24,
-  label,
-  Icon,
-  active,
-  to,
-}: NavOptionProps) {
+/**
+ * Figma "NavOption": one tab of the bottom Nav.
+ * A round "Puck" with a glyph, and a label below it.
+ */
+export default function NavOption({ label, Icon, active, to, onClick }: NavOptionProps) {
+  const cls = clsx("nav-option", active && "nav-option-active");
+  const content = (
+    <>
+      <span className="nav-option-puck">
+        <Icon size={GLYPH_SIZE} />
+      </span>
+      <span className="nav-option-label">{label}</span>
+    </>
+  );
+  if (to) {
+    return (
+      <Link
+        to={to}
+        className={cls}
+        aria-current={active ? "page" : undefined}
+        onClick={onClick}
+      >
+        {content}
+      </Link>
+    );
+  }
   return (
-    <Link to={to} className="nav-option-anchor">
-      <div className="nav-option">
-        <div className={clsx("nav-option-icon", active && "active")}>
-          <Icon className="nav-option-icon-svg" style={{ width: size, height: size }} />
-        </div>
-        <div className={clsx("nav-option-label", active && "active")}>{label}</div>
-      </div>
-    </Link>
+    <button
+      type="button"
+      className={cls}
+      aria-current={active ? "page" : undefined}
+      onClick={onClick}
+    >
+      {content}
+    </button>
   );
 }
+
+/** Glyph size from Figma. */
+const GLYPH_SIZE = 18;

@@ -1,0 +1,27 @@
+.glow {
+/* Figma layer "Body": a title with a second, muted line.
+   Shared by CheckboxRow, SwitchRow, OptionRow and OptionListRow. */
+.option-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+  font-size: var(--font-size-body-sm);
+}
+
+/* Figma text style "Label" */
+.option-body-title {
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-semi);
+  line-height: var(--line-height-label);
+  color: var(--text-secondary);
+}
+
+/* Figma text style "Body S" */
+.option-body-text {
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-body);
+  color: var(--text-secondary-mute);
+}
+}

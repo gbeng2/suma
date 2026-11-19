@@ -1,29 +1,13 @@
 .glow {
+/* The title styles are in PageHeader.css and SectionHeader.css. */
 .text-header {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
 }
 
-.text-header-page {
-  .text-header-title {
-    font-size: var(--font-size-heading-lg);
-    font-weight: var(--font-weight-semi);
-  }
-  .text-header-subtitle {
-    font-size: var(--font-size-body-md);
-    color: var(--text-secondary-mute);
-  }
+.text-header > .page-header,
+.text-header > .section-header {
+  align-self: stretch;
 }
-
-.text-header-section {
-  .text-header-title {
-    font-size: var(--font-size-heading-md);
-    font-weight: var(--font-weight-semi);
-  }
-  .text-header-subtitle {
-    font-size: var(--font-size-body-sm);
-    color: var(--text-secondary-mute);
-  }
-}
-
 }

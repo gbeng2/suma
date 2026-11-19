@@ -1,0 +1,11 @@
+.glow {
+/* Figma text style "Label". The layout is in ImageHeader.css. */
+.program-header-label {
+  margin: 0;
+  color: var(--text-secondary-mute);
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-semi);
+  line-height: var(--line-height-label);
+  text-transform: uppercase;
+}
+}

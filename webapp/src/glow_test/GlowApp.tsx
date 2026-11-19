@@ -1,5 +1,6 @@
 import history from "../history";
 import Components from "./pages/Components.tsx";
+import Dashboard from "./pages/Dashboard.tsx";
 import { unstable_HistoryRouter as Router, useRoutes } from "react-router-dom";
 
 /**
@@ -19,6 +20,7 @@ export default function GlowApp() {
 function GlowRoutes() {
   return useRoutes([
     { path: "/glow_test/components", element: <Components /> },
+    { path: "/glow_test/dashboard", element: <Dashboard /> },
     { path: "/glow_test/*", element: <Components /> },
   ]);
 }

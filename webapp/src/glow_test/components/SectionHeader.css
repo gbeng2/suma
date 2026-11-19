@@ -1,0 +1,38 @@
+.glow {
+.section-header {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-5);
+}
+
+.section-header-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 0;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+/* Figma text style "Heading M" */
+.section-header-title {
+  margin: 0;
+  color: var(--text-secondary);
+  font-family: var(--font-family-title);
+  font-size: var(--font-size-heading-md);
+  font-weight: var(--font-weight-semi);
+  line-height: var(--line-height-heading);
+}
+
+/* Figma text style "Body S" */
+.section-header-text {
+  margin: 0;
+  color: var(--text-secondary-mute);
+  font-size: var(--font-size-body-sm);
+  line-height: var(--line-height-body);
+}
+
+/* The end link keeps its size. The body takes the rest. */
+.section-header > :not(.section-header-body) {
+  flex-shrink: 0;
+}
+}

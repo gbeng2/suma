@@ -1,23 +1,94 @@
 .glow {
 .image-header {
+  /* No tokens for these Figma values. */
+  --image-header-cover-height: 208px;
+  --image-header-band-height: 96px;
+  /* How far the sheet moves up over the cover. */
+  --image-header-overlap: var(--space-7);
+
+  display: flex;
+  flex-direction: column;
+}
+
+/* Figma "Cover" */
+.image-header-cover {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  height: var(--image-header-cover-height);
+  margin-bottom: calc(-1 * var(--image-header-overlap));
+  padding: var(--space-5);
+  overflow: hidden;
+}
+
+/* Figma "State=No photo" */
+.image-header-cover-band {
+  height: var(--image-header-band-height);
+}
+
+.image-header-cover-peach {
+  background-color: var(--band-peach);
+}
+
+.image-header-cover-blue {
+  background-color: var(--band-blue);
+}
+
+/* The photo fills the cover, behind the BackButton. */
+.image-header-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-header-back {
   position: relative;
 }
 
-.image-header-breadcrumb {
-  position: absolute;
-  top: var(--space-4);
-  left: var(--space-4);
-
-}
-
-.image-header-bottom-flow {
-  position: absolute;
-  bottom: 0;
-  height: var(--border-radius-card);
-  width: 100%;
+/* Figma "Sheet" */
+.image-header-sheet {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+  padding: var(--space-7) var(--space-6) var(--space-6);
+  border-bottom: var(--border-width) solid var(--border-secondary-subtle);
+  border-top-left-radius: var(--border-radius-tile-lg);
+  border-top-right-radius: var(--border-radius-tile-lg);
   background-color: var(--bg-page);
-  border-top-left-radius: var(--border-radius-card);
-  border-top-right-radius: var(--border-radius-card);
 }
 
+/*
+ * Figma "Identity": the centered label / title / description block.
+ * Used by ProgramHeader and OfferingHeader.
+ */
+.image-header-identity {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  text-align: center;
+}
+
+/* Figma text style "Heading XL" */
+.image-header-title {
+  margin: 0;
+  color: var(--text-secondary);
+  font-family: var(--font-family-title);
+  font-size: var(--font-size-heading-xl);
+  font-weight: var(--font-weight-semi);
+  line-height: var(--line-height-heading);
+}
+
+/* Figma text style "Body M" */
+.image-header-description {
+  margin: 0;
+  color: var(--text-secondary-mute);
+  font-size: var(--font-size-body-md);
+  line-height: var(--line-height-body);
+}
 }

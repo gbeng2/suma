@@ -1,0 +1,43 @@
+.glow {
+/* Figma "Stats". The rest of the layout is in ImageHeader.css. */
+.offering-header-stats {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+}
+
+.offering-header-stat {
+  flex: 1 0 0;
+  min-width: 0;
+  text-align: center;
+}
+
+/* Figma "Divider": a line in the middle of the gap between two stats. */
+.offering-header-stat + .offering-header-stat {
+  margin-left: var(--space-5);
+  padding-left: var(--space-5);
+  border-left: var(--border-width) solid var(--border-secondary-subtle);
+}
+
+/* Figma text style "Heading XS" */
+.offering-header-stat-value {
+  margin: 0;
+  color: var(--text-secondary);
+  font-family: var(--font-family-title);
+  font-size: var(--font-size-heading-xs);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-heading);
+}
+
+/* Figma text style "Body S" */
+.offering-header-stat-label {
+  margin: 0;
+  color: var(--text-secondary-mute);
+  font-size: var(--font-size-body-sm);
+  line-height: var(--line-height-body);
+}
+
+.offering-header-extra {
+  width: 100%;
+}
+}

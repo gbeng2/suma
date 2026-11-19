@@ -1,8 +1,8 @@
 import { RoutePath } from "../../routing/RoutePath.ts";
 import Breadcrumb from "./Breadcrumb.tsx";
-import Stack from "./Stack.tsx";
+import PageHeader from "./PageHeader.tsx";
+import SectionHeader from "./SectionHeader.tsx";
 import "./TextHeader.css";
-import clsx from "clsx";
 
 export interface TextHeaderProps {
   backTo?: RoutePath;
@@ -12,6 +12,11 @@ export interface TextHeaderProps {
   variant?: "page" | "section";
 }
 
+/**
+ * Kept from src/ui/TextHeader. Figma splits it in two components:
+ * variant "page" is PageHeader, variant "section" is SectionHeader.
+ * New code should use those. This only adds the optional back breadcrumb above.
+ */
 export default function TextHeader({
   backTo,
   backLabel,
@@ -20,10 +25,13 @@ export default function TextHeader({
   subtitle,
 }: TextHeaderProps) {
   return (
-    <Stack className={clsx("text-header", `text-header-${variant}`)} gap={4}>
+    <div className="text-header">
       {backTo && <Breadcrumb to={backTo}>{backLabel}</Breadcrumb>}
-      <p className="text-header-title">{title}</p>
-      {subtitle && <p className="text-header-subtitle">{subtitle}</p>}
-    </Stack>
+      {variant === "page" ? (
+        <PageHeader title={title} subtitle={subtitle} />
+      ) : (
+        <SectionHeader title={title} text={subtitle} />
+      )}
+    </div>
   );
 }

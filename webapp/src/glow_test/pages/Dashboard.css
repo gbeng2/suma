@@ -1,0 +1,19 @@
+.glow {
+/* Figma "Main": 18px padding around the content (the page gutter). */
+.dashboard-main {
+  padding: var(--space-gutter);
+}
+
+/* Visible to screen readers only. */
+.dashboard-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+}

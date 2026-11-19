@@ -1,13 +1,33 @@
 .glow {
 .page-outer {
-    height: 100dvh;
-    position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-page);
 }
 
+.page-outer-full-height {
+  height: 100dvh;
+}
+
+/* The content scrolls. The nav (if any) stays below it. */
 .page {
-    display: flex;
-    flex-direction: column;
-    overflow: scroll;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
 }
 
+/* Children keep their own height, so the page scrolls instead of squashing them. */
+.page > * {
+  flex-shrink: 0;
+}
+
+/* Not named page-padding: that is a global utility class in assets/styles/layout.css. */
+.page-buffer {
+  /* Figma: 343px content in a 375px screen. There is no space token for 16px. */
+  --page-padding-x: 16px;
+
+  padding: var(--space-7) var(--page-padding-x);
+}
 }

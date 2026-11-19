@@ -1,49 +1,34 @@
 .glow {
-.breadcrumb {
-  color: var(--text-secondary);
+/* `.btn` is repeated to win over `.btn-unstyled` in Button.css. */
+.breadcrumb.btn {
+  /* Figma min height: a comfortable tap area. No token for it. */
+  --breadcrumb-min-height: 44px;
+
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: var(--breadcrumb-min-height);
+  border-radius: var(--border-radius-1);
   font-weight: var(--font-weight-semi);
+  line-height: var(--line-height-body);
+  white-space: nowrap;
+}
+
+/* Figma "direction=Left" */
+.breadcrumb-left.btn {
+  padding: 0 var(--space-3);
+  color: var(--text-secondary);
   font-size: var(--font-size-body-md);
 }
 
-.breadcrumb-empty.btn {
-  padding: var(--space-4) var(--space-4);
+/* See `noOffset` in Breadcrumb.tsx. */
+.breadcrumb-offset.btn {
+  margin-left: calc(-1 * var(--space-3));
 }
 
-.breadcrumb-text.btn {
-  padding: var(--space-3) var(--space-4);
-}
-
-.breadcrumb-back.btn {
-  border: var(--border-secondary-subtle) var(--border-width) solid;
-  background-color: var(--bg-card);
-  box-shadow: var(--shadow-1);
-}
-
-.breadcrumb-left.btn {
-  border: none;
-  background-color: transparent;
-}
-
+/* Figma "direction=Right" */
 .breadcrumb-right.btn {
-  border: none;
-  background-color: transparent;
+  color: var(--text-primary-mute);
   font-size: var(--font-size-body-sm);
-  color: var(--link-color);
-}
-
-.breadcrumb-icon-left {
-  margin-right: var(--space-1);
-}
-
-.breadcrumb-icon-right {
-  margin-left: var(--space-1);
-}
-
-.breadcrumb-icon-back, .breadcrumb-icon-left {
-  color: var(--text-secondary);
-}
-
-.breadcrumb-icon-right {
-  color: var(--link-color);
 }
 }

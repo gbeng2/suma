@@ -1,0 +1,44 @@
+.glow {
+/* `.btn` is repeated to win over `.btn-unstyled` in Button.css. */
+.back-button.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  height: var(--btn-h-sm);
+  padding: var(--space-3) var(--space-4);
+  border: var(--border-width) solid var(--border-secondary-subtle);
+  border-radius: var(--border-radius-pill);
+  background-color: var(--bg-card);
+  box-shadow: var(--shadow-1);
+  color: var(--text-secondary);
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-semi);
+  line-height: var(--line-height-body);
+  white-space: nowrap;
+}
+
+/* Figma "label=Off" */
+.back-button-icon-only.btn {
+  justify-content: center;
+  width: var(--btn-h-sm);
+  padding: 0;
+}
+
+/*
+ * Figma has Hover and Pressed variants, but they look the same as Default there.
+ * These fills are the same ones a soft secondary Button uses.
+ */
+.back-button.btn:hover:not(:disabled):not([aria-disabled="true"]),
+.back-button.btn.is-hover {
+  background-color: var(--fill-secondary-soft);
+}
+
+.back-button.btn:active:not(:disabled):not([aria-disabled="true"]),
+.back-button.btn.is-pressed {
+  background-color: var(--fill-secondary-soft-hover);
+}
+
+.back-button.btn:focus-visible {
+  box-shadow: var(--focus-ring-shadow);
+}
+}
