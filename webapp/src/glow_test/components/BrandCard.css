@@ -1,0 +1,51 @@
+.glow {
+.brand-card {
+  background: radial-gradient(
+    130.5% 73.39% at 84.63% 24.78%,
+    #ffdcb4 0%,
+    #ffcca2 54.94%,
+    #ffc59b 61.65%,
+    #f5a98d 90.94%
+  );
+  padding: var(--space-9) var(--space-8) var(--space-6);
+  border-radius: var(--border-radius-card);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.brand-card-pill {
+  background-color: color-mix(in srgb, var(--text-primary-on-strong) 50%, transparent);
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--border-radius-pill);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-semi);
+  border: 2px solid color-mix(in srgb, var(--text-primary-on-strong) 80%, transparent);
+}
+
+.brand-card-title {
+  font-family: var(--font-family-title);
+  font-weight: var(--font-weight-semi);
+  margin-top: var(--space-5);
+  text-align: center;
+}
+
+.brand-card-text {
+  margin-top: var(--space-5);
+  color: var(--text-secondary-mute);
+  font-size: var(--font-size-body-sm);
+  text-align: center;
+}
+
+.brand-card-actions {
+  margin-top: var(--space-6);
+}
+
+.brand-card-help {
+  margin-top: var(--space-5);
+  color: var(--text-secondary-mute);
+  font-size: var(--font-size-body-md);
+  text-align: center;
+}
+
+}

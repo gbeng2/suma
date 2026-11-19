@@ -45,6 +45,8 @@ declare module "./RouteParams.ts" {
     "/private-account/:id": { id: string | number };
     "/sitemap": {};
     "/theme": {};
+    "/glow_test/components": {};
+    "/glow_test/dashboard": {};
     "/trips": {};
     "/trip/:id": { id: string | number };
     "/preferences": {};

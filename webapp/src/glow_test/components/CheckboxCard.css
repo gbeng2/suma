@@ -1,0 +1,19 @@
+.glow {
+.checkbox-card {
+  cursor: pointer;
+  user-select: none;
+}
+
+.checkbox-card-body {
+  display: flex;
+  flex-direction: row;
+  gap: var(--space-3);
+}
+
+.checkbox-card input[type="checkbox"] {
+}
+
+.checkbox-card.is-invalid {
+  border-color: var(--border-danger);
+}
+}

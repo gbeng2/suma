@@ -1,0 +1,53 @@
+import useId from "../../state/useId.ts";
+import CardBody from "./CardBody";
+import CardText from "./CardText";
+import Checkbox from "./Checkbox.tsx";
+import "./CheckboxCard.css";
+import InputFeedback, { HasInputFeedback } from "./InputFeedback.tsx";
+import clsx from "clsx";
+import React from "react";
+
+export interface CheckboxCardProps
+  extends HasInputFeedback,
+    Omit<React.InputHTMLAttributes<HTMLInputElement>, "checked" | "type" | "title"> {
+  checked: boolean;
+  title?: React.ReactNode;
+  text?: React.ReactNode;
+  name?: string;
+  alignCheckbox?: "start" | "center" | "end";
+  children?: React.ReactNode;
+}
+
+const CheckboxCard = React.forwardRef<HTMLInputElement, CheckboxCardProps>(
+  function CheckboxCard(
+    {
+      id,
+      title,
+      text,
+      error,
+      alignCheckbox = "center",
+      children,
+      ...rest
+    }: CheckboxCardProps,
+    ref
+  ) {
+    const inputId = useId(id);
+    const labeledBy = `${inputId}-label`;
+    return (
+      <label
+        className={clsx("card checkable-card checkbox-card", error ? "is-invalid" : "")}
+      >
+        <CardBody className={clsx("checkbox-card-body", `align-items-${alignCheckbox}`)}>
+          <Checkbox ref={ref} id={inputId} error={error} noFeedback {...rest} />
+          <div id={labeledBy}>
+            {title && <CardText variant="subtitle">{title}</CardText>}
+            {text && <CardText variant="subtext">{text}</CardText>}
+            {children && children}
+            <InputFeedback inputId={inputId} error={error} />
+          </div>
+        </CardBody>
+      </label>
+    );
+  }
+);
+export default CheckboxCard;

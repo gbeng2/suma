@@ -1,0 +1,13 @@
+.glow {
+.page-outer {
+    height: 100dvh;
+    position: relative;
+}
+
+.page {
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+}
+
+}

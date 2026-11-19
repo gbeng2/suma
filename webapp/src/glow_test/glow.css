@@ -1,0 +1,10 @@
+/* Base styles for everything inside the glow prototype root. */
+.glow {
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-body);
+  color: var(--text-color);
+  background: var(--bg-page);
+  min-height: 100vh;
+}

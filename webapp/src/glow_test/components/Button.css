@@ -1,0 +1,98 @@
+.glow {
+.btn {
+  /* Set from Button.tsx, based on variant + color. */
+  --btn-color: inherit;
+  --btn-bg: transparent;
+  --btn-bg-hover: var(--btn-bg);
+  --btn-border-color: transparent;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  height: var(--btn-h);
+  padding: 0 var(--btn-x);
+  border: var(--border-width) solid var(--btn-border-color);
+  border-radius: var(--border-radius-pill);
+  background-color: var(--btn-bg);
+  color: var(--btn-color);
+  font-family: var(--font-family-base);
+  font-weight: var(--font-weight-semi);
+  font-size: var(--font-size-label);
+  line-height: var(--line-height-label);
+  white-space: nowrap;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+/* Figma sizes S / M / L */
+.btn-sm {
+  --btn-h: var(--btn-h-sm);
+  --btn-x: var(--space-5);
+}
+
+.btn-md {
+  --btn-h: var(--btn-h-md);
+  --btn-x: var(--space-7);
+}
+
+.btn-lg {
+  --btn-h: var(--btn-h-lg);
+  --btn-x: var(--space-8);
+}
+
+.btn-icon {
+  display: flex;
+  flex-shrink: 0;
+  font-size: var(--btn-icon-size);
+}
+
+.btn:disabled,
+.btn[aria-disabled="true"],
+.btn.is-disabled {
+  cursor: not-allowed;
+  opacity: var(--opacity-dim);
+}
+
+.btn:hover:not(:disabled):not([aria-disabled="true"]),
+.btn.is-hover {
+  background-color: var(--btn-bg-hover);
+}
+
+.btn:focus-visible,
+.btn.is-focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring-shadow);
+}
+
+.btn-link {
+  text-decoration: none;
+}
+
+/* Not in Figma. Kept from src/ui/Button. */
+.btn-unstyled,
+.btn-inherit {
+  display: block;
+  height: auto;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: none;
+  color: inherit;
+  white-space: normal;
+}
+
+.btn-inherit {
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+}
+
+.btn-inline {
+  display: inline;
+  height: auto;
+  padding: 0 var(--space-1);
+  margin: 0 calc(-1 * var(--space-1));
+}
+}

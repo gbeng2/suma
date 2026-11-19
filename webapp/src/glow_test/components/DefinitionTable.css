@@ -1,0 +1,47 @@
+.glow {
+.definition-table {
+    display: flex;
+    flex-direction: column;
+}
+
+.definition-table > div {
+    display: flex;
+    flex-direction: row;
+    gap: var(--space-5);
+    padding: var(--space-2);
+    justify-content: space-between;
+}
+
+.definition-table > div:not(:last-child) {
+    border-bottom: var(--border-width) var(--border-secondary-subtle) solid;
+}
+
+.definition-table > div:first-child {
+    padding-top: 0;
+}
+
+.definition-table > div:last-child {
+    padding-bottom: 0;
+}
+
+.definition-table-in-card {
+    div, div:first-child, div:last-child {
+        padding-left: var(--space-6);
+        padding-right: var(--space-6);
+    }
+    div:first-child {
+        padding-top: var(--space-6);
+    }
+    div:last-child {
+        padding-bottom: var(--space-6);
+    }
+}
+
+.definition-table-key {
+    color: var(--text-secondary-mute);
+}
+
+.definition-table-value {
+    font-weight: var(--font-weight-bold);
+}
+}

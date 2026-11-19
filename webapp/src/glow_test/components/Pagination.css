@@ -1,0 +1,19 @@
+.glow {
+.pagination {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: var(--space-4)
+}
+
+.pagination-back {
+  border-radius: var(--border-radius-pill);
+  padding: var(--space-4);
+}
+
+.pagination-forward {
+  border-radius: var(--border-radius-pill);
+  padding: var(--space-4);
+}
+
+}

@@ -1,0 +1,11 @@
+.glow {
+.div-link {
+  text-decoration: none !important;
+  color: inherit;
+}
+
+.div-link * {
+  color: inherit;
+  text-decoration: inherit;
+}
+}

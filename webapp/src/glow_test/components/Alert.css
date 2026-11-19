@@ -1,0 +1,25 @@
+.glow {
+.alert {
+  padding: var(--space-4);
+  border-radius: var(--border-radius-3);
+}
+
+.alert-icon-container {
+  border-radius: var(--border-radius-2);
+  padding: var(--space-3);
+}
+
+.alert-icon {
+}
+
+.alert-title {
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-body-md);
+}
+
+.alert-text {
+  font-size: var(--font-size-body-sm);
+  color: var(--text-mute)
+}
+
+}

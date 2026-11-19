@@ -1,0 +1,8 @@
+.glow {
+/* Same height as Button, but square, so the pill radius makes a circle. */
+.icon-button {
+  width: var(--btn-h);
+  padding: 0;
+  flex-shrink: 0;
+}
+}

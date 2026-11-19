@@ -1,0 +1,32 @@
+.glow {
+.form-check {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin: 0;
+  cursor: pointer;
+}
+
+.form-check input[type="checkbox"] {
+  width: 1.1rem;
+  height: 1.1rem;
+  accent-color: var(--fill-primary-strong);
+  border-radius: var(--border-radius-2);
+  cursor: pointer;
+}
+
+.form-check input[type="checkbox"]:disabled {
+  cursor: not-allowed;
+}
+
+.form-check input[type="checkbox"].is-invalid {
+  box-shadow: 0 0 0 var(--border-width-strong) var(--fill-danger-strong);
+  border: none;
+}
+
+.form-check:has(input:disabled) {
+  color: var(--text-secondary-mute);
+  cursor: not-allowed;
+}
+
+}

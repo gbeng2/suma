@@ -1,0 +1,9 @@
+.glow {
+.dialog-header {
+  padding-right: var(--dialog-close-size);
+  font-size: var(--font-size-heading-lg);
+  font-weight: var(--font-weight-semi);
+  text-align: center;
+}
+
+}

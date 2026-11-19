@@ -1,0 +1,61 @@
+import useId from "../../state/useId.ts";
+import "./CheckableCard.css";
+import Icon from "./Icon.tsx";
+import InputFeedback, { HasInputFeedback } from "./InputFeedback.tsx";
+import CheckIcon from "@heroicons/react/24/outline/CheckIcon";
+import clsx from "clsx";
+import React from "react";
+
+export interface CheckableCardProps
+  extends HasInputFeedback,
+    React.InputHTMLAttributes<HTMLInputElement> {
+  checked: boolean;
+  name?: string;
+  disabled?: boolean;
+  className?: string;
+  style?: React.CSSProperties;
+  children?: React.ReactNode;
+}
+
+const CheckableCard = React.forwardRef<HTMLInputElement, CheckableCardProps>(
+  function CheckableCard(
+    {
+      id,
+      checked,
+      name,
+      disabled = false,
+      className,
+      style,
+      help,
+      error,
+      children,
+      ...rest
+    }: CheckableCardProps,
+    ref
+  ) {
+    const inputId = useId(id);
+    const cls = clsx("card checkable-card checkable-card-hidecheck", className);
+    return (
+      <div>
+        <label className={cls} style={style}>
+          <Icon
+            className={clsx("checkable-card-check", checked && "checked")}
+            icon={CheckIcon}
+            size={20}
+          />
+          <input
+            ref={ref}
+            type="checkbox"
+            name={name}
+            checked={checked}
+            disabled={disabled}
+            {...rest}
+          />
+          {children}
+        </label>
+        <InputFeedback inputId={inputId} error={error} help={help} />
+      </div>
+    );
+  }
+);
+export default CheckableCard;

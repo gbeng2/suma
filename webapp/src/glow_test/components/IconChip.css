@@ -1,0 +1,8 @@
+.glow {
+.icon-chip {
+  border-radius: var(--border-radius-pill);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+}

@@ -1,0 +1,29 @@
+.glow {
+.tile {
+  border-radius: var(--border-radius-3);
+  width: 43px;
+  height: 43px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--text-primary-mute);
+  background-color: var(--fill-secondary-soft);
+}
+
+.tile-primary {
+
+}
+
+.tile-secondary {
+
+}
+
+.tile-success {
+
+}
+
+.tile-danger {
+
+}
+
+}
