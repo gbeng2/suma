@@ -69,8 +69,7 @@ For each component:
 
 1. Compare the two versions: `diff src/ui/X.tsx src/glow_test/components/X.tsx`.
 2. Copy the glow `.tsx` and `.css` over the `src/ui` ones.
-3. Remove the `.glow { ... }` wrapper from the CSS (and un-indent nothing: the
-   contents were never indented).
+3. Remove the `.glow {` line at the top of the CSS and its closing `}` at the bottom.
 4. Fix the import paths: `../../routing/` becomes `../routing/`.
 5. Put translations back. Prototype components have English defaults such as
    `"Back"` and `"Continue"`. In `src/ui` those should be `t("common.back")`.
