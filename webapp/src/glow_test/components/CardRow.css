@@ -1,0 +1,32 @@
+.glow {
+.card-row {
+  /* No token for this size. */
+  --card-row-min-height: 56px;
+
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  min-height: var(--card-row-min-height);
+  padding: var(--space-4) var(--space-5);
+}
+
+/* The line between rows. */
+.card-row + .card-row {
+  border-top: var(--border-width) solid var(--border-secondary-subtle);
+}
+
+.card-row-selected {
+  background-color: var(--fill-primary-soft);
+}
+
+/* Body M Semi */
+.card-row-label {
+  flex: 1 0 0;
+  min-width: 0;
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-semi);
+  line-height: var(--line-height-body);
+  color: var(--text-secondary);
+  overflow-wrap: break-word;
+}
+}

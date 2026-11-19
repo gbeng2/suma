@@ -1,10 +1,10 @@
 .glow {
 .card {
   background-color: var(--bg-card);
-  border: var(--border-secondary-subtle) var(--border-width) solid;
+  border: var(--border-width) solid var(--border-secondary-subtle);
   border-radius: var(--border-radius-card);
   box-shadow: var(--shadow-1);
+  /* Clips a flush CardImage and selected CardRows to the rounded corners. */
   overflow: hidden;
 }
-
 }

@@ -1,25 +1,81 @@
 .glow {
 .alert {
+  /* Set from Alert.tsx, based on color + emphasis. */
+  --alert-bg: var(--fill-primary-soft);
+  --alert-border-color: var(--border-primary-subtle);
+  --alert-icon-bg: var(--fill-primary-strong);
+  --alert-icon-color: var(--text-primary-on-strong);
+  /* No tokens for these sizes in Figma. */
+  --alert-icon-chip-size: 40px;
+  --alert-glyph-size: 20px;
+
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
   padding: var(--space-4);
+  border: var(--border-width) solid var(--alert-border-color);
   border-radius: var(--border-radius-3);
+  background-color: var(--alert-bg);
+  color: var(--text-secondary);
 }
 
-.alert-icon-container {
-  border-radius: var(--border-radius-2);
-  padding: var(--space-3);
+.alert-no-border {
+  border-color: transparent;
 }
 
+.alert-linked {
+  text-decoration: none;
+}
+
+.alert-linked:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring-shadow);
+}
+
+/* Figma "Icon": the square chip around the glyph. */
 .alert-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: var(--alert-icon-chip-size);
+  height: var(--alert-icon-chip-size);
+  border-radius: var(--border-radius-2);
+  background-color: var(--alert-icon-bg);
+  color: var(--alert-icon-color);
+}
+
+.alert-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 0;
+  gap: var(--space-1);
+  min-width: 0;
+  overflow-wrap: break-word;
 }
 
 .alert-title {
-  font-weight: var(--font-weight-bold);
   font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-semi);
+  line-height: var(--line-height-body);
+  color: var(--text-secondary);
 }
 
 .alert-text {
   font-size: var(--font-size-body-sm);
-  color: var(--text-mute)
+  line-height: var(--line-height-body);
+  color: var(--text-secondary-mute);
 }
 
+.alert-actions {
+  display: flex;
+  padding-top: var(--space-4);
+}
+
+.alert-caret {
+  flex-shrink: 0;
+  width: var(--alert-glyph-size);
+  height: var(--alert-glyph-size);
+  color: var(--text-secondary-mute);
+}
 }

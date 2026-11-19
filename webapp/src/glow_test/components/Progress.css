@@ -1,15 +1,81 @@
 .glow {
+/* ---- ProgressBar ---- */
+.progress-bar {
+  /* No token for the bar thickness in Figma. */
+  --progress-bar-height: 6px;
+
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.progress-bar-track {
+  flex: 1 0 0;
+  min-width: 0;
+  height: var(--progress-bar-height);
+  border-radius: var(--border-radius-pill);
+  background-color: var(--fill-track);
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  border-radius: var(--border-radius-pill);
+  background-color: var(--fill-primary-strong);
+  transition: width var(--transition-base);
+}
+
+.progress-bar-label {
+  flex-shrink: 0;
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-semi);
+  line-height: var(--line-height-label);
+  color: var(--text-secondary-mute);
+  white-space: nowrap;
+}
+
+/* ---- ProgressCircle ---- */
 .progress-circle {
-  display: inline-block;
+  /* Figma surface=Default */
+  --progress-circle-track: var(--fill-track);
+  --progress-circle-bar: var(--fill-primary-strong);
+  --progress-circle-text: var(--text-secondary);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* The text is drawn on top of the ring. */
   position: relative;
 }
 
-.progress-circle-text {
+/* Figma surface=On strong */
+.progress-circle-on-strong {
+  --progress-circle-track: var(--fill-primary-strong-hover);
+  --progress-circle-bar: var(--text-primary-on-strong);
+  --progress-circle-text: var(--text-primary-on-strong);
+}
+
+.progress-circle > svg {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: var(--font-size-body-sm);
+  inset: 0;
+  /* SVG circles start at 3 o'clock. Turn it so the bar starts at the top. */
+  transform: rotate(-90deg);
+}
+
+.progress-circle-track {
+  stroke: var(--progress-circle-track);
+}
+
+.progress-circle-bar {
+  stroke: var(--progress-circle-bar);
+  transition: stroke-dashoffset var(--transition-base);
+}
+
+.progress-circle-text {
+  position: relative;
+  font-size: var(--font-size-chip);
   font-weight: var(--font-weight-semi);
+  line-height: var(--line-height-label);
+  color: var(--progress-circle-text);
 }
 }

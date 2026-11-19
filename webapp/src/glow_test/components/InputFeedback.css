@@ -1,0 +1,26 @@
+.glow {
+/* Figma kind=Help */
+.input-feedback {
+  /* No token for this size in Figma. */
+  --input-feedback-icon-size: 18px;
+
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-body-sm);
+  line-height: var(--line-height-body);
+  color: var(--text-secondary-mute);
+}
+
+/* Figma kind=Error */
+.input-feedback-error {
+  font-weight: var(--font-weight-semi);
+  color: var(--text-danger-placeholder);
+}
+
+.input-feedback-icon {
+  flex-shrink: 0;
+  width: var(--input-feedback-icon-size);
+  height: var(--input-feedback-icon-size);
+}
+}

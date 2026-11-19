@@ -1,39 +1,85 @@
 .glow {
 .checklist-item {
+  /* Figma state=Future. The other states change these below. */
+  --checklist-mark-bg: var(--bg-card);
+  --checklist-mark-color: var(--text-secondary-mute);
+  --checklist-line-color: var(--border-secondary-subtle);
+  --checklist-label-color: var(--text-secondary-mute);
+  /* No tokens for these sizes in Figma. */
+  --checklist-mark-size: 27px;
+  --checklist-check-size: 15px;
+
   display: flex;
-  flex-direction: row;
-  gap: var(--space-4);
+  flex-direction: column;
   align-items: center;
+  gap: var(--space-3);
+  /* All steps get the same width, so the marks are evenly spaced. */
+  flex: 1 0 0;
+  min-width: 0;
+  /* Needed for the line, see below. */
+  position: relative;
 }
 
-.checklist-item-icon {
+.checklist-item-done,
+.checklist-item-current {
+  --checklist-mark-bg: var(--fill-primary-strong);
+  --checklist-mark-color: var(--text-primary-on-strong);
+  --checklist-line-color: var(--fill-primary-strong);
+}
+
+.checklist-item-current {
+  --checklist-label-color: var(--text-primary-mute);
+}
+
+/*
+ * Figma "Line": goes from the previous mark to this mark.
+ * It is one item wide minus one mark, and ends where this mark starts.
+ */
+.checklist-item::before {
+  content: "";
+  position: absolute;
+  top: calc((var(--checklist-mark-size) - var(--border-width-strong)) / 2);
+  right: calc(50% + var(--checklist-mark-size) / 2);
+  width: calc(100% - var(--checklist-mark-size));
+  height: var(--border-width-strong);
+  background-color: var(--checklist-line-color);
+}
+
+.checklist-item:first-child::before {
+  display: none;
+}
+
+/* Figma "Mark": the circle with the number or the check. */
+.checklist-item-mark {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: var(--font-size-body-sm);
-  font-weight: var(--font-weight-semi);
-  border-width: var(--border-width-checked);
-  border-style: solid;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  width: var(--checklist-mark-size);
+  height: var(--checklist-mark-size);
+  border: var(--border-width-strong) solid var(--checklist-line-color);
   border-radius: var(--border-radius-pill);
-  width: 32px;
-  height: 32px;
+  background-color: var(--checklist-mark-bg);
+  color: var(--checklist-mark-color);
+  font-size: var(--font-size-chip);
+  font-weight: var(--font-weight-semi);
+  line-height: var(--line-height-label);
 }
 
-.checklist-item-icon-checked {
-  background-color: var(--fill-primary-strong);
-  color: var(--text-primary-on-strong);
+.checklist-item-check {
+  width: var(--checklist-check-size);
+  height: var(--checklist-check-size);
 }
 
-.checklist-item-icon-current {
-  background-color: var(--fill-primary-strong);
-  color: var(--text-primary-on-strong);
+.checklist-item-label {
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-semi);
+  line-height: var(--line-height-label);
+  color: var(--checklist-label-color);
+  text-align: center;
+  text-transform: uppercase;
+  overflow-wrap: break-word;
+  max-width: 100%;
 }
-
-.checklist-item-icon-future {
-  background-color: var(--bg-page);
-  color: var(--text-secondary-mute);
-  border-color: var(--border-secondary-subtle);
-  border-width: var(--border-width-strong);
-}
-
 }

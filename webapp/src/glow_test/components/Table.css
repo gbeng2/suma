@@ -1,83 +1,120 @@
 .glow {
 .table {
-    width: 100%;
-    border-collapse: collapse;
+  width: 100%;
+  border-collapse: collapse;
+  line-height: var(--line-height-body);
 
-    --tcolor-header: var(--fill-primary-soft);
-    --tcolor-bg1: var(--bg-page);
-    --tcolor-bg2: var(--fill-secondary-soft);
-    --tcolor-hover: var(--fill-primary-soft-hover);
+  /* Set by the `theme` prop. Not in Figma. */
+  --tcolor-header: transparent;
+  --tcolor-bg1: transparent;
+  --tcolor-bg2: var(--fill-secondary-soft);
+  --tcolor-hover: var(--fill-primary-soft-hover);
 
-    thead,
-    tfoot {
-        background-color: var(--tcolor-header);
-    }
+  thead,
+  tfoot {
+    background-color: var(--tcolor-header);
+  }
 
-    th,
-    td {
-        padding: var(--space-2) var(--space-3);
-    }
+  /* Figma "TableRow": muted cells, and a strong last cell at the right edge.
+     Figma has no side padding. The padding between cells is for tables with
+     more than two columns. */
+  th,
+  td {
+    padding: var(--space-5) var(--space-3);
+    text-align: left;
+    font-weight: var(--font-weight-normal);
+    color: var(--text-secondary-mute);
+  }
 
-    th {
-        text-align: left;
-        font-weight: var(--font-weight-semi);
-        color: var(--text-mute);
-    }
+  th:first-child,
+  td:first-child {
+    padding-left: 0;
+  }
 
-    caption {
-        margin-top: var(--space-2);
-        caption-side: bottom;
-    }
+  th:last-child,
+  td:last-child {
+    padding-right: 0;
+  }
 
-    tbody {
-        background-color: var(--tcolor-bg1);
-    }
+  td:last-child:not(:first-child) {
+    text-align: right;
+  }
+
+  tr:not(.table-row-muted) > td:last-child:not(:first-child) {
+    font-weight: var(--font-weight-semi);
+    color: var(--text-secondary);
+  }
+
+  th {
+    font-weight: var(--font-weight-semi);
+  }
+
+  caption {
+    margin-top: var(--space-2);
+    caption-side: bottom;
+  }
+
+  tbody {
+    background-color: var(--tcolor-bg1);
+  }
 }
 
+/* The line under each row. */
 .table-borders {
-    th,
-    td {
-        border: 1px solid var(--border-secondary-subtle);
-    }
+  tr {
+    border-bottom: var(--border-width) solid var(--border-secondary-subtle);
+  }
+}
+
+/* Figma "TableRow/true" (muted): a less important row, like a discount.
+   All cells are muted, Body M, and padded on the sides too. */
+.table .table-row-muted td {
+  padding: var(--space-5);
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-normal);
+  color: var(--text-secondary-mute);
 }
 
 .table-striped {
-    tbody > tr:nth-of-type(even) {
-        background-color: var(--tcolor-bg2);
-    }
+  tbody > tr:nth-of-type(even) {
+    background-color: var(--tcolor-bg2);
+  }
 }
 
 .table-hover {
-    tr:hover, tbody > tr:hover {
-        background-color: var(--tcolor-hover);
-    }
+  tr:hover,
+  tbody > tr:hover {
+    background-color: var(--tcolor-hover);
+  }
 }
 
+/* Not in Figma. */
 .table-compact {
-    th,
-    td {
-        padding: var(--space-1) var(--space-1);
-        font-size: var(--font-size-body-sm);
-    }
-    caption {
-        margin-top: var(--space-1);
-    }
+  th,
+  td {
+    padding-top: var(--space-2);
+    padding-bottom: var(--space-2);
+  }
+  caption {
+    margin-top: var(--space-1);
+  }
 }
 
+/* Figma only has md (Body S). */
 .table-sm {
-    font-size: var(--font-size-body-sm);
+  font-size: var(--font-size-chip);
 }
 
 .table-md {
-    font-size: var(--font-size-base);
+  font-size: var(--font-size-body-sm);
 }
 
 .table-lg {
-    font-size: var(--font-size-body-md);
+  font-size: var(--font-size-body-md);
 }
 
 .table-row-highlight {
-    outline: var(--border-width-highlighted) solid var(--tcolor-header);
-    outline-offset: calc(-1 * var(--border-width-highlighted));
+  outline: var(--border-width-highlighted) solid var(--border-primary);
+  outline-offset: calc(-1 * var(--border-width-highlighted));
 }
 }

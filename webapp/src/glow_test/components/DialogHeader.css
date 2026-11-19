@@ -1,9 +1,12 @@
 .glow {
+/* Heading L */
 .dialog-header {
-  padding-right: var(--dialog-close-size);
+  margin: 0;
+  font-family: var(--font-family-title);
   font-size: var(--font-size-heading-lg);
   font-weight: var(--font-weight-semi);
+  line-height: var(--line-height-heading);
+  color: var(--text-secondary);
   text-align: center;
 }
-
 }

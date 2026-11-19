@@ -14,7 +14,9 @@ export interface TableProps {
   caption?: React.ReactNode;
   striped?: boolean;
   compact?: boolean;
+  /** Draws the line under each row, like Figma "TableRow". On by default. */
   borders?: boolean;
+  /** Figma only has md (Body S). */
   size?: "sm" | "md" | "lg";
   hover?: boolean;
   className?: string;
@@ -22,6 +24,10 @@ export interface TableProps {
   theme?: TableTheme;
 }
 
+/**
+ * A table made of Figma "TableRow"s. See TableRow, TableHeaders, TableFooter.
+ * Put it in a Card to get the Figma "Table" example.
+ */
 export default function Table({
   striped,
   hover,
@@ -47,9 +53,6 @@ export default function Table({
   (Object.keys(theme) as Array<keyof TableTheme>).forEach((k) => {
     sty[themeKeys[k]] = theme[k];
   });
-  if (theme.backgroundColor1) {
-    sty["--tcolor-bg1"] = theme.backgroundColor1;
-  }
   return (
     <table className={cls} style={sty}>
       {caption && <caption>{caption}</caption>}

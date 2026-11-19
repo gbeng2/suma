@@ -1,14 +1,29 @@
 .glow {
 .card-image {
+  /* No tokens for the image heights. */
+  --card-image-height: 180px;
+  --card-image-height-inset: 160px;
+
+  flex-shrink: 0;
+  width: 100%;
+  background-color: var(--fill-secondary-soft);
   overflow: hidden;
 }
 
-.card-image-flush {
+.card-image > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
+/* The Card clips the top corners, so no radius is needed here. */
+.card-image-default {
+  height: var(--card-image-height);
 }
 
 .card-image-inset {
+  height: var(--card-image-height-inset);
   border-radius: var(--border-radius-3);
 }
-
 }

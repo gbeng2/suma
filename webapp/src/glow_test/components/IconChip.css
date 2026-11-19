@@ -1,8 +1,36 @@
 .glow {
 .icon-chip {
-  border-radius: var(--border-radius-pill);
   display: flex;
+  flex-shrink: 0;
   align-items: center;
   justify-content: center;
+  width: var(--icon-chip-size);
+  height: var(--icon-chip-size);
+  /* The icon is 1em, so the font size is the icon size. */
+  font-size: var(--icon-chip-icon-size);
+}
+
+/* Figma sizes M / L. No tokens for these sizes. */
+.icon-chip-md {
+  --icon-chip-size: 40px;
+  --icon-chip-icon-size: 18px;
+  border-radius: var(--border-radius-2);
+}
+
+.icon-chip-lg {
+  --icon-chip-size: 48px;
+  --icon-chip-icon-size: 23px;
+  border-radius: var(--border-radius-3);
+}
+
+/* Figma colors Primary / Accent */
+.icon-chip-primary {
+  background-color: var(--fill-secondary-soft);
+  color: var(--text-primary-mute);
+}
+
+.icon-chip-accent {
+  background-color: var(--fill-primary-strong);
+  color: var(--text-primary-on-strong);
 }
 }

@@ -1,10 +1,11 @@
 import "./Dialog.css";
+import clsx from "clsx";
 import React from "react";
 
 export interface DialogProps {
   open: boolean;
   onClose: () => void;
-  /** id of the element within `children` that labels the dialog (e.g. a heading's id) */
+  /** id of the element within `children` that labels the dialog (e.g. a DialogHeader's id) */
   labelledBy: string;
   /**
    * Ref to the element that should receive focus when the dialog opens —
@@ -12,11 +13,19 @@ export interface DialogProps {
    * If omitted, the browser falls back to its own default (first focusable element).
    */
   initialFocusRef?: React.RefObject<HTMLElement>;
-  /** Any content — a Card, a form, plain text. Dialog adds no chrome of its own besides the close button. */
+  /** Any content, like a DialogHeader, text and buttons. See DialogYesNo. */
   children?: React.ReactNode;
   className?: string;
 }
 
+/**
+ * Figma "Dialog": a card that sits at the bottom of the screen, over a scrim.
+ * The dialog draws the card surface itself (Figma "Container"), so do not wrap
+ * the children in a Card.
+ *
+ * It closes on Escape or on a click outside of the card. There is no close button
+ * in Figma, so the content must have a button that closes it.
+ */
 export function Dialog({
   open,
   onClose,
@@ -49,22 +58,13 @@ export function Dialog({
   return (
     <dialog
       ref={dialogRef}
-      className={["dialog", className].filter(Boolean).join(" ")}
+      className={clsx("dialog", className)}
       aria-labelledby={labelledBy}
       onClick={onClose}
     >
-      <button
-        role="button"
-        className="dialog-close"
-        aria-label="Close"
-        onClick={(e) => {
-          e.stopPropagation();
-          onClose();
-        }}
-      >
-        ×
-      </button>
-      <div onClick={(e) => e.stopPropagation()}>{children}</div>
+      <div className="dialog-container" onClick={(e) => e.stopPropagation()}>
+        {children}
+      </div>
     </dialog>
   );
 }

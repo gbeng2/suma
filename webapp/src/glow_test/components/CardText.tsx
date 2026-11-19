@@ -3,6 +3,10 @@ import clsx from "clsx";
 import React, { CSSProperties } from "react";
 
 interface CardTextProps {
+  /**
+   * Figma "FigmaOnlyCardText" types:
+   * title = Heading XS, subtitle = Body M Semi, text = Body M, subtext = Body S (muted).
+   */
   variant?: "title" | "subtitle" | "text" | "subtext";
   className?: string;
   style?: CSSProperties;

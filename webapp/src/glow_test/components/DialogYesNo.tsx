@@ -1,25 +1,28 @@
 import { Toggle } from "../../state/useToggle.ts";
 import Button from "./Button.tsx";
 import ButtonGroup from "./ButtonGroup.tsx";
-import Card from "./Card.tsx";
-import CardBody from "./CardBody.tsx";
 import DialogHeader from "./DialogHeader.tsx";
-import Stack from "./Stack.tsx";
-import { MouseEventHandler } from "react";
+import React, { MouseEventHandler } from "react";
 
 export interface DialogYesNoProps {
-  /** See Dialog.labeledBy. */
+  /** See Dialog.labelledBy. */
   dialogId: string;
   header: string;
   body: string;
+  /** The toggle that opens the Dialog. "No" turns it off, unless `onNo` is given. */
   toggle: Toggle;
-  focusRef: React.Ref<HTMLButtonElement>;
+  /** Put on the "no" button, so the safe choice has focus. Pass it to Dialog.initialFocusRef too. */
+  focusRef?: React.Ref<HTMLButtonElement>;
   yesText: string;
   noText?: string;
   onYes: MouseEventHandler;
   onNo?: MouseEventHandler;
 }
 
+/**
+ * Content for a confirm Dialog: title, text, and a yes and a no button.
+ * Figma "_DialogContent/ClaimOrder". Use it as the child of a `<Dialog>`.
+ */
 export default function DialogYesNo({
   dialogId,
   header,
@@ -32,26 +35,22 @@ export default function DialogYesNo({
   onNo,
 }: DialogYesNoProps) {
   return (
-    <Card className="bgcolor-secondary-soft">
-      <CardBody padding={7}>
-        <Stack direction="vertical" gap={6}>
-          <DialogHeader id={dialogId}>{header}</DialogHeader>
-          <p className="color-secondary-mute">{body}</p>
-          <ButtonGroup vertical>
-            <Button variant="strong" onClick={onYes}>
-              {yesText}
-            </Button>
-            <Button
-              variant="soft"
-              ref={focusRef}
-              className="btn btn-secondary"
-              onClick={onNo || toggle.turnOff}
-            >
-              {noText || "Cancel"}
-            </Button>
-          </ButtonGroup>
-        </Stack>
-      </CardBody>
-    </Card>
+    <>
+      <DialogHeader id={dialogId}>{header}</DialogHeader>
+      <p className="dialog-text">{body}</p>
+      <ButtonGroup vertical>
+        <Button variant="strong" onClick={onYes}>
+          {yesText}
+        </Button>
+        <Button
+          variant="soft"
+          color="secondary"
+          ref={focusRef}
+          onClick={onNo || toggle.turnOff}
+        >
+          {noText || "Cancel"}
+        </Button>
+      </ButtonGroup>
+    </>
   );
 }

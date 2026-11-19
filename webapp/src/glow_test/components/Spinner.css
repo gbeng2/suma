@@ -1,0 +1,15 @@
+.glow {
+.spinner {
+  display: block;
+  flex-shrink: 0;
+  /* Figma spinner color (text-brand). Override with `color` on the spinner or a parent class. */
+  color: var(--text-primary-mute);
+  animation: glow-spinner-rotate 0.9s linear infinite;
+}
+}
+
+@keyframes glow-spinner-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}

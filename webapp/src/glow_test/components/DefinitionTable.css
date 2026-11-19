@@ -1,47 +1,38 @@
 .glow {
 .definition-table {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
 }
 
-.definition-table > div {
-    display: flex;
-    flex-direction: row;
-    gap: var(--space-5);
-    padding: var(--space-2);
-    justify-content: space-between;
+/* Figma "DefinitionTableRow". Every row has a line above it, also the first. */
+.definition-table-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+  padding: var(--space-4) 0;
+  border-top: var(--border-width) solid var(--border-secondary-subtle);
+  line-height: var(--line-height-body);
 }
 
-.definition-table > div:not(:last-child) {
-    border-bottom: var(--border-width) var(--border-secondary-subtle) solid;
+.definition-table-in-card .definition-table-row {
+  padding-left: var(--space-6);
+  padding-right: var(--space-6);
 }
 
-.definition-table > div:first-child {
-    padding-top: 0;
-}
-
-.definition-table > div:last-child {
-    padding-bottom: 0;
-}
-
-.definition-table-in-card {
-    div, div:first-child, div:last-child {
-        padding-left: var(--space-6);
-        padding-right: var(--space-6);
-    }
-    div:first-child {
-        padding-top: var(--space-6);
-    }
-    div:last-child {
-        padding-bottom: var(--space-6);
-    }
-}
-
+/* Body S */
 .definition-table-key {
-    color: var(--text-secondary-mute);
+  font-size: var(--font-size-body-sm);
+  color: var(--text-secondary-mute);
 }
 
+/* Body M Semi */
 .definition-table-value {
-    font-weight: var(--font-weight-bold);
+  margin: 0;
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-semi);
+  color: var(--text-secondary);
+  text-align: right;
 }
 }

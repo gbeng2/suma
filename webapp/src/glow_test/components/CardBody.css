@@ -1,10 +1,12 @@
 .glow {
 .card-body {
-  @property --card-body-padding {
-    syntax: '*';
-    inherits: false;
-  }
-  padding: var(--card-body-padding, var(--space-gutter));
+  padding: var(--card-body-padding, var(--space-6));
 }
 
+/* Used when CardBody has a `gap`. */
+.card-body-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--card-body-gap);
+}
 }

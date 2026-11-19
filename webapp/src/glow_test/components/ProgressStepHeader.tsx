@@ -1,21 +1,16 @@
-import Progress from "./Progress.tsx";
-import "./ProgressStepHeader.css";
-import Stack from "./Stack.tsx";
+import ProgressBar from "./ProgressBar.tsx";
 
 interface ProgressStepHeaderProps {
   step: number;
   steps: number;
 }
 
+/** A Figma "ProgressBar" with the "Step 2 of 5" label filled in. */
 export default function ProgressStepHeader({ step, steps }: ProgressStepHeaderProps) {
   return (
-    <Stack row center gap={4}>
-      <div className="flex-1">
-        <Progress value={Math.ceil((step / steps) * 100)} />
-      </div>
-      <p className="progress-step-header-label">
-        Step {step} of {steps}
-      </p>
-    </Stack>
+    <ProgressBar
+      value={Math.ceil((step / steps) * 100)}
+      label={`Step ${step} of ${steps}`}
+    />
   );
 }

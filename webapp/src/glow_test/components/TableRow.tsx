@@ -5,12 +5,27 @@ import { CSSProperties } from "react";
 export interface TableRowProps {
   cells: TableCell[];
   highlight?: boolean;
+  /** Figma "TableRow/true" (muted=true): a less important row, like a discount. */
+  muted?: boolean;
   className?: string;
   style?: CSSProperties;
 }
-export default function TableRow({ cells, highlight, className, style }: TableRowProps) {
+
+/** Figma "TableRow". The last cell is right aligned and strong. */
+export default function TableRow({
+  cells,
+  highlight,
+  muted,
+  className,
+  style,
+}: TableRowProps) {
+  const cls = clsx(
+    highlight && "table-row-highlight",
+    muted && "table-row-muted",
+    className
+  );
   return (
-    <tr className={clsx(highlight && "table-row-highlight", className)} style={style}>
+    <tr className={cls} style={style}>
       {cells.map((c) => renderTableCell(c, "td"))}
     </tr>
   );

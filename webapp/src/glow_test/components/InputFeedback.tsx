@@ -1,5 +1,5 @@
-import Icon from "./Icon.tsx";
-import ErrorIcon from "@heroicons/react/24/outline/ExclamationCircleIcon";
+import { WarningCircle } from "../icons";
+import "./InputFeedback.css";
 import React from "react";
 
 export interface HasInputFeedback {
@@ -9,19 +9,32 @@ export interface HasInputFeedback {
 
 interface InputFeedbackProps extends HasInputFeedback {
   inputId: string;
+  /** Figma "icon". Set to false to show only the text. */
+  icon?: boolean;
 }
 
 /**
- * Render the error, or form feedback if no error.
+ * Figma "InputFeedback": the line under a form field.
+ * Render the error (kind=Error), or the help text (kind=Help) if there is no error.
  */
-export default function InputFeedback({ inputId, help, error }: InputFeedbackProps) {
+export default function InputFeedback({
+  inputId,
+  help,
+  error,
+  icon = true,
+}: InputFeedbackProps) {
   const describedBy = InputFeedback.idFor(inputId);
   if (error) {
-    return <InputFeedbackError id={describedBy}>{error}</InputFeedbackError>;
+    return (
+      <InputFeedbackError id={describedBy} icon={icon}>
+        {error}
+      </InputFeedbackError>
+    );
   }
   if (help) {
     return (
-      <div id={describedBy} className="form-text">
+      <div id={describedBy} className="input-feedback">
+        {icon && <WarningCircle className="input-feedback-icon" />}
         {help}
       </div>
     );
@@ -33,13 +46,18 @@ InputFeedback.idFor = (inputId: string) => `${inputId}-feedback`;
 
 interface InputFeedbackErrorProps {
   id?: string;
+  icon?: boolean;
   children: React.ReactNode;
 }
 
-export function InputFeedbackError({ id, children }: InputFeedbackErrorProps) {
+export function InputFeedbackError({
+  id,
+  icon = true,
+  children,
+}: InputFeedbackErrorProps) {
   return (
-    <div id={id} className="form-text invalid-feedback" role="alert">
-      <Icon icon={ErrorIcon} size={20} color="danger" />
+    <div id={id} className="input-feedback input-feedback-error" role="alert">
+      {icon && <WarningCircle className="input-feedback-icon" />}
       {children}
     </div>
   );
